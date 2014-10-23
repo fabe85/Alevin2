@@ -1,0 +1,64 @@
+This are some hopeful usefull scripts to distribute the evalution tests.
+
+Before using the scripts you have to set hosts in "distribution/hosts.txt", only one host per line
+Example: user@hostname
+
+Then you have to set the path to the repository in "distribution/path.txt", it have to be the same on ALL hosts!
+
+The scripts only working with the parallel-working tests and _NOT_ with the old-style junit tests!
+All scripts are startet from the repository directory like this: bash distribution/distribute.sh <package>.<MainClass>
+Example: bash distribution/distribute.sh tests.parallel.SubgraphRunner
+
+Rules for main-class:
+One parameter returns the total number of tests
+Two parameter starts tests: 
+	1. Number of first test
+	2. Number of last test
+
+
+
+There some general scripts:
+killDistributed.sh:	Kill the screen that holds the client-process.
+			This may fail, when several instances of the scripts runs at the same time.
+			Then you have to kill it with killDistributed_hard.sh
+killDistributed_hard.sh:This script tries to kill screen with killall
+			WARNING: This may kill screens that belong to other processes!
+reassamble.sh:		This script uses as Parameter a general part of the output filename
+			Example: bash distribution/reassamble.sh TestAlgo
+				This script now you cat to create TestAlgo_out.txt from all files that matches TestAlgo*.
+			REMARK: You need to Copy the files from remote server manualy at the moment...
+
+There are to sets of scripts.
+First the easy (or static) scripts, they calculate a range for every host in the list and start the job there.
+Needed programs: 
+	1. ssh (ControlServer+Clients)
+	2. screen (Clients)
+
+If the execution fails, then it the scripts creating a file tests_<start>_<end>.failed
+
+To start this the tests you need to call: bash distribution/distribute.sh <package>.<MainClass> (see above>
+On Clients the start.sh will be called.
+There is NO live feedback, so you need to have a look to check if everything is ok.
+
+
+The second set is the advances Version, where packets with defined size (default 5) where distributed
+
+Needed programs:
+	1. ssh (ControlServer+Clients)
+	2. screen (Clients)
+	3. sshfs (ControlServer)
+
+To start the system (on ControlServer): bash distribution/distribute_packet.sh <package>.<MainClass>
+The script will setup the clients and connect a virtual directory via sshfs and then start to distribute the jobs.
+The jobFile containing the range: <start>-<end>
+The statusFile containing: 
+	1. new -> The ControlServer has dispatched a new job
+	2. busy -> The Client is calculating
+	3. fail -> The Client has failed
+	4. free -> The Client is free and accepts new job
+
+It's possilble to start a client manualy by: bash distribution/start_packt.sh <package>.<MainClass> <dirWithinControllfiles>
+If you do this you should act like this: 	1. echo "10-20" > job
+						2. echo "new" > status
+
+

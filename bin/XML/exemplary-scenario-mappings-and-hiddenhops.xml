@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Scenario 
+  xsi:schemaLocation="http://sourceforge.net/projects/alevin/ ./Alevin.xsd" 
+  xmlns="http://sourceforge.net/projects/alevin/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+  <SubstrateNetwork>
+    <SubstrateNodes>
+      <SubstrateNode coordinateX="-0.793" coordinateY="28.361" id="1">
+        <Resource type="IdResource">
+          <ConstructParameter name="SubstrateNetwork" type="localSNet" value=""/>
+          <Parameter name="Id" type="String" value="1"/>
+        </Resource>
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="100.0"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="0.825" coordinateY="-0.878" id="2">
+        <Resource type="IdResource">
+          <ConstructParameter name="SubstrateNetwork" type="localSNet" value=""/>
+          <Parameter name="Id" type="String" value="2"/>
+        </Resource>
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="100.0"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="10.922" coordinateY="-18.367" id="3">
+        <Resource type="IdResource">
+          <ConstructParameter name="SubstrateNetwork" type="localSNet" value=""/>
+          <Parameter name="Id" type="String" value="3"/>
+        </Resource>
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="100.0"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="22.404" coordinateY="-0.94" id="4">
+        <Resource type="IdResource">
+          <ConstructParameter name="SubstrateNetwork" type="localSNet" value=""/>
+          <Parameter name="Id" type="String" value="4"/>
+        </Resource>
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="100.0"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="22.065" coordinateY="28.925" id="5">
+        <Resource type="IdResource">
+          <ConstructParameter name="SubstrateNetwork" type="localSNet" value=""/>
+          <Parameter name="Id" type="String" value="5"/>
+        </Resource>
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="100.0"/>
+        </Resource>
+      </SubstrateNode>
+    </SubstrateNodes>
+    <SubstrateLinks>
+      <SubstrateLink destination="2" id="7" source="1">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="10.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="1" id="8" source="5">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="10.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="2" id="9" source="3">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="10.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="4" id="10" source="2">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="10.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="3" id="11" source="4">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="10.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="5" id="12" source="4">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="10.0"/>
+        </Resource>
+      </SubstrateLink>
+    </SubstrateLinks>
+  </SubstrateNetwork>
+  <VirtualNetworks>
+    <VirtualNetwork layer="1">
+      <VirtualNodes>
+        <VirtualNode coordinateX="-0.867" coordinateY="-0.173" id="13">
+          <Demand type="IdDemand">
+            <Parameter name="DemandedId" type="String" value="1"/>
+            <Mapping resourceType="IdResource" substrateEntity="1"/>
+          </Demand>
+          <Demand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="25.0"/>
+            <Mapping resourceType="CpuResource" substrateEntity="1"/>
+          </Demand>
+        </VirtualNode>
+        <VirtualNode coordinateX="10.0" coordinateY="20.0" id="14">
+          <Demand type="IdDemand">
+            <Parameter name="DemandedId" type="String" value="3"/>
+            <Mapping resourceType="IdResource" substrateEntity="3"/>
+          </Demand>
+          <Demand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="25.0"/>
+            <Mapping resourceType="CpuResource" substrateEntity="3"/>
+          </Demand>
+        </VirtualNode>
+      </VirtualNodes>
+      <VirtualLinks>
+        <VirtualLink destination="14" id="15" source="13">
+          <Demand type="BandwidthDemand">
+            <Parameter name="DemandedBandwidth" type="Double" value="5"/>
+            <Mapping resourceType="BandwidthResource" substrateEntity="7"/>
+            <Mapping resourceType="BandwidthResource" substrateEntity="10"/>
+            <Mapping resourceType="BandwidthResource" substrateEntity="11"/>
+          </Demand>
+          <HiddenHopDemand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="0.5"/>
+            <Mapping resourceType="CpuResource" substrateEntity="2"/>
+            <Mapping resourceType="CpuResource" substrateEntity="4"/>
+          </HiddenHopDemand>
+        </VirtualLink>
+      </VirtualLinks>
+    </VirtualNetwork>
+    <VirtualNetwork layer="2">
+      <VirtualNodes>
+        <VirtualNode coordinateX="20.0" coordinateY="0.0" id="16">
+          <Demand type="IdDemand">
+            <Parameter name="DemandedId" type="String" value="5"/>
+            <Mapping resourceType="IdResource" substrateEntity="5"/>
+          </Demand>
+          <Demand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="10.0"/>
+            <Mapping resourceType="CpuResource" substrateEntity="5"/>
+          </Demand>
+        </VirtualNode>
+        <VirtualNode coordinateX="0.0" coordinateY="10.0" id="17">
+          <Demand type="IdDemand">
+            <Parameter name="DemandedId" type="String" value="2"/>
+            <Mapping resourceType="IdResource" substrateEntity="2"/>
+          </Demand>
+          <Demand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="10.0"/>
+            <Mapping resourceType="CpuResource" substrateEntity="2"/>
+          </Demand>
+        </VirtualNode>
+      </VirtualNodes>
+      <VirtualLinks>
+        <VirtualLink destination="17" id="18" source="16">
+          <Demand type="BandwidthDemand">
+            <Parameter name="DemandedBandwidth" type="Double" value="5.0"/>
+            <Mapping resourceType="BandwidthResource" substrateEntity="8"/>
+            <Mapping resourceType="BandwidthResource" substrateEntity="7"/>
+          </Demand>
+          <HiddenHopDemand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="0.5"/>
+            <Mapping resourceType="CpuResource" substrateEntity="1"/>
+          </HiddenHopDemand>
+        </VirtualLink>
+      </VirtualLinks>
+    </VirtualNetwork>
+  </VirtualNetworks>
+</Scenario>

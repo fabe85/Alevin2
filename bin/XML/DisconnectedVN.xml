@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Scenario 
+  xsi:schemaLocation="http://sourceforge.net/projects/alevin/ ./Alevin.xsd" 
+  xmlns="http://sourceforge.net/projects/alevin/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+  <SubstrateNetwork>
+    <SubstrateNodes>
+      <SubstrateNode coordinateX="-5.948" coordinateY="-8.276" id="0">
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="-1.552" coordinateY="-8.276" id="1">
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="-5.776" coordinateY="-2.5" id="2">
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="-1.379" coordinateY="-2.758" id="3">
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateNode>
+    </SubstrateNodes>
+    <SubstrateLinks>
+      <SubstrateLink destination="1" id="4" source="0">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="2" id="5" source="0">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="1" id="6" source="3">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateLink>
+    </SubstrateLinks>
+  </SubstrateNetwork>
+  <VirtualNetworks>
+    <VirtualNetwork layer="1">
+      <VirtualNodes>
+        <VirtualNode coordinateX="-6.638" coordinateY="-8.793" id="7">
+          <Demand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="5.0"/>
+          </Demand>
+        </VirtualNode>
+        <VirtualNode coordinateX="-2.845" coordinateY="-8.793" id="8">
+          <Demand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="5.0"/>
+          </Demand>
+        </VirtualNode>
+        <VirtualNode coordinateX="-6.724" coordinateY="-4.741" id="9">
+          <Demand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="5.0"/>
+          </Demand>
+        </VirtualNode>
+        <VirtualNode coordinateX="-2.672" coordinateY="-4.396" id="12">
+          <Demand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="5.0"/>
+          </Demand>
+        </VirtualNode>
+      </VirtualNodes>
+      <VirtualLinks>
+        <VirtualLink destination="9" id="10" source="7">
+          <Demand type="BandwidthDemand">
+            <Parameter name="DemandedBandwidth" type="Double" value="5.0"/>
+          </Demand>
+        </VirtualLink>
+        <VirtualLink destination="8" id="11" source="7">
+          <Demand type="BandwidthDemand">
+            <Parameter name="DemandedBandwidth" type="Double" value="5.0"/>
+          </Demand>
+        </VirtualLink>
+      </VirtualLinks>
+    </VirtualNetwork>
+  </VirtualNetworks>
+</Scenario>

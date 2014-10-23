@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MappingTest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/alevin/ ./Alevin.xsd" xmlns="http://sourceforge.net/projects/alevin/" name="AdvSubgraphTestGenerator">
+  <TestGenerator className="tests.generatorTests.AdvSubgraphTestRunner"

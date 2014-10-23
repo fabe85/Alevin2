@@ -1,0 +1,24 @@
+WARNING: Only use the new parallel tests NOT the junit test se README
+Every host have to run the _same compiled version_ of alevin.
+
+1. Set hosts in distribution/hosts.txt
+user@host
+user@host2
+
+2. Set Path (have to be the same on all hosts) in distribution/path.txt
+
+
+3. Run Tests
+3.1. Static Packet test distribution (every host gets a pre defined packet)
+NEED: 
+	ControlServer: ssh
+	Clients: ssh, screen
+
+bash distribution/distribute.sh <package>.<MainClass>
+
+3.2 Dynamic tests:
+NEED:
+	ControlServer: ssh, sshfs
+	Clients: ssh, screen
+
+bash distribution/distribute_packets.sh <package>.<MainClass>

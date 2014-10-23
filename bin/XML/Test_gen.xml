@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MappingTest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sourceforge.net/projects/alevin/ ./Alevin.xsd" xmlns="http://sourceforge.net/projects/alevin/" name="Test">
+  <TestGenerator className="tests.scenarios.mls.MLSTestGenerator"/>
+  <ScenarioResult>
+    <ScenarioParameter name="Waxman_alpha" value="0.5"/>
+    <ScenarioParameter name="Waxman_beta" value="0.5"/>
+    <ScenarioParameter name="NumVNodes" value="10.0"/>
+    <ScenarioParameter name="NumVNets" value="5.0"/>
+    <ScenarioParameter name="SNetSize" value="100.0"/>
+    <ScenarioParameter name="MLS_Theta" value="1.0"/>
+    <ScenarioParameter name="MLS_SecLevels" value="5.0"/>
+    <ScenarioParameter name="MLS_NumCategories" value="2.0"/>
+  </ScenarioResult>
+  <ScenarioResult>
+    <ScenarioParameter name="Waxman_alpha" value="0.5"/>
+    <ScenarioParameter name="Waxman_beta" value="0.5"/>
+    <ScenarioParameter name="NumVNodes" value="10.0"/>
+    <ScenarioParameter name="NumVNets" value="5.0"/>
+    <ScenarioParameter name="SNetSize" value="100.0"/>
+    <ScenarioParameter name="MLS_Theta" value="1.0"/>
+    <ScenarioParameter name="MLS_SecLevels" value="5.0"/>
+    <ScenarioParameter name="MLS_NumCategories" value="6.0"/>
+  </ScenarioResult>
+  <ScenarioResult>
+    <ScenarioParameter name="Waxman_alpha" value="0.5"/>
+    <ScenarioParameter name="Waxman_beta" value="0.5"/>
+    <ScenarioParameter name="NumVNodes" value="10.0"/>
+    <ScenarioParameter name="NumVNets" value="5.0"/>
+    <ScenarioParameter name="SNetSize" value="100.0"/>
+    <ScenarioParameter name="MLS_Theta" value="1.0"/>
+    <ScenarioParameter name="MLS_SecLevels" value="17.0"/>
+    <ScenarioParameter name="MLS_NumCategories" value="2.0"/>
+  </ScenarioResult>
+  <ScenarioResult>
+    <ScenarioParameter name="Waxman_alpha" value="0.5"/>
+    <ScenarioParameter name="Waxman_beta" value="0.5"/>
+    <ScenarioParameter name="NumVNodes" value="10.0"/>
+    <ScenarioParameter name="NumVNets" value="5.0"/>
+    <ScenarioParameter name="SNetSize" value="100.0"/>
+    <ScenarioParameter name="MLS_Theta" value="2.0"/>
+    <ScenarioParameter name="MLS_SecLevels" value="5.0"/>
+    <ScenarioParameter name="MLS_NumCategories" value="2.0"/>
+  </ScenarioResult>
+  <ScenarioResult>
+    <ScenarioParameter name="Waxman_alpha" value="0.5"/>
+    <ScenarioParameter name="Waxman_beta" value="0.5"/>
+    <ScenarioParameter name="NumVNodes" value="10.0"/>
+    <ScenarioParameter name="NumVNets" value="5.0"/>
+    <ScenarioParameter name="SNetSize" value="100.0"/>
+    <ScenarioParameter name="MLS_Theta" value="2.0"/>
+    <ScenarioParameter name="MLS_SecLevels" value="5.0"/>
+    <ScenarioParameter name="MLS_NumCategories" value="6.0"/>
+  </ScenarioResult>
+  <ScenarioResult>
+    <ScenarioParameter name="Waxman_alpha" value="0.5"/>
+    <ScenarioParameter name="Waxman_beta" value="0.5"/>
+    <ScenarioParameter name="NumVNodes" value="10.0"/>
+    <ScenarioParameter name="NumVNets" value="5.0"/>
+    <ScenarioParameter name="SNetSize" value="100.0"/>
+    <ScenarioParameter name="MLS_Theta" value="2.0"/>
+    <ScenarioParameter name="MLS_SecLevels" value="17.0"/>
+    <ScenarioParameter name="MLS_NumCategories" value="2.0"/>
+  </ScenarioResult>
+  <ScenarioResult>
+    <ScenarioParameter name="Waxman_alpha" value="0.5"/>
+    <ScenarioParameter name="Waxman_beta" value="0.5"/>
+    <ScenarioParameter name="NumVNodes" value="10.0"/>
+    <ScenarioParameter name="NumVNets" value="5.0"/>
+    <ScenarioParameter name="SNetSize" value="100.0"/>
+    <ScenarioParameter name="MLS_Theta" value="3.0"/>
+    <ScenarioParameter name="MLS_SecLevels" value="5.0"/>
+    <ScenarioParameter name="MLS_NumCategories" value="2.0"/>
+  </ScenarioResult>
+  <ScenarioResult>
+    <ScenarioParameter name="Waxman_alpha" value="0.5"/>
+    <ScenarioParameter name="Waxman_beta" value="0.5"/>
+    <ScenarioParameter name="NumVNodes" value="10.0"/>
+    <ScenarioParameter name="NumVNets" value="5.0"/>
+    <ScenarioParameter name="SNetSize" value="100.0"/>
+    <ScenarioParameter name="MLS_Theta" value="3.0"/>
+    <ScenarioParameter name="MLS_SecLevels" value="5.0"/>
+    <ScenarioParameter name="MLS_NumCategories" value="6.0"/>
+  </ScenarioResult>
+  <ScenarioResult>
+    <ScenarioParameter name="Waxman_alpha" value="0.5"/>
+    <ScenarioParameter name="Waxman_beta" value="0.5"/>
+    <ScenarioParameter name="NumVNodes" value="10.0"/>
+    <ScenarioParameter name="NumVNets" value="5.0"/>
+    <ScenarioParameter name="SNetSize" value="100.0"/>
+    <ScenarioParameter name="MLS_Theta" value="3.0"/>
+    <ScenarioParameter name="MLS_SecLevels" value="17.0"/>
+    <ScenarioParameter name="MLS_NumCategories" value="2.0"/>
+  </ScenarioResult>
+</MappingTest>

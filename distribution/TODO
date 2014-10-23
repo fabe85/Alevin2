@@ -1,0 +1,22 @@
+killDistributed.sh:
+	Kill screens even if to instances are running, without killing non alevin screens
+	Kill ALEVIN inside the screen, instaed of killing the screen itself.
+
+reassable.sh:
+	Automaticls collect the results
+	Correct order of results
+
+distribute.sh:
+	Find a nice way to check if the client is busy, failed or ready.
+
+distribute_packets.sh:
+	Find a way to kill only the sshfs that belogs to alevin
+	Restart clients on fail
+	Restart packets that failed 
+	Log error in a special Logfile and show it on ControlServer
+	Set the testname with the controlfile to make a client Multitest useable
+
+start_packet.sh:
+	Log error in a special logfile
+	Set the testname with the controlfile to make a client Multitest useable
+

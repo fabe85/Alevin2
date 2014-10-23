@@ -1,0 +1,71 @@
+<!ELEMENT Scenario (SubstrateNetwork, VirtualNetworks)>
+
+<!ELEMENT SubstrateNetwork (SubstrateNodes, SubstrateLinks)>
+<!ELEMENT SubstrateNodes (SubstrateNode+)>
+<!ELEMENT SubstrateLinks (SubstrateLink+)>
+<!ELEMENT SubstrateNode (Resource+)>
+<!ELEMENT SubstrateLink (Resource+)>
+<!ELEMENT Resource (Parameter+)>
+
+<!ELEMENT VirtualNetworks (VirtualNetwork+)>
+<!ELEMENT VirtualNetwork (VirtualNodes, VirtualLinks)>
+<!ELEMENT VirtualNodes (VirtualNode+)>
+<!ELEMENT VirtualLinks (VirtualLink+)>
+<!ELEMENT VirtualNode (Demand+)>
+<!ELEMENT VirtualLink (Demand+, HiddenHopDemand*)>
+<!ELEMENT Demand (Parameter+, Mapping*)>
+<!ELEMENT HiddenHopDemand (Parameter+, Mapping*)> 
+
+<!ELEMENT Parameter EMPTY>
+<!ELEMENT Mapping EMPTY>
+
+<!ATTLIST SubstrateNode
+    id          CDATA    #REQUIRED
+    coordinateX	CDATA	 #REQUIRED
+    coordinateY CDATA	 #REQUIRED
+>
+ 
+<!ATTLIST SubstrateLink
+    id          CDATA    #REQUIRED
+    source      CDATA    #REQUIRED
+    destination CDATA    #REQUIRED
+>
+
+<!ATTLIST VirtualNetwork
+    layer       CDATA    #REQUIRED
+>
+
+<!ATTLIST VirtualNode
+    id          CDATA    #REQUIRED
+    coordinateX	CDATA    #REQUIRED
+    coordinateY CDATA    #REQUIRED
+>
+
+<!ATTLIST VirtualLink
+    id          CDATA    #REQUIRED
+    source      CDATA    #REQUIRED
+    destination CDATA    #REQUIRED
+>
+
+<!ATTLIST Resource
+    type        CDATA    #REQUIRED
+>
+
+<!ATTLIST Demand
+    type        CDATA    #REQUIRED
+>
+
+<!ATTLIST HiddenHopDemand
+    type        CDATA    #REQUIRED
+>
+
+<!ATTLIST Parameter
+    name        CDATA    #REQUIRED
+    type        (Integer|String|Double|Boolean)    #REQUIRED
+    value       CDATA    #REQUIRED
+>
+
+<!ATTLIST Mapping
+    substrateEntity	CDATA    #REQUIRED
+    resourceType    CDATA    #REQUIRED
+>

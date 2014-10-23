@@ -1,0 +1,111 @@
+\section{Adding of New Pair of Resource/Demand Types}
+
+\subsection{Overview}
+\begin{itemize}
+	\item All resource types are derived from \texttt{AbstractResource}
+	\item Resources may only be added to the entities of the \texttt{SubstrateNetwork}
+	\item The \texttt{SubstrateNetwork} consists of \texttt{SubstrateLinks} and \texttt{SubstrateNodes}
+	\item All demand types are derived from \texttt{AbstractDemand}
+	\item Demands may only be added to the entities of a \texttt{VirtualNetwork}
+	\item A \texttt{VirtualNetwork} consists of \texttt{VirtualLinks} and \texttt{VirtualNodes}
+\end{itemize}
+We use the \textbf{Visitor pattern}\footnote{See \href{http://en.wikipedia.org/wiki/Visitor_pattern}{http://en.wikipedia.org/wiki/Visitor\_pattern}} 
+and \textbf{Adapter pattern}\footnote{See \href{http://en.wikipedia.org/wiki/Adapter_pattern}{http://en.wikipedia.org/wiki/Adapter\_pattern}}  to avoid
+\begin{itemize}
+	\item casts to concrete demand/resource classes,
+	\item the use of Java's instanceof as far as possible.
+\end{itemize}
+\textbf{N.b.: } We use these design pattern in an entangled way.
+\begin{itemize}
+	\item A resource is a visitor for a demand providing the occupy and free visitors
+	\item A demand is a visitor for a resource providing the accepts and fulfills visitors
+	\item Do not get confused about this.
+	\item Every Resource and Demand has a name. When you create a clone (with \textsl{getCopy()}) you have to copy the name over to the clone. 
+	So that the equals()-Method can do matches with clones.
+	\item If you don't provide a name, the name is set to \textbf{NameOfOwner\_this.hashCode()}
+\end{itemize}
+
+
+\subsection{About the visitor pattern}
+Normally the visitor pattern is used to be able to add new operations to an existing object structure, 
+without altering every single object. 
+The operations get encapsulated in visitors, 
+which then visit the objects and interacts with them. 
+The object only have to provide a simple interface to accept visitors.
+Here we already know all operations we need (free, occupy, accepts, fulfills), 
+but want to be able to add new resource / demand pairs to our network, e.g. new objects, 
+which then can handle all upcoming resource / demand requests.
+
+%TODO: Need to add the Constructor Parameters
+\subsection{Constraints}
+For ALEVIN's \textbf{XML exchange format}\footnote{See SVN\_base/src/XML/Alevin.xsd}, resource and demand classes need to meet the following constraints
+\begin{itemize}
+	\item The constraint classes must implement one or both of the \texttt{INodeConstraint}, \texttt{ILinkConstraint} interfaces. This shows whether the Constraint is applicable to nodes, links or both.
+	\item For each parameter that shall be included in the exchange format, a getter and a setter method \textbf{must be declared and  annotated} with @ExchangeParameter 
+	\begin{itemize}
+		\item Getters are required for export
+		\item Setters are required for import
+	\end{itemize}
+	\item The parameters for these methods \textbf{must not} be simple types (int, double) but classes 
+	such that it can be used via Java Reflection
+	\begin{itemize}
+		\item N.B.  Currently, the exchange format supports the following types: Integer, Double, String, Boolean and ArrayList<String>
+	\end{itemize}
+	\item Resources
+	\begin{itemize}
+		\item Getter methods must be named according to the following pattern: get + <parameter name>
+		\item Setter methods must be named according to the following pattern: set + <parameter name>
+	\end{itemize}
+	\item Demands
+	\begin{itemize}
+		\item Getter methods must be named according to the following pattern: getDemanded + <parameter name>
+		\item Setter methods must be named according to the following pattern: setDemanded + <parameter name>
+	\end{itemize}
+	\item Constructors
+	\begin{itemize}
+		\item It's suggested that you use a default constructor only with the owner as parameter.
+		\item If you need to have additional parameter you need to add the @ConstructionParameter annotation
+		\item If you have more than one parameter, the parameterName and parameterGetter have to be in the right order.
+		\begin{lstlisting}
+@AdditionalConstructParameter(
+		parameterNames = {"sNetwork"},
+		parameterGetters = {"getsNetwork"}
+)
+public final class IdResource extends AbstractResource implements
+		INodeConstraint {
+	private String id;
+	private final SubstrateNetwork sNetwork;
+
+
+	public IdResource(Node<? extends AbstractConstraint> owner, SubstrateNetwork sNetwork) {
+		super(owner);
+		this.sNetwork = sNetwork;
+	}
+	...
+		\end{lstlisting}
+	\end{itemize}
+\end{itemize}
+
+
+\subsection{Procedure}
+To add the new demand type \texttt{MyNewDemand} and the corresponding resource type \texttt{MyNewResource} perform the following steps: 
+\begin{enumerate}
+	\item Add dummy methods to
+	\begin{itemize}
+		\item \textsl{vnreal.demands.DemandVisitorAdapter }
+		\begin{lstlisting}
+public boolean visit(MyNewDemand req) {
+  return false;
+}
+		\end{lstlisting}
+		\item \textsl{vnreal.resources.ResourceVisitorAdapter }
+			\begin{lstlisting}
+public boolean visit(MyNewResource req) {
+  return false;
+}
+		\end{lstlisting}
+	\end{itemize}
+	\item Create a new class \texttt{MyNewResource} in package \textit{vnreal.resources} extending \texttt{AbstractResource}
+	\item Create a new class \texttt{MyNewDemand} in package \textit{vnreal.demands} extending \texttt{AbstractDemand}
+	\item Implement all abstract methods (imitate existing code, like \texttt{IdDemand} and \texttt{IdResource}) 
+\end{enumerate}

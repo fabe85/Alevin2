@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Scenario 
+  xsi:schemaLocation="http://sourceforge.net/projects/alevin/ ./Alevin.xsd" 
+  xmlns="http://sourceforge.net/projects/alevin/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+  <SubstrateNetwork>
+    <SubstrateNodes>
+      <SubstrateNode coordinateX="-6.468" coordinateY="-5.958" id="0">
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="6.0"/>
+        </Resource>
+        <Resource type="IdResource">
+          <Parameter name="Id" type="String" value="G"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="-2.085" coordinateY="-5.703" id="1">
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="7.0"/>
+        </Resource>
+        <Resource type="IdResource">
+          <Parameter name="Id" type="String" value="B"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="1.617" coordinateY="-6.042" id="2">
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="5.0"/>
+        </Resource>
+        <Resource type="IdResource">
+          <Parameter name="Id" type="String" value="C"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="4.638" coordinateY="-3.957" id="3">
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="7.0"/>
+        </Resource>
+        <Resource type="IdResource">
+          <Parameter name="Id" type="String" value="F"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="1.617" coordinateY="-2.298" id="4">
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="7.0"/>
+        </Resource>
+        <Resource type="IdResource">
+          <Parameter name="Id" type="String" value="E"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="-2.255" coordinateY="-2.298" id="5">
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="5.0"/>
+        </Resource>
+        <Resource type="IdResource">
+          <Parameter name="Id" type="String" value="D"/>
+        </Resource>
+      </SubstrateNode>
+      <SubstrateNode coordinateX="-6.595" coordinateY="-2.341" id="6">
+        <Resource type="CpuResource">
+          <Parameter name="Cycles" type="Double" value="8.0"/>
+        </Resource>
+        <Resource type="IdResource">
+          <Parameter name="Id" type="String" value="A"/>
+        </Resource>
+      </SubstrateNode>
+    </SubstrateNodes>
+    <SubstrateLinks>
+      <SubstrateLink destination="6" id="7" source="0">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="3.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="0" id="8" source="6">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="3.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="1" id="9" source="0">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="4.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="0" id="10" source="1">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="4.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="6" id="11" source="5">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="4.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="5" id="12" source="6">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="4.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="4" id="13" source="5">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="4.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="5" id="14" source="4">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="4.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="1" id="15" source="2">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="4.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="2" id="16" source="1">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="4.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="3" id="17" source="2">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="6.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="2" id="18" source="3">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="6.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="4" id="19" source="3">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="3" id="20" source="4">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="1" id="21" source="5">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="3.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="5" id="22" source="1">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="3.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="1" id="23" source="6">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="6" id="24" source="1">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="1" id="25" source="4">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="4" id="26" source="1">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="5.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="4" id="27" source="2">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="3.0"/>
+        </Resource>
+      </SubstrateLink>
+      <SubstrateLink destination="2" id="28" source="4">
+        <Resource type="BandwidthResource">
+          <Parameter name="Bandwidth" type="Double" value="3.0"/>
+        </Resource>
+      </SubstrateLink>
+    </SubstrateLinks>
+  </SubstrateNetwork>
+  <VirtualNetworks>
+    <VirtualNetwork layer="1">
+      <VirtualNodes>
+        <VirtualNode coordinateX="-0.213" coordinateY="-4.894" id="29">
+          <Demand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="6.0"/>
+          </Demand>
+        </VirtualNode>
+        <VirtualNode coordinateX="-2.851" coordinateY="-3.234" id="30">
+          <Demand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="8.0"/>
+          </Demand>
+        </VirtualNode>
+        <VirtualNode coordinateX="-2.766" coordinateY="-6.553" id="31">
+          <Demand type="CpuDemand">
+            <Parameter name="DemandedCycles" type="Double" value="7.0"/>
+          </Demand>
+        </VirtualNode>
+      </VirtualNodes>
+      <VirtualLinks>
+        <VirtualLink destination="29" id="32" source="31">
+          <Demand type="BandwidthDemand">
+            <Parameter name="DemandedBandwidth" type="Double" value="4.0"/>
+          </Demand>
+        </VirtualLink>
+        <VirtualLink destination="29" id="33" source="30">
+          <Demand type="BandwidthDemand">
+            <Parameter name="DemandedBandwidth" type="Double" value="3.0"/>
+          </Demand>
+        </VirtualLink>
+        <VirtualLink destination="30" id="35" source="31">
+          <Demand type="BandwidthDemand">
+            <Parameter name="DemandedBandwidth" type="Double" value="5.0"/>
+          </Demand>
+        </VirtualLink>
+      </VirtualLinks>
+    </VirtualNetwork>
+  </VirtualNetworks>
+</Scenario>

@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://sourceforge.net/projects/alevin/"
+    xmlns:Alevin="http://sourceforge.net/projects/alevin/"
+    targetNamespace="http://sourceforge.net/projects/alevin/"
+    elementFormDefault="qualified"
+>
+
+ <xsd:element name="MappingTest" type="MappingTestType" />
+
+  
+  <xsd:complexType name="MappingTestType">
+    <xsd:sequence>
+      <xsd:element name="TestGenerator" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:attribute name="className" type="xsd:string" />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ScenarioResult" type="ScenarioType" minOccurs="0" maxOccurs="unbounded" >
+        <xsd:unique name="UniqeParam">
+					<xsd:selector xpath="./Alevin:ScenarioParameter" /> 
+					<xsd:field xpath="@name" /> 
+				</xsd:unique>
+        <xsd:unique name="UniqeMetric">
+					<xsd:selector xpath="./Alevin:ScenarioMetric" /> 
+					<xsd:field xpath="@name" /> 
+				</xsd:unique>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+  </xsd:complexType>
+  
+
+  
+	<xsd:complexType name="ScenarioType">
+		<xsd:sequence>
+			<xsd:element name="ScenarioParameter" type="ScenarioParameterType" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="ScenarioMetric" type="ScenarioMetricType" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="ScenarioNetworks" type="NetworkType" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+    
+  
+  
+	<xsd:complexType name="ScenarioParameterType">
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+  
+  <xsd:complexType name="ScenarioMetricType">
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute name="result" type="xsd:string" use="required" />
+  </xsd:complexType>
+
+
+<!--
+The following elements are converted and adapted scenario.dtd 
+-->
+
+  <xsd:complexType name="NetworkType">
+   <xsd:sequence>
+    <xsd:element ref='SubstrateNetwork'/>
+    <xsd:element ref='VirtualNetworks'/>
+   </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:element name='Scenario'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='SubstrateNetwork'/>
+    <xsd:element ref='VirtualNetworks'/>
+   </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='SubstrateNetwork'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='SubstrateNodes'/>
+    <xsd:element ref='SubstrateLinks'/>
+   </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='SubstrateNodes'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='SubstrateNode' maxOccurs='unbounded'/>
+   </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='SubstrateLinks'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='SubstrateLink' maxOccurs='unbounded'/>
+   </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='SubstrateNode'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='Resource' maxOccurs='unbounded'/>
+   </xsd:sequence>
+   <xsd:attribute name='id' type='xsd:string' use='required'/>
+   <xsd:attribute name='coordinateX' type='xsd:string' use='required'/>
+   <xsd:attribute name='coordinateY' type='xsd:string' use='required'/>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='SubstrateLink'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='Resource' maxOccurs='unbounded'/>
+   </xsd:sequence>
+   <xsd:attribute name='id' type='xsd:string' use='required'/>
+   <xsd:attribute name='source' type='xsd:string' use='required'/>
+   <xsd:attribute name='destination' type='xsd:string' use='required'/>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='Resource'>
+  <xsd:complexType>
+   <xsd:sequence>
+   	<xsd:element name="ConstructParameter" type="ParameterType" minOccurs="0" maxOccurs="unbounded" />
+    <xsd:element name='Parameter' type="ParameterType" minOccurs="0" maxOccurs='unbounded'/>
+   </xsd:sequence>
+   <xsd:attribute name='type' type='xsd:string' use='required'/>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='VirtualNetworks'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='VirtualNetwork' maxOccurs='unbounded'/>
+   </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='VirtualNetwork'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='VirtualNodes'/>
+    <xsd:element ref='VirtualLinks'/>
+   </xsd:sequence>
+   <xsd:attribute name='layer' type='xsd:string' use='required'/>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='VirtualNodes'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='VirtualNode' maxOccurs='unbounded'/>
+   </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='VirtualLinks'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='VirtualLink' maxOccurs='unbounded'/>
+   </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='VirtualNode'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='Demand' maxOccurs='unbounded'/>
+   </xsd:sequence>
+   <xsd:attribute name='id' type='xsd:string' use='required'/>
+   <xsd:attribute name='coordinateX' type='xsd:string' use='required'/>
+   <xsd:attribute name='coordinateY' type='xsd:string' use='required'/>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='VirtualLink'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref='Demand' maxOccurs='unbounded'/>
+    <xsd:element ref='HiddenHopDemand' minOccurs='0' maxOccurs='unbounded'/>
+   </xsd:sequence>
+   <xsd:attribute name='id' type='xsd:string' use='required'/>
+   <xsd:attribute name='source' type='xsd:string' use='required'/>
+   <xsd:attribute name='destination' type='xsd:string' use='required'/>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='Demand'>
+  <xsd:complexType>
+   <xsd:sequence>
+   	<xsd:element name="ConstructParameter" type="ParameterType" minOccurs="0" maxOccurs="unbounded" />
+    <xsd:element name='Parameter' type="ParameterType" minOccurs="0" maxOccurs='unbounded'/>
+    <xsd:element ref='Mapping' minOccurs='0' maxOccurs='unbounded'/>
+   </xsd:sequence>
+   <xsd:attribute name='type' type='xsd:string' use='required'/>
+  </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name='HiddenHopDemand'>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="Parameter" type='ParameterType' maxOccurs='unbounded'/>
+    <xsd:element ref='Mapping' minOccurs='0' maxOccurs='unbounded'/>
+   </xsd:sequence>
+   <xsd:attribute name='type' type='xsd:string' use='required'/>
+  </xsd:complexType>
+  </xsd:element>
+
+ 	
+
+
+  <xsd:complexType name="ParameterType">
+   <xsd:attribute name='name' type='xsd:string' use='required'/>
+   <xsd:attribute name='type' use='required'>
+    <xsd:simpleType>
+     <xsd:restriction base='xsd:string'>
+      <xsd:enumeration value='Integer'/>
+      <xsd:enumeration value='String'/>
+      <xsd:enumeration value='Double'/>
+      <xsd:enumeration value='Boolean'/>
+      <xsd:enumeration value="localSNet"/>
+      <xsd:enumeration value="Collection_String"/>
+     </xsd:restriction>
+    </xsd:simpleType>
+   </xsd:attribute>
+   <xsd:attribute name='value' type='xsd:string' use='required'/>
+  </xsd:complexType>
+
+ <xsd:element name='Mapping'>
+  <xsd:complexType>
+   <xsd:attribute name='substrateEntity' type='xsd:string' use='required'/>
+   <xsd:attribute name='resourceType' type='xsd:string' use='required'/>
+  </xsd:complexType>
+  </xsd:element>
+
+</xsd:schema>

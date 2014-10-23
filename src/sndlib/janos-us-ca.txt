@@ -1,0 +1,1673 @@
+?SNDlib native format; type: network; version: 1.0
+# network janos-us-ca
+
+# NODE SECTION
+#
+# <node_id> [(<longitude>, <latitude>)]
+
+NODES (
+  Vancouver ( -123.10 49.22 )
+  LosAngeles ( -118.40 33.93 )
+  SanFrancisco ( -122.38 37.62 )
+  LasVegas ( -115.17 36.08 )
+  SaltLakeCity ( -111.97 40.78 )
+  ElPaso ( -106.40 31.80 )
+  Dallas ( -96.85 32.85 )
+  Houston ( -95.35 29.97 )
+  OklahomaCity ( -95.90 36.20 )
+  Minneapolis ( -93.38 45.07 )
+  KansasCity ( -94.72 39.32 )
+  Denver ( -104.87 39.75 )
+  Chicago ( -87.90 41.98 )
+  Indianapolis ( -86.27 39.65 )
+  Detroit ( -83.02 42.42 )
+  StLouis ( -90.37 38.75 )
+  Nashville ( -86.68 36.12 )
+  Cleveland ( -81.68 41.52 )
+  NewYork ( -73.78 40.65 )
+  Montreal ( -73.60 45.50 )
+  Charlotte ( -80.93 35.22 )
+  NewOrleans ( -90.02 29.83 )
+  Boston ( -71.03 42.37 )
+  Atlanta ( -84.42 33.65 )
+  Miami ( -80.28 25.82 )
+  WashingtonDC ( -77.04 38.85 )
+  Philadelphia ( -75.13 40.00 )
+  Toronto ( -79.41 43.70 )
+  Pittsburgh ( -79.97 40.44 )
+  Cincinnati ( -84.50 39.14 )
+  Tampa ( -82.48 27.96 )
+  Memphis ( -90.00 35.11 )
+  Winnipeg ( -97.16 49.88 )
+  Calgary ( -114.08 51.08 )
+  Seattle ( -122.30 47.45 )
+  Portland ( -122.65 45.53 )
+  Sacrameto ( -121.46 38.56 )
+  Phoenix ( -112.02 33.43 )
+  SanDiego ( -117.13 32.81 )
+)
+
+# LINK SECTION
+#
+# <link_id> ( <source> <target> ) <pre_installed_capacity> <pre_installed_capacity_cost> <routing_cost> <setup_cost> ( {<module_capacity> <module_cost>}* )
+
+LINKS (
+  L0 ( Vancouver Calgary ) 0.00 0.00 0.00 0.00 ( 1008.00 405.00 )
+  L1 ( Vancouver Seattle ) 0.00 0.00 0.00 0.00 ( 1008.00 123.00 )
+  L2 ( LosAngeles SanFrancisco ) 0.00 0.00 0.00 0.00 ( 1008.00 327.00 )
+  L3 ( LosAngeles LasVegas ) 0.00 0.00 0.00 0.00 ( 1008.00 227.00 )
+  L4 ( LosAngeles SanDiego ) 0.00 0.00 0.00 0.00 ( 1008.00 102.00 )
+  L5 ( SanFrancisco LosAngeles ) 0.00 0.00 0.00 0.00 ( 1008.00 327.00 )
+  L6 ( SanFrancisco Portland ) 0.00 0.00 0.00 0.00 ( 1008.00 529.00 )
+  L7 ( SanFrancisco Sacrameto ) 0.00 0.00 0.00 0.00 ( 1008.00 79.00 )
+  L8 ( LasVegas LosAngeles ) 0.00 0.00 0.00 0.00 ( 1008.00 227.00 )
+  L9 ( LasVegas SaltLakeCity ) 0.00 0.00 0.00 0.00 ( 1008.00 355.00 )
+  L10 ( LasVegas Sacrameto ) 0.00 0.00 0.00 0.00 ( 1008.00 373.00 )
+  L11 ( LasVegas Phoenix ) 0.00 0.00 0.00 0.00 ( 1008.00 247.00 )
+  L12 ( SaltLakeCity LasVegas ) 0.00 0.00 0.00 0.00 ( 1008.00 355.00 )
+  L13 ( SaltLakeCity Denver ) 0.00 0.00 0.00 0.00 ( 1008.00 368.00 )
+  L14 ( SaltLakeCity Calgary ) 0.00 0.00 0.00 0.00 ( 1008.00 695.00 )
+  L15 ( SaltLakeCity Portland ) 0.00 0.00 0.00 0.00 ( 1008.00 609.00 )
+  L16 ( SaltLakeCity Sacrameto ) 0.00 0.00 0.00 0.00 ( 1008.00 509.00 )
+  L17 ( ElPaso Dallas ) 0.00 0.00 0.00 0.00 ( 1008.00 543.00 )
+  L18 ( ElPaso Houston ) 0.00 0.00 0.00 0.00 ( 1008.00 644.00 )
+  L19 ( ElPaso Phoenix ) 0.00 0.00 0.00 0.00 ( 1008.00 334.00 )
+  L20 ( Dallas ElPaso ) 0.00 0.00 0.00 0.00 ( 1008.00 543.00 )
+  L21 ( Dallas Houston ) 0.00 0.00 0.00 0.00 ( 1008.00 210.00 )
+  L22 ( Dallas OklahomaCity ) 0.00 0.00 0.00 0.00 ( 1008.00 229.00 )
+  L23 ( Dallas Denver ) 0.00 0.00 0.00 0.00 ( 1008.00 630.00 )
+  L24 ( Dallas Memphis ) 0.00 0.00 0.00 0.00 ( 1008.00 407.00 )
+  L25 ( Houston ElPaso ) 0.00 0.00 0.00 0.00 ( 1008.00 644.00 )
+  L26 ( Houston Dallas ) 0.00 0.00 0.00 0.00 ( 1008.00 210.00 )
+  L27 ( Houston NewOrleans ) 0.00 0.00 0.00 0.00 ( 1008.00 308.00 )
+  L28 ( OklahomaCity Dallas ) 0.00 0.00 0.00 0.00 ( 1008.00 229.00 )
+  L29 ( OklahomaCity KansasCity ) 0.00 0.00 0.00 0.00 ( 1008.00 217.00 )
+  L30 ( Minneapolis KansasCity ) 0.00 0.00 0.00 0.00 ( 1008.00 389.00 )
+  L31 ( Minneapolis Chicago ) 0.00 0.00 0.00 0.00 ( 1008.00 336.00 )
+  L32 ( Minneapolis Winnipeg ) 0.00 0.00 0.00 0.00 ( 1008.00 363.00 )
+  L33 ( KansasCity OklahomaCity ) 0.00 0.00 0.00 0.00 ( 1008.00 217.00 )
+  L34 ( KansasCity Minneapolis ) 0.00 0.00 0.00 0.00 ( 1008.00 389.00 )
+  L35 ( KansasCity Denver ) 0.00 0.00 0.00 0.00 ( 1008.00 523.00 )
+  L36 ( KansasCity StLouis ) 0.00 0.00 0.00 0.00 ( 1008.00 228.00 )
+  L37 ( Denver SaltLakeCity ) 0.00 0.00 0.00 0.00 ( 1008.00 368.00 )
+  L38 ( Denver Dallas ) 0.00 0.00 0.00 0.00 ( 1008.00 630.00 )
+  L39 ( Denver KansasCity ) 0.00 0.00 0.00 0.00 ( 1008.00 523.00 )
+  L40 ( Chicago Minneapolis ) 0.00 0.00 0.00 0.00 ( 1008.00 336.00 )
+  L41 ( Chicago Indianapolis ) 0.00 0.00 0.00 0.00 ( 1008.00 176.00 )
+  L42 ( Chicago Detroit ) 0.00 0.00 0.00 0.00 ( 1008.00 243.00 )
+  L43 ( Chicago StLouis ) 0.00 0.00 0.00 0.00 ( 1008.00 249.00 )
+  L44 ( Indianapolis Chicago ) 0.00 0.00 0.00 0.00 ( 1008.00 176.00 )
+  L45 ( Indianapolis StLouis ) 0.00 0.00 0.00 0.00 ( 1008.00 220.00 )
+  L46 ( Indianapolis Nashville ) 0.00 0.00 0.00 0.00 ( 1008.00 236.00 )
+  L47 ( Indianapolis Cincinnati ) 0.00 0.00 0.00 0.00 ( 1008.00 97.00 )
+  L48 ( Detroit Chicago ) 0.00 0.00 0.00 0.00 ( 1008.00 243.00 )
+  L49 ( Detroit Cleveland ) 0.00 0.00 0.00 0.00 ( 1008.00 89.00 )
+  L50 ( Detroit Toronto ) 0.00 0.00 0.00 0.00 ( 1008.00 195.00 )
+  L51 ( StLouis KansasCity ) 0.00 0.00 0.00 0.00 ( 1008.00 228.00 )
+  L52 ( StLouis Chicago ) 0.00 0.00 0.00 0.00 ( 1008.00 249.00 )
+  L53 ( StLouis Indianapolis ) 0.00 0.00 0.00 0.00 ( 1008.00 220.00 )
+  L54 ( StLouis Memphis ) 0.00 0.00 0.00 0.00 ( 1008.00 244.00 )
+  L55 ( Nashville Indianapolis ) 0.00 0.00 0.00 0.00 ( 1008.00 236.00 )
+  L56 ( Nashville Charlotte ) 0.00 0.00 0.00 0.00 ( 1008.00 317.00 )
+  L57 ( Nashville Atlanta ) 0.00 0.00 0.00 0.00 ( 1008.00 206.00 )
+  L58 ( Nashville Memphis ) 0.00 0.00 0.00 0.00 ( 1008.00 192.00 )
+  L59 ( Cleveland Detroit ) 0.00 0.00 0.00 0.00 ( 1008.00 89.00 )
+  L60 ( Cleveland NewYork ) 0.00 0.00 0.00 0.00 ( 1008.00 401.00 )
+  L61 ( Cleveland Pittsburgh ) 0.00 0.00 0.00 0.00 ( 1008.00 112.00 )
+  L62 ( Cleveland Cincinnati ) 0.00 0.00 0.00 0.00 ( 1008.00 214.00 )
+  L63 ( NewYork Cleveland ) 0.00 0.00 0.00 0.00 ( 1008.00 401.00 )
+  L64 ( NewYork Boston ) 0.00 0.00 0.00 0.00 ( 1008.00 179.00 )
+  L65 ( NewYork Philadelphia ) 0.00 0.00 0.00 0.00 ( 1008.00 81.00 )
+  L66 ( NewYork Toronto ) 0.00 0.00 0.00 0.00 ( 1008.00 345.00 )
+  L67 ( Montreal Boston ) 0.00 0.00 0.00 0.00 ( 1008.00 242.00 )
+  L68 ( Montreal Toronto ) 0.00 0.00 0.00 0.00 ( 1008.00 301.00 )
+  L69 ( Charlotte Nashville ) 0.00 0.00 0.00 0.00 ( 1008.00 317.00 )
+  L70 ( Charlotte Atlanta ) 0.00 0.00 0.00 0.00 ( 1008.00 218.00 )
+  L71 ( Charlotte WashingtonDC ) 0.00 0.00 0.00 0.00 ( 1008.00 318.00 )
+  L72 ( Charlotte Tampa ) 0.00 0.00 0.00 0.00 ( 1008.00 492.00 )
+  L73 ( NewOrleans Houston ) 0.00 0.00 0.00 0.00 ( 1008.00 308.00 )
+  L74 ( NewOrleans Atlanta ) 0.00 0.00 0.00 0.00 ( 1008.00 407.00 )
+  L75 ( NewOrleans Miami ) 0.00 0.00 0.00 0.00 ( 1008.00 634.00 )
+  L76 ( NewOrleans Memphis ) 0.00 0.00 0.00 0.00 ( 1008.00 352.00 )
+  L77 ( Boston NewYork ) 0.00 0.00 0.00 0.00 ( 1008.00 179.00 )
+  L78 ( Boston Montreal ) 0.00 0.00 0.00 0.00 ( 1008.00 242.00 )
+  L79 ( Atlanta Nashville ) 0.00 0.00 0.00 0.00 ( 1008.00 206.00 )
+  L80 ( Atlanta Charlotte ) 0.00 0.00 0.00 0.00 ( 1008.00 218.00 )
+  L81 ( Atlanta NewOrleans ) 0.00 0.00 0.00 0.00 ( 1008.00 407.00 )
+  L82 ( Atlanta Tampa ) 0.00 0.00 0.00 0.00 ( 1008.00 396.00 )
+  L83 ( Miami NewOrleans ) 0.00 0.00 0.00 0.00 ( 1008.00 634.00 )
+  L84 ( Miami Tampa ) 0.00 0.00 0.00 0.00 ( 1008.00 193.00 )
+  L85 ( WashingtonDC Charlotte ) 0.00 0.00 0.00 0.00 ( 1008.00 318.00 )
+  L86 ( WashingtonDC Philadelphia ) 0.00 0.00 0.00 0.00 ( 1008.00 125.00 )
+  L87 ( WashingtonDC Pittsburgh ) 0.00 0.00 0.00 0.00 ( 1008.00 184.00 )
+  L88 ( Philadelphia NewYork ) 0.00 0.00 0.00 0.00 ( 1008.00 81.00 )
+  L89 ( Philadelphia WashingtonDC ) 0.00 0.00 0.00 0.00 ( 1008.00 125.00 )
+  L90 ( Toronto Detroit ) 0.00 0.00 0.00 0.00 ( 1008.00 195.00 )
+  L91 ( Toronto NewYork ) 0.00 0.00 0.00 0.00 ( 1008.00 345.00 )
+  L92 ( Toronto Montreal ) 0.00 0.00 0.00 0.00 ( 1008.00 301.00 )
+  L93 ( Pittsburgh Cleveland ) 0.00 0.00 0.00 0.00 ( 1008.00 112.00 )
+  L94 ( Pittsburgh WashingtonDC ) 0.00 0.00 0.00 0.00 ( 1008.00 184.00 )
+  L95 ( Cincinnati Indianapolis ) 0.00 0.00 0.00 0.00 ( 1008.00 97.00 )
+  L96 ( Cincinnati Cleveland ) 0.00 0.00 0.00 0.00 ( 1008.00 214.00 )
+  L97 ( Tampa Charlotte ) 0.00 0.00 0.00 0.00 ( 1008.00 492.00 )
+  L98 ( Tampa Atlanta ) 0.00 0.00 0.00 0.00 ( 1008.00 396.00 )
+  L99 ( Tampa Miami ) 0.00 0.00 0.00 0.00 ( 1008.00 193.00 )
+  L100 ( Memphis Dallas ) 0.00 0.00 0.00 0.00 ( 1008.00 407.00 )
+  L101 ( Memphis StLouis ) 0.00 0.00 0.00 0.00 ( 1008.00 244.00 )
+  L102 ( Memphis Nashville ) 0.00 0.00 0.00 0.00 ( 1008.00 192.00 )
+  L103 ( Memphis NewOrleans ) 0.00 0.00 0.00 0.00 ( 1008.00 352.00 )
+  L104 ( Winnipeg Minneapolis ) 0.00 0.00 0.00 0.00 ( 1008.00 363.00 )
+  L105 ( Winnipeg Calgary ) 0.00 0.00 0.00 0.00 ( 1008.00 721.00 )
+  L106 ( Calgary Vancouver ) 0.00 0.00 0.00 0.00 ( 1008.00 405.00 )
+  L107 ( Calgary SaltLakeCity ) 0.00 0.00 0.00 0.00 ( 1008.00 695.00 )
+  L108 ( Calgary Winnipeg ) 0.00 0.00 0.00 0.00 ( 1008.00 721.00 )
+  L109 ( Seattle Vancouver ) 0.00 0.00 0.00 0.00 ( 1008.00 123.00 )
+  L110 ( Seattle Portland ) 0.00 0.00 0.00 0.00 ( 1008.00 128.00 )
+  L111 ( Portland SanFrancisco ) 0.00 0.00 0.00 0.00 ( 1008.00 529.00 )
+  L112 ( Portland SaltLakeCity ) 0.00 0.00 0.00 0.00 ( 1008.00 609.00 )
+  L113 ( Portland Seattle ) 0.00 0.00 0.00 0.00 ( 1008.00 128.00 )
+  L114 ( Sacrameto SanFrancisco ) 0.00 0.00 0.00 0.00 ( 1008.00 79.00 )
+  L115 ( Sacrameto LasVegas ) 0.00 0.00 0.00 0.00 ( 1008.00 373.00 )
+  L116 ( Sacrameto SaltLakeCity ) 0.00 0.00 0.00 0.00 ( 1008.00 509.00 )
+  L117 ( Phoenix LasVegas ) 0.00 0.00 0.00 0.00 ( 1008.00 247.00 )
+  L118 ( Phoenix ElPaso ) 0.00 0.00 0.00 0.00 ( 1008.00 334.00 )
+  L119 ( Phoenix SanDiego ) 0.00 0.00 0.00 0.00 ( 1008.00 289.00 )
+  L120 ( SanDiego LosAngeles ) 0.00 0.00 0.00 0.00 ( 1008.00 102.00 )
+  L121 ( SanDiego Phoenix ) 0.00 0.00 0.00 0.00 ( 1008.00 289.00 )
+)
+
+# DEMAND SECTION
+#
+# <demand_id> ( <source> <target> ) <routing_unit> <demand_value> <max_path_length>
+
+DEMANDS (
+  D0 ( Vancouver LosAngeles ) 1 1770.00 UNLIMITED
+  D1 ( Vancouver SanFrancisco ) 1 973.00 UNLIMITED
+  D2 ( Vancouver LasVegas ) 1 170.00 UNLIMITED
+  D3 ( Vancouver SaltLakeCity ) 1 136.00 UNLIMITED
+  D4 ( Vancouver ElPaso ) 1 55.00 UNLIMITED
+  D5 ( Vancouver Dallas ) 1 384.00 UNLIMITED
+  D6 ( Vancouver Houston ) 1 321.00 UNLIMITED
+  D7 ( Vancouver OklahomaCity ) 1 83.00 UNLIMITED
+  D8 ( Vancouver Minneapolis ) 1 268.00 UNLIMITED
+  D9 ( Vancouver KansasCity ) 1 146.00 UNLIMITED
+  D10 ( Vancouver Denver ) 1 256.00 UNLIMITED
+  D11 ( Vancouver Chicago ) 1 666.00 UNLIMITED
+  D12 ( Vancouver Indianapolis ) 1 117.00 UNLIMITED
+  D13 ( Vancouver Detroit ) 1 349.00 UNLIMITED
+  D14 ( Vancouver StLouis ) 1 192.00 UNLIMITED
+  D15 ( Vancouver Nashville ) 1 85.00 UNLIMITED
+  D16 ( Vancouver Cleveland ) 1 177.00 UNLIMITED
+  D17 ( Vancouver NewYork ) 1 1189.00 UNLIMITED
+  D18 ( Vancouver Montreal ) 1 197.00 UNLIMITED
+  D19 ( Vancouver Charlotte ) 1 80.00 UNLIMITED
+  D20 ( Vancouver NewOrleans ) 1 78.00 UNLIMITED
+  D21 ( Vancouver Boston ) 1 304.00 UNLIMITED
+  D22 ( Vancouver Atlanta ) 1 274.00 UNLIMITED
+  D23 ( Vancouver Miami ) 1 263.00 UNLIMITED
+  D24 ( Vancouver WashingtonDC ) 1 437.00 UNLIMITED
+  D25 ( Vancouver Philadelphia ) 1 329.00 UNLIMITED
+  D26 ( Vancouver Toronto ) 1 289.00 UNLIMITED
+  D27 ( Vancouver Pittsburgh ) 1 145.00 UNLIMITED
+  D28 ( Vancouver Cincinnati ) 1 129.00 UNLIMITED
+  D29 ( Vancouver Tampa ) 1 131.00 UNLIMITED
+  D30 ( Vancouver Memphis ) 1 80.00 UNLIMITED
+  D31 ( Vancouver Winnipeg ) 1 65.00 UNLIMITED
+  D32 ( Vancouver Calgary ) 1 241.00 UNLIMITED
+  D33 ( Vancouver Seattle ) 1 3428.00 UNLIMITED
+  D34 ( Vancouver Portland ) 1 863.00 UNLIMITED
+  D35 ( Vancouver Sacrameto ) 1 281.00 UNLIMITED
+  D36 ( Vancouver Phoenix ) 1 326.00 UNLIMITED
+  D37 ( Vancouver SanDiego ) 1 281.00 UNLIMITED
+  D38 ( LosAngeles Vancouver ) 1 1770.00 UNLIMITED
+  D39 ( LosAngeles SanFrancisco ) 1 19465.00 UNLIMITED
+  D40 ( LosAngeles LasVegas ) 1 6106.00 UNLIMITED
+  D41 ( LosAngeles SaltLakeCity ) 1 1546.00 UNLIMITED
+  D42 ( LosAngeles ElPaso ) 1 906.00 UNLIMITED
+  D43 ( LosAngeles Dallas ) 1 4348.00 UNLIMITED
+  D44 ( LosAngeles Houston ) 1 3637.00 UNLIMITED
+  D45 ( LosAngeles OklahomaCity ) 1 868.00 UNLIMITED
+  D46 ( LosAngeles Minneapolis ) 1 2160.00 UNLIMITED
+  D47 ( LosAngeles KansasCity ) 1 1390.00 UNLIMITED
+  D48 ( LosAngeles Denver ) 1 2784.00 UNLIMITED
+  D49 ( LosAngeles Chicago ) 1 5753.00 UNLIMITED
+  D50 ( LosAngeles Indianapolis ) 1 1045.00 UNLIMITED
+  D51 ( LosAngeles Detroit ) 1 2960.00 UNLIMITED
+  D52 ( LosAngeles StLouis ) 1 1789.00 UNLIMITED
+  D53 ( LosAngeles Nashville ) 1 801.00 UNLIMITED
+  D54 ( LosAngeles Cleveland ) 1 1522.00 UNLIMITED
+  D55 ( LosAngeles NewYork ) 1 10114.00 UNLIMITED
+  D56 ( LosAngeles Montreal ) 1 1607.00 UNLIMITED
+  D57 ( LosAngeles Charlotte ) 1 737.00 UNLIMITED
+  D58 ( LosAngeles NewOrleans ) 1 817.00 UNLIMITED
+  D59 ( LosAngeles Boston ) 1 2542.00 UNLIMITED
+  D60 ( LosAngeles Atlanta ) 1 2611.00 UNLIMITED
+  D61 ( LosAngeles Miami ) 1 2554.00 UNLIMITED
+  D62 ( LosAngeles WashingtonDC ) 1 3813.00 UNLIMITED
+  D63 ( LosAngeles Philadelphia ) 1 2827.00 UNLIMITED
+  D64 ( LosAngeles Toronto ) 1 2400.00 UNLIMITED
+  D65 ( LosAngeles Pittsburgh ) 1 1254.00 UNLIMITED
+  D66 ( LosAngeles Cincinnati ) 1 1155.00 UNLIMITED
+  D67 ( LosAngeles Tampa ) 1 1287.00 UNLIMITED
+  D68 ( LosAngeles Memphis ) 1 790.00 UNLIMITED
+  D69 ( LosAngeles Winnipeg ) 1 447.00 UNLIMITED
+  D70 ( LosAngeles Calgary ) 1 774.00 UNLIMITED
+  D71 ( LosAngeles Seattle ) 1 3556.00 UNLIMITED
+  D72 ( LosAngeles Portland ) 1 2265.00 UNLIMITED
+  D73 ( LosAngeles Sacrameto ) 1 4865.00 UNLIMITED
+  D74 ( LosAngeles Phoenix ) 1 8690.00 UNLIMITED
+  D75 ( LosAngeles SanDiego ) 1 30034.00 UNLIMITED
+  D76 ( SanFrancisco Vancouver ) 1 973.00 UNLIMITED
+  D77 ( SanFrancisco LosAngeles ) 1 19465.00 UNLIMITED
+  D78 ( SanFrancisco LasVegas ) 1 1418.00 UNLIMITED
+  D79 ( SanFrancisco SaltLakeCity ) 1 643.00 UNLIMITED
+  D80 ( SanFrancisco ElPaso ) 1 282.00 UNLIMITED
+  D81 ( SanFrancisco Dallas ) 1 1595.00 UNLIMITED
+  D82 ( SanFrancisco Houston ) 1 1337.00 UNLIMITED
+  D83 ( SanFrancisco OklahomaCity ) 1 328.00 UNLIMITED
+  D84 ( SanFrancisco Minneapolis ) 1 888.00 UNLIMITED
+  D85 ( SanFrancisco KansasCity ) 1 543.00 UNLIMITED
+  D86 ( SanFrancisco Denver ) 1 1056.00 UNLIMITED
+  D87 ( SanFrancisco Chicago ) 1 2323.00 UNLIMITED
+  D88 ( SanFrancisco Indianapolis ) 1 418.00 UNLIMITED
+  D89 ( SanFrancisco Detroit ) 1 1205.00 UNLIMITED
+  D90 ( SanFrancisco StLouis ) 1 705.00 UNLIMITED
+  D91 ( SanFrancisco Nashville ) 1 315.00 UNLIMITED
+  D92 ( SanFrancisco Cleveland ) 1 618.00 UNLIMITED
+  D93 ( SanFrancisco NewYork ) 1 4137.00 UNLIMITED
+  D94 ( SanFrancisco Montreal ) 1 665.00 UNLIMITED
+  D95 ( SanFrancisco Charlotte ) 1 294.00 UNLIMITED
+  D96 ( SanFrancisco NewOrleans ) 1 311.00 UNLIMITED
+  D97 ( SanFrancisco Boston ) 1 1046.00 UNLIMITED
+  D98 ( SanFrancisco Atlanta ) 1 1027.00 UNLIMITED
+  D99 ( SanFrancisco Miami ) 1 1005.00 UNLIMITED
+  D100 ( SanFrancisco WashingtonDC ) 1 1546.00 UNLIMITED
+  D101 ( SanFrancisco Philadelphia ) 1 1152.00 UNLIMITED
+  D102 ( SanFrancisco Toronto ) 1 985.00 UNLIMITED
+  D103 ( SanFrancisco Pittsburgh ) 1 509.00 UNLIMITED
+  D104 ( SanFrancisco Cincinnati ) 1 462.00 UNLIMITED
+  D105 ( SanFrancisco Tampa ) 1 504.00 UNLIMITED
+  D106 ( SanFrancisco Memphis ) 1 306.00 UNLIMITED
+  D107 ( SanFrancisco Winnipeg ) 1 191.00 UNLIMITED
+  D108 ( SanFrancisco Calgary ) 1 377.00 UNLIMITED
+  D109 ( SanFrancisco Seattle ) 1 2046.00 UNLIMITED
+  D110 ( SanFrancisco Portland ) 1 1417.00 UNLIMITED
+  D111 ( SanFrancisco Sacrameto ) 1 11724.00 UNLIMITED
+  D112 ( SanFrancisco Phoenix ) 1 2085.00 UNLIMITED
+  D113 ( SanFrancisco SanDiego ) 1 2509.00 UNLIMITED
+  D114 ( LasVegas Vancouver ) 1 170.00 UNLIMITED
+  D115 ( LasVegas LosAngeles ) 1 6106.00 UNLIMITED
+  D116 ( LasVegas SanFrancisco ) 1 1418.00 UNLIMITED
+  D117 ( LasVegas SaltLakeCity ) 1 221.00 UNLIMITED
+  D118 ( LasVegas ElPaso ) 1 97.00 UNLIMITED
+  D119 ( LasVegas Dallas ) 1 442.00 UNLIMITED
+  D120 ( LasVegas Houston ) 1 358.00 UNLIMITED
+  D121 ( LasVegas OklahomaCity ) 1 89.00 UNLIMITED
+  D122 ( LasVegas Minneapolis ) 1 220.00 UNLIMITED
+  D123 ( LasVegas KansasCity ) 1 144.00 UNLIMITED
+  D124 ( LasVegas Denver ) 1 334.00 UNLIMITED
+  D125 ( LasVegas Chicago ) 1 573.00 UNLIMITED
+  D126 ( LasVegas Indianapolis ) 1 103.00 UNLIMITED
+  D127 ( LasVegas Detroit ) 1 289.00 UNLIMITED
+  D128 ( LasVegas StLouis ) 1 179.00 UNLIMITED
+  D129 ( LasVegas Nashville ) 1 78.00 UNLIMITED
+  D130 ( LasVegas Cleveland ) 1 148.00 UNLIMITED
+  D131 ( LasVegas NewYork ) 1 965.00 UNLIMITED
+  D132 ( LasVegas Montreal ) 1 153.00 UNLIMITED
+  D133 ( LasVegas Charlotte ) 1 71.00 UNLIMITED
+  D134 ( LasVegas NewOrleans ) 1 79.00 UNLIMITED
+  D135 ( LasVegas Boston ) 1 241.00 UNLIMITED
+  D136 ( LasVegas Atlanta ) 1 252.00 UNLIMITED
+  D137 ( LasVegas Miami ) 1 240.00 UNLIMITED
+  D138 ( LasVegas WashingtonDC ) 1 365.00 UNLIMITED
+  D139 ( LasVegas Philadelphia ) 1 270.00 UNLIMITED
+  D140 ( LasVegas Toronto ) 1 232.00 UNLIMITED
+  D141 ( LasVegas Pittsburgh ) 1 121.00 UNLIMITED
+  D142 ( LasVegas Cincinnati ) 1 113.00 UNLIMITED
+  D143 ( LasVegas Tampa ) 1 122.00 UNLIMITED
+  D144 ( LasVegas Memphis ) 1 78.00 UNLIMITED
+  D145 ( LasVegas Winnipeg ) 1 45.00 UNLIMITED
+  D146 ( LasVegas Calgary ) 1 78.00 UNLIMITED
+  D147 ( LasVegas Seattle ) 1 346.00 UNLIMITED
+  D148 ( LasVegas Portland ) 1 219.00 UNLIMITED
+  D149 ( LasVegas Sacrameto ) 1 407.00 UNLIMITED
+  D150 ( LasVegas Phoenix ) 1 1144.00 UNLIMITED
+  D151 ( LasVegas SanDiego ) 1 967.00 UNLIMITED
+  D152 ( SaltLakeCity Vancouver ) 1 136.00 UNLIMITED
+  D153 ( SaltLakeCity LosAngeles ) 1 1546.00 UNLIMITED
+  D154 ( SaltLakeCity SanFrancisco ) 1 643.00 UNLIMITED
+  D155 ( SaltLakeCity LasVegas ) 1 221.00 UNLIMITED
+  D156 ( SaltLakeCity ElPaso ) 1 54.00 UNLIMITED
+  D157 ( SaltLakeCity Dallas ) 1 307.00 UNLIMITED
+  D158 ( SaltLakeCity Houston ) 1 239.00 UNLIMITED
+  D159 ( SaltLakeCity OklahomaCity ) 1 67.00 UNLIMITED
+  D160 ( SaltLakeCity Minneapolis ) 1 182.00 UNLIMITED
+  D161 ( SaltLakeCity KansasCity ) 1 113.00 UNLIMITED
+  D162 ( SaltLakeCity Denver ) 1 353.00 UNLIMITED
+  D163 ( SaltLakeCity Chicago ) 1 439.00 UNLIMITED
+  D164 ( SaltLakeCity Indianapolis ) 1 76.00 UNLIMITED
+  D165 ( SaltLakeCity Detroit ) 1 216.00 UNLIMITED
+  D166 ( SaltLakeCity StLouis ) 1 136.00 UNLIMITED
+  D167 ( SaltLakeCity Nashville ) 1 56.00 UNLIMITED
+  D168 ( SaltLakeCity Cleveland ) 1 109.00 UNLIMITED
+  D169 ( SaltLakeCity NewYork ) 1 691.00 UNLIMITED
+  D170 ( SaltLakeCity Montreal ) 1 111.00 UNLIMITED
+  D171 ( SaltLakeCity Charlotte ) 1 50.00 UNLIMITED
+  D172 ( SaltLakeCity NewOrleans ) 1 53.00 UNLIMITED
+  D173 ( SaltLakeCity Boston ) 1 172.00 UNLIMITED
+  D174 ( SaltLakeCity Atlanta ) 1 178.00 UNLIMITED
+  D175 ( SaltLakeCity Miami ) 1 162.00 UNLIMITED
+  D176 ( SaltLakeCity WashingtonDC ) 1 262.00 UNLIMITED
+  D177 ( SaltLakeCity Philadelphia ) 1 193.00 UNLIMITED
+  D178 ( SaltLakeCity Toronto ) 1 171.00 UNLIMITED
+  D179 ( SaltLakeCity Pittsburgh ) 1 88.00 UNLIMITED
+  D180 ( SaltLakeCity Cincinnati ) 1 83.00 UNLIMITED
+  D181 ( SaltLakeCity Tampa ) 1 83.00 UNLIMITED
+  D182 ( SaltLakeCity Memphis ) 1 56.00 UNLIMITED
+  D183 ( SaltLakeCity Winnipeg ) 1 39.00 UNLIMITED
+  D184 ( SaltLakeCity Calgary ) 1 71.00 UNLIMITED
+  D185 ( SaltLakeCity Seattle ) 1 280.00 UNLIMITED
+  D186 ( SaltLakeCity Portland ) 1 171.00 UNLIMITED
+  D187 ( SaltLakeCity Sacrameto ) 1 195.00 UNLIMITED
+  D188 ( SaltLakeCity Phoenix ) 1 367.00 UNLIMITED
+  D189 ( SaltLakeCity SanDiego ) 1 251.00 UNLIMITED
+  D190 ( ElPaso Vancouver ) 1 55.00 UNLIMITED
+  D191 ( ElPaso LosAngeles ) 1 906.00 UNLIMITED
+  D192 ( ElPaso SanFrancisco ) 1 282.00 UNLIMITED
+  D193 ( ElPaso LasVegas ) 1 97.00 UNLIMITED
+  D194 ( ElPaso SaltLakeCity ) 1 54.00 UNLIMITED
+  D195 ( ElPaso Dallas ) 1 364.00 UNLIMITED
+  D196 ( ElPaso Houston ) 1 281.00 UNLIMITED
+  D197 ( ElPaso OklahomaCity ) 1 62.00 UNLIMITED
+  D198 ( ElPaso Minneapolis ) 1 111.00 UNLIMITED
+  D199 ( ElPaso KansasCity ) 1 86.00 UNLIMITED
+  D200 ( ElPaso Denver ) 1 169.00 UNLIMITED
+  D201 ( ElPaso Chicago ) 1 309.00 UNLIMITED
+  D202 ( ElPaso Indianapolis ) 1 57.00 UNLIMITED
+  D203 ( ElPaso Detroit ) 1 152.00 UNLIMITED
+  D204 ( ElPaso StLouis ) 1 105.00 UNLIMITED
+  D205 ( ElPaso Nashville ) 1 46.00 UNLIMITED
+  D206 ( ElPaso Cleveland ) 1 78.00 UNLIMITED
+  D207 ( ElPaso NewYork ) 1 498.00 UNLIMITED
+  D208 ( ElPaso Montreal ) 1 76.00 UNLIMITED
+  D209 ( ElPaso Charlotte ) 1 39.00 UNLIMITED
+  D210 ( ElPaso NewOrleans ) 1 52.00 UNLIMITED
+  D211 ( ElPaso Boston ) 1 122.00 UNLIMITED
+  D212 ( ElPaso Atlanta ) 1 148.00 UNLIMITED
+  D213 ( ElPaso Miami ) 1 136.00 UNLIMITED
+  D214 ( ElPaso WashingtonDC ) 1 193.00 UNLIMITED
+  D215 ( ElPaso Philadelphia ) 1 140.00 UNLIMITED
+  D216 ( ElPaso Toronto ) 1 119.00 UNLIMITED
+  D217 ( ElPaso Pittsburgh ) 1 64.00 UNLIMITED
+  D218 ( ElPaso Cincinnati ) 1 62.00 UNLIMITED
+  D219 ( ElPaso Tampa ) 1 71.00 UNLIMITED
+  D220 ( ElPaso Memphis ) 1 49.00 UNLIMITED
+  D221 ( ElPaso Winnipeg ) 1 20.00 UNLIMITED
+  D222 ( ElPaso Calgary ) 1 28.00 UNLIMITED
+  D223 ( ElPaso Seattle ) 1 107.00 UNLIMITED
+  D224 ( ElPaso Portland ) 1 63.00 UNLIMITED
+  D225 ( ElPaso Sacrameto ) 1 77.00 UNLIMITED
+  D226 ( ElPaso Phoenix ) 1 379.00 UNLIMITED
+  D227 ( ElPaso SanDiego ) 1 173.00 UNLIMITED
+  D228 ( Dallas Vancouver ) 1 384.00 UNLIMITED
+  D229 ( Dallas LosAngeles ) 1 4348.00 UNLIMITED
+  D230 ( Dallas SanFrancisco ) 1 1595.00 UNLIMITED
+  D231 ( Dallas LasVegas ) 1 442.00 UNLIMITED
+  D232 ( Dallas SaltLakeCity ) 1 307.00 UNLIMITED
+  D233 ( Dallas ElPaso ) 1 364.00 UNLIMITED
+  D234 ( Dallas Houston ) 1 7026.00 UNLIMITED
+  D235 ( Dallas OklahomaCity ) 1 1432.00 UNLIMITED
+  D236 ( Dallas Minneapolis ) 1 1128.00 UNLIMITED
+  D237 ( Dallas KansasCity ) 1 1197.00 UNLIMITED
+  D238 ( Dallas Denver ) 1 1141.00 UNLIMITED
+  D239 ( Dallas Chicago ) 1 3569.00 UNLIMITED
+  D240 ( Dallas Indianapolis ) 1 705.00 UNLIMITED
+  D241 ( Dallas Detroit ) 1 1658.00 UNLIMITED
+  D242 ( Dallas StLouis ) 1 1481.00 UNLIMITED
+  D243 ( Dallas Nashville ) 1 642.00 UNLIMITED
+  D244 ( Dallas Cleveland ) 1 856.00 UNLIMITED
+  D245 ( Dallas NewYork ) 1 5035.00 UNLIMITED
+  D246 ( Dallas Montreal ) 1 745.00 UNLIMITED
+  D247 ( Dallas Charlotte ) 1 464.00 UNLIMITED
+  D248 ( Dallas NewOrleans ) 1 849.00 UNLIMITED
+  D249 ( Dallas Boston ) 1 1195.00 UNLIMITED
+  D250 ( Dallas Atlanta ) 1 1934.00 UNLIMITED
+  D251 ( Dallas Miami ) 1 1470.00 UNLIMITED
+  D252 ( Dallas WashingtonDC ) 1 2059.00 UNLIMITED
+  D253 ( Dallas Philadelphia ) 1 1450.00 UNLIMITED
+  D254 ( Dallas Toronto ) 1 1228.00 UNLIMITED
+  D255 ( Dallas Pittsburgh ) 1 700.00 UNLIMITED
+  D256 ( Dallas Cincinnati ) 1 753.00 UNLIMITED
+  D257 ( Dallas Tampa ) 1 823.00 UNLIMITED
+  D258 ( Dallas Memphis ) 1 855.00 UNLIMITED
+  D259 ( Dallas Winnipeg ) 1 179.00 UNLIMITED
+  D260 ( Dallas Calgary ) 1 204.00 UNLIMITED
+  D261 ( Dallas Seattle ) 1 721.00 UNLIMITED
+  D262 ( Dallas Portland ) 1 414.00 UNLIMITED
+  D263 ( Dallas Sacrameto ) 1 438.00 UNLIMITED
+  D264 ( Dallas Phoenix ) 1 1206.00 UNLIMITED
+  D265 ( Dallas SanDiego ) 1 776.00 UNLIMITED
+  D266 ( Houston Vancouver ) 1 321.00 UNLIMITED
+  D267 ( Houston LosAngeles ) 1 3637.00 UNLIMITED
+  D268 ( Houston SanFrancisco ) 1 1337.00 UNLIMITED
+  D269 ( Houston LasVegas ) 1 358.00 UNLIMITED
+  D270 ( Houston SaltLakeCity ) 1 239.00 UNLIMITED
+  D271 ( Houston ElPaso ) 1 281.00 UNLIMITED
+  D272 ( Houston Dallas ) 1 7026.00 UNLIMITED
+  D273 ( Houston OklahomaCity ) 1 692.00 UNLIMITED
+  D274 ( Houston Minneapolis ) 1 864.00 UNLIMITED
+  D275 ( Houston KansasCity ) 1 784.00 UNLIMITED
+  D276 ( Houston Denver ) 1 801.00 UNLIMITED
+  D277 ( Houston Chicago ) 1 2835.00 UNLIMITED
+  D278 ( Houston Indianapolis ) 1 578.00 UNLIMITED
+  D279 ( Houston Detroit ) 1 1392.00 UNLIMITED
+  D280 ( Houston StLouis ) 1 1106.00 UNLIMITED
+  D281 ( Houston Nashville ) 1 553.00 UNLIMITED
+  D282 ( Houston Cleveland ) 1 730.00 UNLIMITED
+  D283 ( Houston NewYork ) 1 4484.00 UNLIMITED
+  D284 ( Houston Montreal ) 1 650.00 UNLIMITED
+  D285 ( Houston Charlotte ) 1 426.00 UNLIMITED
+  D286 ( Houston NewOrleans ) 1 1109.00 UNLIMITED
+  D287 ( Houston Boston ) 1 1063.00 UNLIMITED
+  D288 ( Houston Atlanta ) 1 1830.00 UNLIMITED
+  D289 ( Houston Miami ) 1 1510.00 UNLIMITED
+  D290 ( Houston WashingtonDC ) 1 1839.00 UNLIMITED
+  D291 ( Houston Philadelphia ) 1 1291.00 UNLIMITED
+  D292 ( Houston Toronto ) 1 1053.00 UNLIMITED
+  D293 ( Houston Pittsburgh ) 1 609.00 UNLIMITED
+  D294 ( Houston Cincinnati ) 1 636.00 UNLIMITED
+  D295 ( Houston Tampa ) 1 859.00 UNLIMITED
+  D296 ( Houston Memphis ) 1 695.00 UNLIMITED
+  D297 ( Houston Winnipeg ) 1 142.00 UNLIMITED
+  D298 ( Houston Calgary ) 1 168.00 UNLIMITED
+  D299 ( Houston Seattle ) 1 600.00 UNLIMITED
+  D300 ( Houston Portland ) 1 344.00 UNLIMITED
+  D301 ( Houston Sacrameto ) 1 365.00 UNLIMITED
+  D302 ( Houston Phoenix ) 1 971.00 UNLIMITED
+  D303 ( Houston SanDiego ) 1 650.00 UNLIMITED
+  D304 ( OklahomaCity Vancouver ) 1 83.00 UNLIMITED
+  D305 ( OklahomaCity LosAngeles ) 1 868.00 UNLIMITED
+  D306 ( OklahomaCity SanFrancisco ) 1 328.00 UNLIMITED
+  D307 ( OklahomaCity LasVegas ) 1 89.00 UNLIMITED
+  D308 ( OklahomaCity SaltLakeCity ) 1 67.00 UNLIMITED
+  D309 ( OklahomaCity ElPaso ) 1 62.00 UNLIMITED
+  D310 ( OklahomaCity Dallas ) 1 1432.00 UNLIMITED
+  D311 ( OklahomaCity Houston ) 1 692.00 UNLIMITED
+  D312 ( OklahomaCity Minneapolis ) 1 310.00 UNLIMITED
+  D313 ( OklahomaCity KansasCity ) 1 524.00 UNLIMITED
+  D314 ( OklahomaCity Denver ) 1 276.00 UNLIMITED
+  D315 ( OklahomaCity Chicago ) 1 976.00 UNLIMITED
+  D316 ( OklahomaCity Indianapolis ) 1 185.00 UNLIMITED
+  D317 ( OklahomaCity Detroit ) 1 409.00 UNLIMITED
+  D318 ( OklahomaCity StLouis ) 1 473.00 UNLIMITED
+  D319 ( OklahomaCity Nashville ) 1 157.00 UNLIMITED
+  D320 ( OklahomaCity Cleveland ) 1 207.00 UNLIMITED
+  D321 ( OklahomaCity NewYork ) 1 1130.00 UNLIMITED
+  D322 ( OklahomaCity Montreal ) 1 169.00 UNLIMITED
+  D323 ( OklahomaCity Charlotte ) 1 103.00 UNLIMITED
+  D324 ( OklahomaCity NewOrleans ) 1 142.00 UNLIMITED
+  D325 ( OklahomaCity Boston ) 1 266.00 UNLIMITED
+  D326 ( OklahomaCity Atlanta ) 1 421.00 UNLIMITED
+  D327 ( OklahomaCity Miami ) 1 287.00 UNLIMITED
+  D328 ( OklahomaCity WashingtonDC ) 1 466.00 UNLIMITED
+  D329 ( OklahomaCity Philadelphia ) 1 327.00 UNLIMITED
+  D330 ( OklahomaCity Toronto ) 1 290.00 UNLIMITED
+  D331 ( OklahomaCity Pittsburgh ) 1 165.00 UNLIMITED
+  D332 ( OklahomaCity Cincinnati ) 1 188.00 UNLIMITED
+  D333 ( OklahomaCity Tampa ) 1 160.00 UNLIMITED
+  D334 ( OklahomaCity Memphis ) 1 218.00 UNLIMITED
+  D335 ( OklahomaCity Winnipeg ) 1 44.00 UNLIMITED
+  D336 ( OklahomaCity Calgary ) 1 45.00 UNLIMITED
+  D337 ( OklahomaCity Seattle ) 1 155.00 UNLIMITED
+  D338 ( OklahomaCity Portland ) 1 88.00 UNLIMITED
+  D339 ( OklahomaCity Sacrameto ) 1 90.00 UNLIMITED
+  D340 ( OklahomaCity Phoenix ) 1 233.00 UNLIMITED
+  D341 ( OklahomaCity SanDiego ) 1 153.00 UNLIMITED
+  D342 ( Minneapolis Vancouver ) 1 268.00 UNLIMITED
+  D343 ( Minneapolis LosAngeles ) 1 2160.00 UNLIMITED
+  D344 ( Minneapolis SanFrancisco ) 1 888.00 UNLIMITED
+  D345 ( Minneapolis LasVegas ) 1 220.00 UNLIMITED
+  D346 ( Minneapolis SaltLakeCity ) 1 182.00 UNLIMITED
+  D347 ( Minneapolis ElPaso ) 1 111.00 UNLIMITED
+  D348 ( Minneapolis Dallas ) 1 1128.00 UNLIMITED
+  D349 ( Minneapolis Houston ) 1 864.00 UNLIMITED
+  D350 ( Minneapolis OklahomaCity ) 1 310.00 UNLIMITED
+  D351 ( Minneapolis KansasCity ) 1 809.00 UNLIMITED
+  D352 ( Minneapolis Denver ) 1 636.00 UNLIMITED
+  D353 ( Minneapolis Chicago ) 1 4743.00 UNLIMITED
+  D354 ( Minneapolis Indianapolis ) 1 589.00 UNLIMITED
+  D355 ( Minneapolis Detroit ) 1 1705.00 UNLIMITED
+  D356 ( Minneapolis StLouis ) 1 1024.00 UNLIMITED
+  D357 ( Minneapolis Nashville ) 1 333.00 UNLIMITED
+  D358 ( Minneapolis Cleveland ) 1 777.00 UNLIMITED
+  D359 ( Minneapolis NewYork ) 1 3773.00 UNLIMITED
+  D360 ( Minneapolis Montreal ) 1 642.00 UNLIMITED
+  D361 ( Minneapolis Charlotte ) 1 268.00 UNLIMITED
+  D362 ( Minneapolis NewOrleans ) 1 224.00 UNLIMITED
+  D363 ( Minneapolis Boston ) 1 913.00 UNLIMITED
+  D364 ( Minneapolis Atlanta ) 1 909.00 UNLIMITED
+  D365 ( Minneapolis Miami ) 1 668.00 UNLIMITED
+  D366 ( Minneapolis WashingtonDC ) 1 1475.00 UNLIMITED
+  D367 ( Minneapolis Philadelphia ) 1 1076.00 UNLIMITED
+  D368 ( Minneapolis Toronto ) 1 1176.00 UNLIMITED
+  D369 ( Minneapolis Pittsburgh ) 1 566.00 UNLIMITED
+  D370 ( Minneapolis Cincinnati ) 1 578.00 UNLIMITED
+  D371 ( Minneapolis Tampa ) 1 354.00 UNLIMITED
+  D372 ( Minneapolis Memphis ) 1 302.00 UNLIMITED
+  D373 ( Minneapolis Winnipeg ) 1 308.00 UNLIMITED
+  D374 ( Minneapolis Calgary ) 1 166.00 UNLIMITED
+  D375 ( Minneapolis Seattle ) 1 492.00 UNLIMITED
+  D376 ( Minneapolis Portland ) 1 272.00 UNLIMITED
+  D377 ( Minneapolis Sacrameto ) 1 247.00 UNLIMITED
+  D378 ( Minneapolis Phoenix ) 1 514.00 UNLIMITED
+  D379 ( Minneapolis SanDiego ) 1 369.00 UNLIMITED
+  D380 ( KansasCity Vancouver ) 1 146.00 UNLIMITED
+  D381 ( KansasCity LosAngeles ) 1 1390.00 UNLIMITED
+  D382 ( KansasCity SanFrancisco ) 1 543.00 UNLIMITED
+  D383 ( KansasCity LasVegas ) 1 144.00 UNLIMITED
+  D384 ( KansasCity SaltLakeCity ) 1 113.00 UNLIMITED
+  D385 ( KansasCity ElPaso ) 1 86.00 UNLIMITED
+  D386 ( KansasCity Dallas ) 1 1197.00 UNLIMITED
+  D387 ( KansasCity Houston ) 1 784.00 UNLIMITED
+  D388 ( KansasCity OklahomaCity ) 1 524.00 UNLIMITED
+  D389 ( KansasCity Minneapolis ) 1 809.00 UNLIMITED
+  D390 ( KansasCity Denver ) 1 470.00 UNLIMITED
+  D391 ( KansasCity Chicago ) 1 2391.00 UNLIMITED
+  D392 ( KansasCity Indianapolis ) 1 398.00 UNLIMITED
+  D393 ( KansasCity Detroit ) 1 851.00 UNLIMITED
+  D394 ( KansasCity StLouis ) 1 1216.00 UNLIMITED
+  D395 ( KansasCity Nashville ) 1 277.00 UNLIMITED
+  D396 ( KansasCity Cleveland ) 1 415.00 UNLIMITED
+  D397 ( KansasCity NewYork ) 1 2081.00 UNLIMITED
+  D398 ( KansasCity Montreal ) 1 320.00 UNLIMITED
+  D399 ( KansasCity Charlotte ) 1 180.00 UNLIMITED
+  D400 ( KansasCity NewOrleans ) 1 190.00 UNLIMITED
+  D401 ( KansasCity Boston ) 1 490.00 UNLIMITED
+  D402 ( KansasCity Atlanta ) 1 690.00 UNLIMITED
+  D403 ( KansasCity Miami ) 1 457.00 UNLIMITED
+  D404 ( KansasCity WashingtonDC ) 1 858.00 UNLIMITED
+  D405 ( KansasCity Philadelphia ) 1 603.00 UNLIMITED
+  D406 ( KansasCity Toronto ) 1 575.00 UNLIMITED
+  D407 ( KansasCity Pittsburgh ) 1 318.00 UNLIMITED
+  D408 ( KansasCity Cincinnati ) 1 377.00 UNLIMITED
+  D409 ( KansasCity Tampa ) 1 252.00 UNLIMITED
+  D410 ( KansasCity Memphis ) 1 319.00 UNLIMITED
+  D411 ( KansasCity Winnipeg ) 1 93.00 UNLIMITED
+  D412 ( KansasCity Calgary ) 1 83.00 UNLIMITED
+  D413 ( KansasCity Seattle ) 1 272.00 UNLIMITED
+  D414 ( KansasCity Portland ) 1 153.00 UNLIMITED
+  D415 ( KansasCity Sacrameto ) 1 150.00 UNLIMITED
+  D416 ( KansasCity Phoenix ) 1 357.00 UNLIMITED
+  D417 ( KansasCity SanDiego ) 1 242.00 UNLIMITED
+  D418 ( Denver Vancouver ) 1 256.00 UNLIMITED
+  D419 ( Denver LosAngeles ) 1 2784.00 UNLIMITED
+  D420 ( Denver SanFrancisco ) 1 1056.00 UNLIMITED
+  D421 ( Denver LasVegas ) 1 334.00 UNLIMITED
+  D422 ( Denver SaltLakeCity ) 1 353.00 UNLIMITED
+  D423 ( Denver ElPaso ) 1 169.00 UNLIMITED
+  D424 ( Denver Dallas ) 1 1141.00 UNLIMITED
+  D425 ( Denver Houston ) 1 801.00 UNLIMITED
+  D426 ( Denver OklahomaCity ) 1 276.00 UNLIMITED
+  D427 ( Denver Minneapolis ) 1 636.00 UNLIMITED
+  D428 ( Denver KansasCity ) 1 470.00 UNLIMITED
+  D429 ( Denver Chicago ) 1 1473.00 UNLIMITED
+  D430 ( Denver Indianapolis ) 1 253.00 UNLIMITED
+  D431 ( Denver Detroit ) 1 677.00 UNLIMITED
+  D432 ( Denver StLouis ) 1 486.00 UNLIMITED
+  D433 ( Denver Nashville ) 1 187.00 UNLIMITED
+  D434 ( Denver Cleveland ) 1 339.00 UNLIMITED
+  D435 ( Denver NewYork ) 1 2023.00 UNLIMITED
+  D436 ( Denver Montreal ) 1 323.00 UNLIMITED
+  D437 ( Denver Charlotte ) 1 154.00 UNLIMITED
+  D438 ( Denver NewOrleans ) 1 173.00 UNLIMITED
+  D439 ( Denver Boston ) 1 497.00 UNLIMITED
+  D440 ( Denver Atlanta ) 1 562.00 UNLIMITED
+  D441 ( Denver Miami ) 1 474.00 UNLIMITED
+  D442 ( Denver WashingtonDC ) 1 784.00 UNLIMITED
+  D443 ( Denver Philadelphia ) 1 572.00 UNLIMITED
+  D444 ( Denver Toronto ) 1 517.00 UNLIMITED
+  D445 ( Denver Pittsburgh ) 1 270.00 UNLIMITED
+  D446 ( Denver Cincinnati ) 1 268.00 UNLIMITED
+  D447 ( Denver Tampa ) 1 248.00 UNLIMITED
+  D448 ( Denver Memphis ) 1 195.00 UNLIMITED
+  D449 ( Denver Winnipeg ) 1 116.00 UNLIMITED
+  D450 ( Denver Calgary ) 1 147.00 UNLIMITED
+  D451 ( Denver Seattle ) 1 497.00 UNLIMITED
+  D452 ( Denver Portland ) 1 288.00 UNLIMITED
+  D453 ( Denver Sacrameto ) 1 301.00 UNLIMITED
+  D454 ( Denver Phoenix ) 1 802.00 UNLIMITED
+  D455 ( Denver SanDiego ) 1 482.00 UNLIMITED
+  D456 ( Chicago Vancouver ) 1 666.00 UNLIMITED
+  D457 ( Chicago LosAngeles ) 1 5753.00 UNLIMITED
+  D458 ( Chicago SanFrancisco ) 1 2323.00 UNLIMITED
+  D459 ( Chicago LasVegas ) 1 573.00 UNLIMITED
+  D460 ( Chicago SaltLakeCity ) 1 439.00 UNLIMITED
+  D461 ( Chicago ElPaso ) 1 309.00 UNLIMITED
+  D462 ( Chicago Dallas ) 1 3569.00 UNLIMITED
+  D463 ( Chicago Houston ) 1 2835.00 UNLIMITED
+  D464 ( Chicago OklahomaCity ) 1 976.00 UNLIMITED
+  D465 ( Chicago Minneapolis ) 1 4743.00 UNLIMITED
+  D466 ( Chicago KansasCity ) 1 2391.00 UNLIMITED
+  D467 ( Chicago Denver ) 1 1473.00 UNLIMITED
+  D468 ( Chicago Indianapolis ) 1 5321.00 UNLIMITED
+  D469 ( Chicago Detroit ) 1 11246.00 UNLIMITED
+  D470 ( Chicago StLouis ) 1 5560.00 UNLIMITED
+  D471 ( Chicago Nashville ) 1 1677.00 UNLIMITED
+  D472 ( Chicago Cleveland ) 1 4536.00 UNLIMITED
+  D473 ( Chicago NewYork ) 1 15065.00 UNLIMITED
+  D474 ( Chicago Montreal ) 1 2353.00 UNLIMITED
+  D475 ( Chicago Charlotte ) 1 1200.00 UNLIMITED
+  D476 ( Chicago NewOrleans ) 1 810.00 UNLIMITED
+  D477 ( Chicago Boston ) 1 3402.00 UNLIMITED
+  D478 ( Chicago Atlanta ) 1 3944.00 UNLIMITED
+  D479 ( Chicago Miami ) 1 2385.00 UNLIMITED
+  D480 ( Chicago WashingtonDC ) 1 6474.00 UNLIMITED
+  D481 ( Chicago Philadelphia ) 1 4463.00 UNLIMITED
+  D482 ( Chicago Toronto ) 1 5335.00 UNLIMITED
+  D483 ( Chicago Pittsburgh ) 1 2889.00 UNLIMITED
+  D484 ( Chicago Cincinnati ) 1 4008.00 UNLIMITED
+  D485 ( Chicago Tampa ) 1 1307.00 UNLIMITED
+  D486 ( Chicago Memphis ) 1 1279.00 UNLIMITED
+  D487 ( Chicago Winnipeg ) 1 491.00 UNLIMITED
+  D488 ( Chicago Calgary ) 1 384.00 UNLIMITED
+  D489 ( Chicago Seattle ) 1 1222.00 UNLIMITED
+  D490 ( Chicago Portland ) 1 681.00 UNLIMITED
+  D491 ( Chicago Sacrameto ) 1 642.00 UNLIMITED
+  D492 ( Chicago Phoenix ) 1 1372.00 UNLIMITED
+  D493 ( Chicago SanDiego ) 1 992.00 UNLIMITED
+  D494 ( Indianapolis Vancouver ) 1 117.00 UNLIMITED
+  D495 ( Indianapolis LosAngeles ) 1 1045.00 UNLIMITED
+  D496 ( Indianapolis SanFrancisco ) 1 418.00 UNLIMITED
+  D497 ( Indianapolis LasVegas ) 1 103.00 UNLIMITED
+  D498 ( Indianapolis SaltLakeCity ) 1 76.00 UNLIMITED
+  D499 ( Indianapolis ElPaso ) 1 57.00 UNLIMITED
+  D500 ( Indianapolis Dallas ) 1 705.00 UNLIMITED
+  D501 ( Indianapolis Houston ) 1 578.00 UNLIMITED
+  D502 ( Indianapolis OklahomaCity ) 1 185.00 UNLIMITED
+  D503 ( Indianapolis Minneapolis ) 1 589.00 UNLIMITED
+  D504 ( Indianapolis KansasCity ) 1 398.00 UNLIMITED
+  D505 ( Indianapolis Denver ) 1 253.00 UNLIMITED
+  D506 ( Indianapolis Chicago ) 1 5321.00 UNLIMITED
+  D507 ( Indianapolis Detroit ) 1 2069.00 UNLIMITED
+  D508 ( Indianapolis StLouis ) 1 1193.00 UNLIMITED
+  D509 ( Indianapolis Nashville ) 1 542.00 UNLIMITED
+  D510 ( Indianapolis Cleveland ) 1 1012.00 UNLIMITED
+  D511 ( Indianapolis NewYork ) 1 3117.00 UNLIMITED
+  D512 ( Indianapolis Montreal ) 1 437.00 UNLIMITED
+  D513 ( Indianapolis Charlotte ) 1 316.00 UNLIMITED
+  D514 ( Indianapolis NewOrleans ) 1 178.00 UNLIMITED
+  D515 ( Indianapolis Boston ) 1 670.00 UNLIMITED
+  D516 ( Indianapolis Atlanta ) 1 1042.00 UNLIMITED
+  D517 ( Indianapolis Miami ) 1 513.00 UNLIMITED
+  D518 ( Indianapolis WashingtonDC ) 1 1480.00 UNLIMITED
+  D519 ( Indianapolis Philadelphia ) 1 953.00 UNLIMITED
+  D520 ( Indianapolis Toronto ) 1 987.00 UNLIMITED
+  D521 ( Indianapolis Pittsburgh ) 1 686.00 UNLIMITED
+  D522 ( Indianapolis Cincinnati ) 1 2355.00 UNLIMITED
+  D523 ( Indianapolis Tampa ) 1 290.00 UNLIMITED
+  D524 ( Indianapolis Memphis ) 1 312.00 UNLIMITED
+  D525 ( Indianapolis Winnipeg ) 1 74.00 UNLIMITED
+  D526 ( Indianapolis Calgary ) 1 65.00 UNLIMITED
+  D527 ( Indianapolis Seattle ) 1 214.00 UNLIMITED
+  D528 ( Indianapolis Portland ) 1 120.00 UNLIMITED
+  D529 ( Indianapolis Sacrameto ) 1 115.00 UNLIMITED
+  D530 ( Indianapolis Phoenix ) 1 250.00 UNLIMITED
+  D531 ( Indianapolis SanDiego ) 1 181.00 UNLIMITED
+  D532 ( Detroit Vancouver ) 1 349.00 UNLIMITED
+  D533 ( Detroit LosAngeles ) 1 2960.00 UNLIMITED
+  D534 ( Detroit SanFrancisco ) 1 1205.00 UNLIMITED
+  D535 ( Detroit LasVegas ) 1 289.00 UNLIMITED
+  D536 ( Detroit SaltLakeCity ) 1 216.00 UNLIMITED
+  D537 ( Detroit ElPaso ) 1 152.00 UNLIMITED
+  D538 ( Detroit Dallas ) 1 1658.00 UNLIMITED
+  D539 ( Detroit Houston ) 1 1392.00 UNLIMITED
+  D540 ( Detroit OklahomaCity ) 1 409.00 UNLIMITED
+  D541 ( Detroit Minneapolis ) 1 1705.00 UNLIMITED
+  D542 ( Detroit KansasCity ) 1 851.00 UNLIMITED
+  D543 ( Detroit Denver ) 1 677.00 UNLIMITED
+  D544 ( Detroit Chicago ) 1 11246.00 UNLIMITED
+  D545 ( Detroit Indianapolis ) 1 2069.00 UNLIMITED
+  D546 ( Detroit StLouis ) 1 1724.00 UNLIMITED
+  D547 ( Detroit Nashville ) 1 819.00 UNLIMITED
+  D548 ( Detroit Cleveland ) 1 11098.00 UNLIMITED
+  D549 ( Detroit NewYork ) 1 12620.00 UNLIMITED
+  D550 ( Detroit Montreal ) 1 1927.00 UNLIMITED
+  D551 ( Detroit Charlotte ) 1 799.00 UNLIMITED
+  D552 ( Detroit NewOrleans ) 1 415.00 UNLIMITED
+  D553 ( Detroit Boston ) 1 2667.00 UNLIMITED
+  D554 ( Detroit Atlanta ) 1 2229.00 UNLIMITED
+  D555 ( Detroit Miami ) 1 1398.00 UNLIMITED
+  D556 ( Detroit WashingtonDC ) 1 5618.00 UNLIMITED
+  D557 ( Detroit Philadelphia ) 1 3856.00 UNLIMITED
+  D558 ( Detroit Toronto ) 1 7075.00 UNLIMITED
+  D559 ( Detroit Pittsburgh ) 1 3524.00 UNLIMITED
+  D560 ( Detroit Cincinnati ) 1 2549.00 UNLIMITED
+  D561 ( Detroit Tampa ) 1 754.00 UNLIMITED
+  D562 ( Detroit Memphis ) 1 569.00 UNLIMITED
+  D563 ( Detroit Winnipeg ) 1 235.00 UNLIMITED
+  D564 ( Detroit Calgary ) 1 197.00 UNLIMITED
+  D565 ( Detroit Seattle ) 1 636.00 UNLIMITED
+  D566 ( Detroit Portland ) 1 354.00 UNLIMITED
+  D567 ( Detroit Sacrameto ) 1 331.00 UNLIMITED
+  D568 ( Detroit Phoenix ) 1 689.00 UNLIMITED
+  D569 ( Detroit SanDiego ) 1 509.00 UNLIMITED
+  D570 ( StLouis Vancouver ) 1 192.00 UNLIMITED
+  D571 ( StLouis LosAngeles ) 1 1789.00 UNLIMITED
+  D572 ( StLouis SanFrancisco ) 1 705.00 UNLIMITED
+  D573 ( StLouis LasVegas ) 1 179.00 UNLIMITED
+  D574 ( StLouis SaltLakeCity ) 1 136.00 UNLIMITED
+  D575 ( StLouis ElPaso ) 1 105.00 UNLIMITED
+  D576 ( StLouis Dallas ) 1 1481.00 UNLIMITED
+  D577 ( StLouis Houston ) 1 1106.00 UNLIMITED
+  D578 ( StLouis OklahomaCity ) 1 473.00 UNLIMITED
+  D579 ( StLouis Minneapolis ) 1 1024.00 UNLIMITED
+  D580 ( StLouis KansasCity ) 1 1216.00 UNLIMITED
+  D581 ( StLouis Denver ) 1 486.00 UNLIMITED
+  D582 ( StLouis Chicago ) 1 5560.00 UNLIMITED
+  D583 ( StLouis Indianapolis ) 1 1193.00 UNLIMITED
+  D584 ( StLouis Detroit ) 1 1724.00 UNLIMITED
+  D585 ( StLouis Nashville ) 1 748.00 UNLIMITED
+  D586 ( StLouis Cleveland ) 1 843.00 UNLIMITED
+  D587 ( StLouis NewYork ) 1 3677.00 UNLIMITED
+  D588 ( StLouis Montreal ) 1 540.00 UNLIMITED
+  D589 ( StLouis Charlotte ) 1 362.00 UNLIMITED
+  D590 ( StLouis NewOrleans ) 1 315.00 UNLIMITED
+  D591 ( StLouis Boston ) 1 833.00 UNLIMITED
+  D592 ( StLouis Atlanta ) 1 1423.00 UNLIMITED
+  D593 ( StLouis Miami ) 1 761.00 UNLIMITED
+  D594 ( StLouis WashingtonDC ) 1 1610.00 UNLIMITED
+  D595 ( StLouis Philadelphia ) 1 1088.00 UNLIMITED
+  D596 ( StLouis Toronto ) 1 1048.00 UNLIMITED
+  D597 ( StLouis Pittsburgh ) 1 631.00 UNLIMITED
+  D598 ( StLouis Cincinnati ) 1 960.00 UNLIMITED
+  D599 ( StLouis Tampa ) 1 433.00 UNLIMITED
+  D600 ( StLouis Memphis ) 1 737.00 UNLIMITED
+  D601 ( StLouis Winnipeg ) 1 121.00 UNLIMITED
+  D602 ( StLouis Calgary ) 1 108.00 UNLIMITED
+  D603 ( StLouis Seattle ) 1 355.00 UNLIMITED
+  D604 ( StLouis Portland ) 1 200.00 UNLIMITED
+  D605 ( StLouis Sacrameto ) 1 194.00 UNLIMITED
+  D606 ( StLouis Phoenix ) 1 443.00 UNLIMITED
+  D607 ( StLouis SanDiego ) 1 311.00 UNLIMITED
+  D608 ( Nashville Vancouver ) 1 85.00 UNLIMITED
+  D609 ( Nashville LosAngeles ) 1 801.00 UNLIMITED
+  D610 ( Nashville SanFrancisco ) 1 315.00 UNLIMITED
+  D611 ( Nashville LasVegas ) 1 78.00 UNLIMITED
+  D612 ( Nashville SaltLakeCity ) 1 56.00 UNLIMITED
+  D613 ( Nashville ElPaso ) 1 46.00 UNLIMITED
+  D614 ( Nashville Dallas ) 1 642.00 UNLIMITED
+  D615 ( Nashville Houston ) 1 553.00 UNLIMITED
+  D616 ( Nashville OklahomaCity ) 1 157.00 UNLIMITED
+  D617 ( Nashville Minneapolis ) 1 333.00 UNLIMITED
+  D618 ( Nashville KansasCity ) 1 277.00 UNLIMITED
+  D619 ( Nashville Denver ) 1 187.00 UNLIMITED
+  D620 ( Nashville Chicago ) 1 1677.00 UNLIMITED
+  D621 ( Nashville Indianapolis ) 1 542.00 UNLIMITED
+  D622 ( Nashville Detroit ) 1 819.00 UNLIMITED
+  D623 ( Nashville StLouis ) 1 748.00 UNLIMITED
+  D624 ( Nashville Cleveland ) 1 447.00 UNLIMITED
+  D625 ( Nashville NewYork ) 1 2075.00 UNLIMITED
+  D626 ( Nashville Montreal ) 1 274.00 UNLIMITED
+  D627 ( Nashville Charlotte ) 1 313.00 UNLIMITED
+  D628 ( Nashville NewOrleans ) 1 199.00 UNLIMITED
+  D629 ( Nashville Boston ) 1 448.00 UNLIMITED
+  D630 ( Nashville Atlanta ) 1 1665.00 UNLIMITED
+  D631 ( Nashville Miami ) 1 480.00 UNLIMITED
+  D632 ( Nashville WashingtonDC ) 1 1000.00 UNLIMITED
+  D633 ( Nashville Philadelphia ) 1 632.00 UNLIMITED
+  D634 ( Nashville Toronto ) 1 526.00 UNLIMITED
+  D635 ( Nashville Pittsburgh ) 1 371.00 UNLIMITED
+  D636 ( Nashville Cincinnati ) 1 636.00 UNLIMITED
+  D637 ( Nashville Tampa ) 1 294.00 UNLIMITED
+  D638 ( Nashville Memphis ) 1 472.00 UNLIMITED
+  D639 ( Nashville Winnipeg ) 1 47.00 UNLIMITED
+  D640 ( Nashville Calgary ) 1 46.00 UNLIMITED
+  D641 ( Nashville Seattle ) 1 156.00 UNLIMITED
+  D642 ( Nashville Portland ) 1 88.00 UNLIMITED
+  D643 ( Nashville Sacrameto ) 1 86.00 UNLIMITED
+  D644 ( Nashville Phoenix ) 1 194.00 UNLIMITED
+  D645 ( Nashville SanDiego ) 1 139.00 UNLIMITED
+  D646 ( Cleveland Vancouver ) 1 177.00 UNLIMITED
+  D647 ( Cleveland LosAngeles ) 1 1522.00 UNLIMITED
+  D648 ( Cleveland SanFrancisco ) 1 618.00 UNLIMITED
+  D649 ( Cleveland LasVegas ) 1 148.00 UNLIMITED
+  D650 ( Cleveland SaltLakeCity ) 1 109.00 UNLIMITED
+  D651 ( Cleveland ElPaso ) 1 78.00 UNLIMITED
+  D652 ( Cleveland Dallas ) 1 856.00 UNLIMITED
+  D653 ( Cleveland Houston ) 1 730.00 UNLIMITED
+  D654 ( Cleveland OklahomaCity ) 1 207.00 UNLIMITED
+  D655 ( Cleveland Minneapolis ) 1 777.00 UNLIMITED
+  D656 ( Cleveland KansasCity ) 1 415.00 UNLIMITED
+  D657 ( Cleveland Denver ) 1 339.00 UNLIMITED
+  D658 ( Cleveland Chicago ) 1 4536.00 UNLIMITED
+  D659 ( Cleveland Indianapolis ) 1 1012.00 UNLIMITED
+  D660 ( Cleveland Detroit ) 1 11098.00 UNLIMITED
+  D661 ( Cleveland StLouis ) 1 843.00 UNLIMITED
+  D662 ( Cleveland Nashville ) 1 447.00 UNLIMITED
+  D663 ( Cleveland NewYork ) 1 7887.00 UNLIMITED
+  D664 ( Cleveland Montreal ) 1 1066.00 UNLIMITED
+  D665 ( Cleveland Charlotte ) 1 491.00 UNLIMITED
+  D666 ( Cleveland NewOrleans ) 1 223.00 UNLIMITED
+  D667 ( Cleveland Boston ) 1 1555.00 UNLIMITED
+  D668 ( Cleveland Atlanta ) 1 1267.00 UNLIMITED
+  D669 ( Cleveland Miami ) 1 776.00 UNLIMITED
+  D670 ( Cleveland WashingtonDC ) 1 3893.00 UNLIMITED
+  D671 ( Cleveland Philadelphia ) 1 2521.00 UNLIMITED
+  D672 ( Cleveland Toronto ) 1 4012.00 UNLIMITED
+  D673 ( Cleveland Pittsburgh ) 1 3729.00 UNLIMITED
+  D674 ( Cleveland Cincinnati ) 1 1462.00 UNLIMITED
+  D675 ( Cleveland Tampa ) 1 420.00 UNLIMITED
+  D676 ( Cleveland Memphis ) 1 298.00 UNLIMITED
+  D677 ( Cleveland Winnipeg ) 1 112.00 UNLIMITED
+  D678 ( Cleveland Calgary ) 1 99.00 UNLIMITED
+  D679 ( Cleveland Seattle ) 1 324.00 UNLIMITED
+  D680 ( Cleveland Portland ) 1 180.00 UNLIMITED
+  D681 ( Cleveland Sacrameto ) 1 170.00 UNLIMITED
+  D682 ( Cleveland Phoenix ) 1 353.00 UNLIMITED
+  D683 ( Cleveland SanDiego ) 1 262.00 UNLIMITED
+  D684 ( NewYork Vancouver ) 1 1189.00 UNLIMITED
+  D685 ( NewYork LosAngeles ) 1 10114.00 UNLIMITED
+  D686 ( NewYork SanFrancisco ) 1 4137.00 UNLIMITED
+  D687 ( NewYork LasVegas ) 1 965.00 UNLIMITED
+  D688 ( NewYork SaltLakeCity ) 1 691.00 UNLIMITED
+  D689 ( NewYork ElPaso ) 1 498.00 UNLIMITED
+  D690 ( NewYork Dallas ) 1 5035.00 UNLIMITED
+  D691 ( NewYork Houston ) 1 4484.00 UNLIMITED
+  D692 ( NewYork OklahomaCity ) 1 1130.00 UNLIMITED
+  D693 ( NewYork Minneapolis ) 1 3773.00 UNLIMITED
+  D694 ( NewYork KansasCity ) 1 2081.00 UNLIMITED
+  D695 ( NewYork Denver ) 1 2023.00 UNLIMITED
+  D696 ( NewYork Chicago ) 1 15065.00 UNLIMITED
+  D697 ( NewYork Indianapolis ) 1 3117.00 UNLIMITED
+  D698 ( NewYork Detroit ) 1 12620.00 UNLIMITED
+  D699 ( NewYork StLouis ) 1 3677.00 UNLIMITED
+  D700 ( NewYork Nashville ) 1 2075.00 UNLIMITED
+  D701 ( NewYork Cleveland ) 1 7887.00 UNLIMITED
+  D702 ( NewYork Montreal ) 1 11852.00 UNLIMITED
+  D703 ( NewYork Charlotte ) 1 3005.00 UNLIMITED
+  D704 ( NewYork NewOrleans ) 1 1376.00 UNLIMITED
+  D705 ( NewYork Boston ) 1 37252.00 UNLIMITED
+  D706 ( NewYork Atlanta ) 1 7231.00 UNLIMITED
+  D707 ( NewYork Miami ) 1 5851.00 UNLIMITED
+  D708 ( NewYork WashingtonDC ) 1 43810.00 UNLIMITED
+  D709 ( NewYork Philadelphia ) 1 104079.00 UNLIMITED
+  D710 ( NewYork Toronto ) 1 15155.00 UNLIMITED
+  D711 ( NewYork Pittsburgh ) 1 8625.00 UNLIMITED
+  D712 ( NewYork Cincinnati ) 1 4077.00 UNLIMITED
+  D713 ( NewYork Tampa ) 1 2985.00 UNLIMITED
+  D714 ( NewYork Memphis ) 1 1534.00 UNLIMITED
+  D715 ( NewYork Winnipeg ) 1 649.00 UNLIMITED
+  D716 ( NewYork Calgary ) 1 646.00 UNLIMITED
+  D717 ( NewYork Seattle ) 1 2157.00 UNLIMITED
+  D718 ( NewYork Portland ) 1 1202.00 UNLIMITED
+  D719 ( NewYork Sacrameto ) 1 1132.00 UNLIMITED
+  D720 ( NewYork Phoenix ) 1 2289.00 UNLIMITED
+  D721 ( NewYork SanDiego ) 1 1741.00 UNLIMITED
+  D722 ( Montreal Vancouver ) 1 197.00 UNLIMITED
+  D723 ( Montreal LosAngeles ) 1 1607.00 UNLIMITED
+  D724 ( Montreal SanFrancisco ) 1 665.00 UNLIMITED
+  D725 ( Montreal LasVegas ) 1 153.00 UNLIMITED
+  D726 ( Montreal SaltLakeCity ) 1 111.00 UNLIMITED
+  D727 ( Montreal ElPaso ) 1 76.00 UNLIMITED
+  D728 ( Montreal Dallas ) 1 745.00 UNLIMITED
+  D729 ( Montreal Houston ) 1 650.00 UNLIMITED
+  D730 ( Montreal OklahomaCity ) 1 169.00 UNLIMITED
+  D731 ( Montreal Minneapolis ) 1 642.00 UNLIMITED
+  D732 ( Montreal KansasCity ) 1 320.00 UNLIMITED
+  D733 ( Montreal Denver ) 1 323.00 UNLIMITED
+  D734 ( Montreal Chicago ) 1 2353.00 UNLIMITED
+  D735 ( Montreal Indianapolis ) 1 437.00 UNLIMITED
+  D736 ( Montreal Detroit ) 1 1927.00 UNLIMITED
+  D737 ( Montreal StLouis ) 1 540.00 UNLIMITED
+  D738 ( Montreal Nashville ) 1 274.00 UNLIMITED
+  D739 ( Montreal Cleveland ) 1 1066.00 UNLIMITED
+  D740 ( Montreal NewYork ) 1 11852.00 UNLIMITED
+  D741 ( Montreal Charlotte ) 1 327.00 UNLIMITED
+  D742 ( Montreal NewOrleans ) 1 190.00 UNLIMITED
+  D743 ( Montreal Boston ) 1 4212.00 UNLIMITED
+  D744 ( Montreal Atlanta ) 1 899.00 UNLIMITED
+  D745 ( Montreal Miami ) 1 752.00 UNLIMITED
+  D746 ( Montreal WashingtonDC ) 1 2880.00 UNLIMITED
+  D747 ( Montreal Philadelphia ) 1 2795.00 UNLIMITED
+  D748 ( Montreal Toronto ) 1 2783.00 UNLIMITED
+  D749 ( Montreal Pittsburgh ) 1 931.00 UNLIMITED
+  D750 ( Montreal Cincinnati ) 1 534.00 UNLIMITED
+  D751 ( Montreal Tampa ) 1 381.00 UNLIMITED
+  D752 ( Montreal Memphis ) 1 214.00 UNLIMITED
+  D753 ( Montreal Winnipeg ) 1 115.00 UNLIMITED
+  D754 ( Montreal Calgary ) 1 109.00 UNLIMITED
+  D755 ( Montreal Seattle ) 1 357.00 UNLIMITED
+  D756 ( Montreal Portland ) 1 197.00 UNLIMITED
+  D757 ( Montreal Sacrameto ) 1 182.00 UNLIMITED
+  D758 ( Montreal Phoenix ) 1 360.00 UNLIMITED
+  D759 ( Montreal SanDiego ) 1 275.00 UNLIMITED
+  D760 ( Charlotte Vancouver ) 1 80.00 UNLIMITED
+  D761 ( Charlotte LosAngeles ) 1 737.00 UNLIMITED
+  D762 ( Charlotte SanFrancisco ) 1 294.00 UNLIMITED
+  D763 ( Charlotte LasVegas ) 1 71.00 UNLIMITED
+  D764 ( Charlotte SaltLakeCity ) 1 50.00 UNLIMITED
+  D765 ( Charlotte ElPaso ) 1 39.00 UNLIMITED
+  D766 ( Charlotte Dallas ) 1 464.00 UNLIMITED
+  D767 ( Charlotte Houston ) 1 426.00 UNLIMITED
+  D768 ( Charlotte OklahomaCity ) 1 103.00 UNLIMITED
+  D769 ( Charlotte Minneapolis ) 1 268.00 UNLIMITED
+  D770 ( Charlotte KansasCity ) 1 180.00 UNLIMITED
+  D771 ( Charlotte Denver ) 1 154.00 UNLIMITED
+  D772 ( Charlotte Chicago ) 1 1200.00 UNLIMITED
+  D773 ( Charlotte Indianapolis ) 1 316.00 UNLIMITED
+  D774 ( Charlotte Detroit ) 1 799.00 UNLIMITED
+  D775 ( Charlotte StLouis ) 1 362.00 UNLIMITED
+  D776 ( Charlotte Nashville ) 1 313.00 UNLIMITED
+  D777 ( Charlotte Cleveland ) 1 491.00 UNLIMITED
+  D778 ( Charlotte NewYork ) 1 3005.00 UNLIMITED
+  D779 ( Charlotte Montreal ) 1 327.00 UNLIMITED
+  D780 ( Charlotte NewOrleans ) 1 154.00 UNLIMITED
+  D781 ( Charlotte Boston ) 1 591.00 UNLIMITED
+  D782 ( Charlotte Atlanta ) 1 1623.00 UNLIMITED
+  D783 ( Charlotte Miami ) 1 611.00 UNLIMITED
+  D784 ( Charlotte WashingtonDC ) 1 1783.00 UNLIMITED
+  D785 ( Charlotte Philadelphia ) 1 970.00 UNLIMITED
+  D786 ( Charlotte Toronto ) 1 599.00 UNLIMITED
+  D787 ( Charlotte Pittsburgh ) 1 502.00 UNLIMITED
+  D788 ( Charlotte Cincinnati ) 1 463.00 UNLIMITED
+  D789 ( Charlotte Tampa ) 1 368.00 UNLIMITED
+  D790 ( Charlotte Memphis ) 1 181.00 UNLIMITED
+  D791 ( Charlotte Winnipeg ) 1 42.00 UNLIMITED
+  D792 ( Charlotte Calgary ) 1 43.00 UNLIMITED
+  D793 ( Charlotte Seattle ) 1 147.00 UNLIMITED
+  D794 ( Charlotte Portland ) 1 82.00 UNLIMITED
+  D795 ( Charlotte Sacrameto ) 1 80.00 UNLIMITED
+  D796 ( Charlotte Phoenix ) 1 173.00 UNLIMITED
+  D797 ( Charlotte SanDiego ) 1 128.00 UNLIMITED
+  D798 ( NewOrleans Vancouver ) 1 78.00 UNLIMITED
+  D799 ( NewOrleans LosAngeles ) 1 817.00 UNLIMITED
+  D800 ( NewOrleans SanFrancisco ) 1 311.00 UNLIMITED
+  D801 ( NewOrleans LasVegas ) 1 79.00 UNLIMITED
+  D802 ( NewOrleans SaltLakeCity ) 1 53.00 UNLIMITED
+  D803 ( NewOrleans ElPaso ) 1 52.00 UNLIMITED
+  D804 ( NewOrleans Dallas ) 1 849.00 UNLIMITED
+  D805 ( NewOrleans Houston ) 1 1109.00 UNLIMITED
+  D806 ( NewOrleans OklahomaCity ) 1 142.00 UNLIMITED
+  D807 ( NewOrleans Minneapolis ) 1 224.00 UNLIMITED
+  D808 ( NewOrleans KansasCity ) 1 190.00 UNLIMITED
+  D809 ( NewOrleans Denver ) 1 173.00 UNLIMITED
+  D810 ( NewOrleans Chicago ) 1 810.00 UNLIMITED
+  D811 ( NewOrleans Indianapolis ) 1 178.00 UNLIMITED
+  D812 ( NewOrleans Detroit ) 1 415.00 UNLIMITED
+  D813 ( NewOrleans StLouis ) 1 315.00 UNLIMITED
+  D814 ( NewOrleans Nashville ) 1 199.00 UNLIMITED
+  D815 ( NewOrleans Cleveland ) 1 223.00 UNLIMITED
+  D816 ( NewOrleans NewYork ) 1 1376.00 UNLIMITED
+  D817 ( NewOrleans Montreal ) 1 190.00 UNLIMITED
+  D818 ( NewOrleans Charlotte ) 1 154.00 UNLIMITED
+  D819 ( NewOrleans Boston ) 1 317.00 UNLIMITED
+  D820 ( NewOrleans Atlanta ) 1 780.00 UNLIMITED
+  D821 ( NewOrleans Miami ) 1 565.00 UNLIMITED
+  D822 ( NewOrleans WashingtonDC ) 1 587.00 UNLIMITED
+  D823 ( NewOrleans Philadelphia ) 1 401.00 UNLIMITED
+  D824 ( NewOrleans Toronto ) 1 312.00 UNLIMITED
+  D825 ( NewOrleans Pittsburgh ) 1 190.00 UNLIMITED
+  D826 ( NewOrleans Cincinnati ) 1 203.00 UNLIMITED
+  D827 ( NewOrleans Tampa ) 1 369.00 UNLIMITED
+  D828 ( NewOrleans Memphis ) 1 238.00 UNLIMITED
+  D829 ( NewOrleans Winnipeg ) 1 36.00 UNLIMITED
+  D830 ( NewOrleans Calgary ) 1 41.00 UNLIMITED
+  D831 ( NewOrleans Seattle ) 1 145.00 UNLIMITED
+  D832 ( NewOrleans Portland ) 1 82.00 UNLIMITED
+  D833 ( NewOrleans Sacrameto ) 1 84.00 UNLIMITED
+  D834 ( NewOrleans Phoenix ) 1 204.00 UNLIMITED
+  D835 ( NewOrleans SanDiego ) 1 144.00 UNLIMITED
+  D836 ( Boston Vancouver ) 1 304.00 UNLIMITED
+  D837 ( Boston LosAngeles ) 1 2542.00 UNLIMITED
+  D838 ( Boston SanFrancisco ) 1 1046.00 UNLIMITED
+  D839 ( Boston LasVegas ) 1 241.00 UNLIMITED
+  D840 ( Boston SaltLakeCity ) 1 172.00 UNLIMITED
+  D841 ( Boston ElPaso ) 1 122.00 UNLIMITED
+  D842 ( Boston Dallas ) 1 1195.00 UNLIMITED
+  D843 ( Boston Houston ) 1 1063.00 UNLIMITED
+  D844 ( Boston OklahomaCity ) 1 266.00 UNLIMITED
+  D845 ( Boston Minneapolis ) 1 913.00 UNLIMITED
+  D846 ( Boston KansasCity ) 1 490.00 UNLIMITED
+  D847 ( Boston Denver ) 1 497.00 UNLIMITED
+  D848 ( Boston Chicago ) 1 3402.00 UNLIMITED
+  D849 ( Boston Indianapolis ) 1 670.00 UNLIMITED
+  D850 ( Boston Detroit ) 1 2667.00 UNLIMITED
+  D851 ( Boston StLouis ) 1 833.00 UNLIMITED
+  D852 ( Boston Nashville ) 1 448.00 UNLIMITED
+  D853 ( Boston Cleveland ) 1 1555.00 UNLIMITED
+  D854 ( Boston NewYork ) 1 37252.00 UNLIMITED
+  D855 ( Boston Montreal ) 1 4212.00 UNLIMITED
+  D856 ( Boston Charlotte ) 1 591.00 UNLIMITED
+  D857 ( Boston NewOrleans ) 1 317.00 UNLIMITED
+  D858 ( Boston Atlanta ) 1 1547.00 UNLIMITED
+  D859 ( Boston Miami ) 1 1351.00 UNLIMITED
+  D860 ( Boston WashingtonDC ) 1 5837.00 UNLIMITED
+  D861 ( Boston Philadelphia ) 1 6739.00 UNLIMITED
+  D862 ( Boston Toronto ) 1 3241.00 UNLIMITED
+  D863 ( Boston Pittsburgh ) 1 1503.00 UNLIMITED
+  D864 ( Boston Cincinnati ) 1 842.00 UNLIMITED
+  D865 ( Boston Tampa ) 1 676.00 UNLIMITED
+  D866 ( Boston Memphis ) 1 346.00 UNLIMITED
+  D867 ( Boston Winnipeg ) 1 164.00 UNLIMITED
+  D868 ( Boston Calgary ) 1 165.00 UNLIMITED
+  D869 ( Boston Seattle ) 1 550.00 UNLIMITED
+  D870 ( Boston Portland ) 1 306.00 UNLIMITED
+  D871 ( Boston Sacrameto ) 1 286.00 UNLIMITED
+  D872 ( Boston Phoenix ) 1 569.00 UNLIMITED
+  D873 ( Boston SanDiego ) 1 436.00 UNLIMITED
+  D874 ( Atlanta Vancouver ) 1 274.00 UNLIMITED
+  D875 ( Atlanta LosAngeles ) 1 2611.00 UNLIMITED
+  D876 ( Atlanta SanFrancisco ) 1 1027.00 UNLIMITED
+  D877 ( Atlanta LasVegas ) 1 252.00 UNLIMITED
+  D878 ( Atlanta SaltLakeCity ) 1 178.00 UNLIMITED
+  D879 ( Atlanta ElPaso ) 1 148.00 UNLIMITED
+  D880 ( Atlanta Dallas ) 1 1934.00 UNLIMITED
+  D881 ( Atlanta Houston ) 1 1830.00 UNLIMITED
+  D882 ( Atlanta OklahomaCity ) 1 421.00 UNLIMITED
+  D883 ( Atlanta Minneapolis ) 1 909.00 UNLIMITED
+  D884 ( Atlanta KansasCity ) 1 690.00 UNLIMITED
+  D885 ( Atlanta Denver ) 1 562.00 UNLIMITED
+  D886 ( Atlanta Chicago ) 1 3944.00 UNLIMITED
+  D887 ( Atlanta Indianapolis ) 1 1042.00 UNLIMITED
+  D888 ( Atlanta Detroit ) 1 2229.00 UNLIMITED
+  D889 ( Atlanta StLouis ) 1 1423.00 UNLIMITED
+  D890 ( Atlanta Nashville ) 1 1665.00 UNLIMITED
+  D891 ( Atlanta Cleveland ) 1 1267.00 UNLIMITED
+  D892 ( Atlanta NewYork ) 1 7231.00 UNLIMITED
+  D893 ( Atlanta Montreal ) 1 899.00 UNLIMITED
+  D894 ( Atlanta Charlotte ) 1 1623.00 UNLIMITED
+  D895 ( Atlanta NewOrleans ) 1 780.00 UNLIMITED
+  D896 ( Atlanta Boston ) 1 1547.00 UNLIMITED
+  D897 ( Atlanta Miami ) 1 2210.00 UNLIMITED
+  D898 ( Atlanta WashingtonDC ) 1 3553.00 UNLIMITED
+  D899 ( Atlanta Philadelphia ) 1 2210.00 UNLIMITED
+  D900 ( Atlanta Toronto ) 1 1601.00 UNLIMITED
+  D901 ( Atlanta Pittsburgh ) 1 1145.00 UNLIMITED
+  D902 ( Atlanta Cincinnati ) 1 1350.00 UNLIMITED
+  D903 ( Atlanta Tampa ) 1 1522.00 UNLIMITED
+  D904 ( Atlanta Memphis ) 1 929.00 UNLIMITED
+  D905 ( Atlanta Winnipeg ) 1 141.00 UNLIMITED
+  D906 ( Atlanta Calgary ) 1 147.00 UNLIMITED
+  D907 ( Atlanta Seattle ) 1 504.00 UNLIMITED
+  D908 ( Atlanta Portland ) 1 284.00 UNLIMITED
+  D909 ( Atlanta Sacrameto ) 1 281.00 UNLIMITED
+  D910 ( Atlanta Phoenix ) 1 626.00 UNLIMITED
+  D911 ( Atlanta SanDiego ) 1 455.00 UNLIMITED
+  D912 ( Miami Vancouver ) 1 263.00 UNLIMITED
+  D913 ( Miami LosAngeles ) 1 2554.00 UNLIMITED
+  D914 ( Miami SanFrancisco ) 1 1005.00 UNLIMITED
+  D915 ( Miami LasVegas ) 1 240.00 UNLIMITED
+  D916 ( Miami SaltLakeCity ) 1 162.00 UNLIMITED
+  D917 ( Miami ElPaso ) 1 136.00 UNLIMITED
+  D918 ( Miami Dallas ) 1 1470.00 UNLIMITED
+  D919 ( Miami Houston ) 1 1510.00 UNLIMITED
+  D920 ( Miami OklahomaCity ) 1 287.00 UNLIMITED
+  D921 ( Miami Minneapolis ) 1 668.00 UNLIMITED
+  D922 ( Miami KansasCity ) 1 457.00 UNLIMITED
+  D923 ( Miami Denver ) 1 474.00 UNLIMITED
+  D924 ( Miami Chicago ) 1 2385.00 UNLIMITED
+  D925 ( Miami Indianapolis ) 1 513.00 UNLIMITED
+  D926 ( Miami Detroit ) 1 1398.00 UNLIMITED
+  D927 ( Miami StLouis ) 1 761.00 UNLIMITED
+  D928 ( Miami Nashville ) 1 480.00 UNLIMITED
+  D929 ( Miami Cleveland ) 1 776.00 UNLIMITED
+  D930 ( Miami NewYork ) 1 5851.00 UNLIMITED
+  D931 ( Miami Montreal ) 1 752.00 UNLIMITED
+  D932 ( Miami Charlotte ) 1 611.00 UNLIMITED
+  D933 ( Miami NewOrleans ) 1 565.00 UNLIMITED
+  D934 ( Miami Boston ) 1 1351.00 UNLIMITED
+  D935 ( Miami Atlanta ) 1 2210.00 UNLIMITED
+  D936 ( Miami WashingtonDC ) 1 2441.00 UNLIMITED
+  D937 ( Miami Philadelphia ) 1 1693.00 UNLIMITED
+  D938 ( Miami Toronto ) 1 1145.00 UNLIMITED
+  D939 ( Miami Pittsburgh ) 1 702.00 UNLIMITED
+  D940 ( Miami Cincinnati ) 1 624.00 UNLIMITED
+  D941 ( Miami Tampa ) 1 3672.00 UNLIMITED
+  D942 ( Miami Memphis ) 1 410.00 UNLIMITED
+  D943 ( Miami Winnipeg ) 1 117.00 UNLIMITED
+  D944 ( Miami Calgary ) 1 136.00 UNLIMITED
+  D945 ( Miami Seattle ) 1 483.00 UNLIMITED
+  D946 ( Miami Portland ) 1 274.00 UNLIMITED
+  D947 ( Miami Sacrameto ) 1 273.00 UNLIMITED
+  D948 ( Miami Phoenix ) 1 593.00 UNLIMITED
+  D949 ( Miami SanDiego ) 1 445.00 UNLIMITED
+  D950 ( WashingtonDC Vancouver ) 1 437.00 UNLIMITED
+  D951 ( WashingtonDC LosAngeles ) 1 3813.00 UNLIMITED
+  D952 ( WashingtonDC SanFrancisco ) 1 1546.00 UNLIMITED
+  D953 ( WashingtonDC LasVegas ) 1 365.00 UNLIMITED
+  D954 ( WashingtonDC SaltLakeCity ) 1 262.00 UNLIMITED
+  D955 ( WashingtonDC ElPaso ) 1 193.00 UNLIMITED
+  D956 ( WashingtonDC Dallas ) 1 2059.00 UNLIMITED
+  D957 ( WashingtonDC Houston ) 1 1839.00 UNLIMITED
+  D958 ( WashingtonDC OklahomaCity ) 1 466.00 UNLIMITED
+  D959 ( WashingtonDC Minneapolis ) 1 1475.00 UNLIMITED
+  D960 ( WashingtonDC KansasCity ) 1 858.00 UNLIMITED
+  D961 ( WashingtonDC Denver ) 1 784.00 UNLIMITED
+  D962 ( WashingtonDC Chicago ) 1 6474.00 UNLIMITED
+  D963 ( WashingtonDC Indianapolis ) 1 1480.00 UNLIMITED
+  D964 ( WashingtonDC Detroit ) 1 5618.00 UNLIMITED
+  D965 ( WashingtonDC StLouis ) 1 1610.00 UNLIMITED
+  D966 ( WashingtonDC Nashville ) 1 1000.00 UNLIMITED
+  D967 ( WashingtonDC Cleveland ) 1 3893.00 UNLIMITED
+  D968 ( WashingtonDC NewYork ) 1 43810.00 UNLIMITED
+  D969 ( WashingtonDC Montreal ) 1 2880.00 UNLIMITED
+  D970 ( WashingtonDC Charlotte ) 1 1783.00 UNLIMITED
+  D971 ( WashingtonDC NewOrleans ) 1 587.00 UNLIMITED
+  D972 ( WashingtonDC Boston ) 1 5837.00 UNLIMITED
+  D973 ( WashingtonDC Atlanta ) 1 3553.00 UNLIMITED
+  D974 ( WashingtonDC Miami ) 1 2441.00 UNLIMITED
+  D975 ( WashingtonDC Philadelphia ) 1 21613.00 UNLIMITED
+  D976 ( WashingtonDC Toronto ) 1 5451.00 UNLIMITED
+  D977 ( WashingtonDC Pittsburgh ) 1 5580.00 UNLIMITED
+  D978 ( WashingtonDC Cincinnati ) 1 2105.00 UNLIMITED
+  D979 ( WashingtonDC Tampa ) 1 1295.00 UNLIMITED
+  D980 ( WashingtonDC Memphis ) 1 682.00 UNLIMITED
+  D981 ( WashingtonDC Winnipeg ) 1 241.00 UNLIMITED
+  D982 ( WashingtonDC Calgary ) 1 238.00 UNLIMITED
+  D983 ( WashingtonDC Seattle ) 1 796.00 UNLIMITED
+  D984 ( WashingtonDC Portland ) 1 445.00 UNLIMITED
+  D985 ( WashingtonDC Sacrameto ) 1 423.00 UNLIMITED
+  D986 ( WashingtonDC Phoenix ) 1 875.00 UNLIMITED
+  D987 ( WashingtonDC SanDiego ) 1 658.00 UNLIMITED
+  D988 ( Philadelphia Vancouver ) 1 329.00 UNLIMITED
+  D989 ( Philadelphia LosAngeles ) 1 2827.00 UNLIMITED
+  D990 ( Philadelphia SanFrancisco ) 1 1152.00 UNLIMITED
+  D991 ( Philadelphia LasVegas ) 1 270.00 UNLIMITED
+  D992 ( Philadelphia SaltLakeCity ) 1 193.00 UNLIMITED
+  D993 ( Philadelphia ElPaso ) 1 140.00 UNLIMITED
+  D994 ( Philadelphia Dallas ) 1 1450.00 UNLIMITED
+  D995 ( Philadelphia Houston ) 1 1291.00 UNLIMITED
+  D996 ( Philadelphia OklahomaCity ) 1 327.00 UNLIMITED
+  D997 ( Philadelphia Minneapolis ) 1 1076.00 UNLIMITED
+  D998 ( Philadelphia KansasCity ) 1 603.00 UNLIMITED
+  D999 ( Philadelphia Denver ) 1 572.00 UNLIMITED
+  D1000 ( Philadelphia Chicago ) 1 4463.00 UNLIMITED
+  D1001 ( Philadelphia Indianapolis ) 1 953.00 UNLIMITED
+  D1002 ( Philadelphia Detroit ) 1 3856.00 UNLIMITED
+  D1003 ( Philadelphia StLouis ) 1 1088.00 UNLIMITED
+  D1004 ( Philadelphia Nashville ) 1 632.00 UNLIMITED
+  D1005 ( Philadelphia Cleveland ) 1 2521.00 UNLIMITED
+  D1006 ( Philadelphia NewYork ) 1 104079.00 UNLIMITED
+  D1007 ( Philadelphia Montreal ) 1 2795.00 UNLIMITED
+  D1008 ( Philadelphia Charlotte ) 1 970.00 UNLIMITED
+  D1009 ( Philadelphia NewOrleans ) 1 401.00 UNLIMITED
+  D1010 ( Philadelphia Boston ) 1 6739.00 UNLIMITED
+  D1011 ( Philadelphia Atlanta ) 1 2210.00 UNLIMITED
+  D1012 ( Philadelphia Miami ) 1 1693.00 UNLIMITED
+  D1013 ( Philadelphia WashingtonDC ) 1 21613.00 UNLIMITED
+  D1014 ( Philadelphia Toronto ) 1 4415.00 UNLIMITED
+  D1015 ( Philadelphia Pittsburgh ) 1 3047.00 UNLIMITED
+  D1016 ( Philadelphia Cincinnati ) 1 1281.00 UNLIMITED
+  D1017 ( Philadelphia Tampa ) 1 875.00 UNLIMITED
+  D1018 ( Philadelphia Memphis ) 1 455.00 UNLIMITED
+  D1019 ( Philadelphia Winnipeg ) 1 181.00 UNLIMITED
+  D1020 ( Philadelphia Calgary ) 1 179.00 UNLIMITED
+  D1021 ( Philadelphia Seattle ) 1 598.00 UNLIMITED
+  D1022 ( Philadelphia Portland ) 1 334.00 UNLIMITED
+  D1023 ( Philadelphia Sacrameto ) 1 315.00 UNLIMITED
+  D1024 ( Philadelphia Phoenix ) 1 643.00 UNLIMITED
+  D1025 ( Philadelphia SanDiego ) 1 487.00 UNLIMITED
+  D1026 ( Toronto Vancouver ) 1 289.00 UNLIMITED
+  D1027 ( Toronto LosAngeles ) 1 2400.00 UNLIMITED
+  D1028 ( Toronto SanFrancisco ) 1 985.00 UNLIMITED
+  D1029 ( Toronto LasVegas ) 1 232.00 UNLIMITED
+  D1030 ( Toronto SaltLakeCity ) 1 171.00 UNLIMITED
+  D1031 ( Toronto ElPaso ) 1 119.00 UNLIMITED
+  D1032 ( Toronto Dallas ) 1 1228.00 UNLIMITED
+  D1033 ( Toronto Houston ) 1 1053.00 UNLIMITED
+  D1034 ( Toronto OklahomaCity ) 1 290.00 UNLIMITED
+  D1035 ( Toronto Minneapolis ) 1 1176.00 UNLIMITED
+  D1036 ( Toronto KansasCity ) 1 575.00 UNLIMITED
+  D1037 ( Toronto Denver ) 1 517.00 UNLIMITED
+  D1038 ( Toronto Chicago ) 1 5335.00 UNLIMITED
+  D1039 ( Toronto Indianapolis ) 1 987.00 UNLIMITED
+  D1040 ( Toronto Detroit ) 1 7075.00 UNLIMITED
+  D1041 ( Toronto StLouis ) 1 1048.00 UNLIMITED
+  D1042 ( Toronto Nashville ) 1 526.00 UNLIMITED
+  D1043 ( Toronto Cleveland ) 1 4012.00 UNLIMITED
+  D1044 ( Toronto NewYork ) 1 15155.00 UNLIMITED
+  D1045 ( Toronto Montreal ) 1 2783.00 UNLIMITED
+  D1046 ( Toronto Charlotte ) 1 599.00 UNLIMITED
+  D1047 ( Toronto NewOrleans ) 1 312.00 UNLIMITED
+  D1048 ( Toronto Boston ) 1 3241.00 UNLIMITED
+  D1049 ( Toronto Atlanta ) 1 1601.00 UNLIMITED
+  D1050 ( Toronto Miami ) 1 1145.00 UNLIMITED
+  D1051 ( Toronto WashingtonDC ) 1 5451.00 UNLIMITED
+  D1052 ( Toronto Philadelphia ) 1 4415.00 UNLIMITED
+  D1053 ( Toronto Pittsburgh ) 1 2775.00 UNLIMITED
+  D1054 ( Toronto Cincinnati ) 1 1244.00 UNLIMITED
+  D1055 ( Toronto Tampa ) 1 601.00 UNLIMITED
+  D1056 ( Toronto Memphis ) 1 385.00 UNLIMITED
+  D1057 ( Toronto Winnipeg ) 1 186.00 UNLIMITED
+  D1058 ( Toronto Calgary ) 1 162.00 UNLIMITED
+  D1059 ( Toronto Seattle ) 1 524.00 UNLIMITED
+  D1060 ( Toronto Portland ) 1 291.00 UNLIMITED
+  D1061 ( Toronto Sacrameto ) 1 270.00 UNLIMITED
+  D1062 ( Toronto Phoenix ) 1 548.00 UNLIMITED
+  D1063 ( Toronto SanDiego ) 1 412.00 UNLIMITED
+  D1064 ( Pittsburgh Vancouver ) 1 145.00 UNLIMITED
+  D1065 ( Pittsburgh LosAngeles ) 1 1254.00 UNLIMITED
+  D1066 ( Pittsburgh SanFrancisco ) 1 509.00 UNLIMITED
+  D1067 ( Pittsburgh LasVegas ) 1 121.00 UNLIMITED
+  D1068 ( Pittsburgh SaltLakeCity ) 1 88.00 UNLIMITED
+  D1069 ( Pittsburgh ElPaso ) 1 64.00 UNLIMITED
+  D1070 ( Pittsburgh Dallas ) 1 700.00 UNLIMITED
+  D1071 ( Pittsburgh Houston ) 1 609.00 UNLIMITED
+  D1072 ( Pittsburgh OklahomaCity ) 1 165.00 UNLIMITED
+  D1073 ( Pittsburgh Minneapolis ) 1 566.00 UNLIMITED
+  D1074 ( Pittsburgh KansasCity ) 1 318.00 UNLIMITED
+  D1075 ( Pittsburgh Denver ) 1 270.00 UNLIMITED
+  D1076 ( Pittsburgh Chicago ) 1 2889.00 UNLIMITED
+  D1077 ( Pittsburgh Indianapolis ) 1 686.00 UNLIMITED
+  D1078 ( Pittsburgh Detroit ) 1 3524.00 UNLIMITED
+  D1079 ( Pittsburgh StLouis ) 1 631.00 UNLIMITED
+  D1080 ( Pittsburgh Nashville ) 1 371.00 UNLIMITED
+  D1081 ( Pittsburgh Cleveland ) 1 3729.00 UNLIMITED
+  D1082 ( Pittsburgh NewYork ) 1 8625.00 UNLIMITED
+  D1083 ( Pittsburgh Montreal ) 1 931.00 UNLIMITED
+  D1084 ( Pittsburgh Charlotte ) 1 502.00 UNLIMITED
+  D1085 ( Pittsburgh NewOrleans ) 1 190.00 UNLIMITED
+  D1086 ( Pittsburgh Boston ) 1 1503.00 UNLIMITED
+  D1087 ( Pittsburgh Atlanta ) 1 1145.00 UNLIMITED
+  D1088 ( Pittsburgh Miami ) 1 702.00 UNLIMITED
+  D1089 ( Pittsburgh WashingtonDC ) 1 5580.00 UNLIMITED
+  D1090 ( Pittsburgh Philadelphia ) 1 3047.00 UNLIMITED
+  D1091 ( Pittsburgh Toronto ) 1 2775.00 UNLIMITED
+  D1092 ( Pittsburgh Cincinnati ) 1 1056.00 UNLIMITED
+  D1093 ( Pittsburgh Tampa ) 1 380.00 UNLIMITED
+  D1094 ( Pittsburgh Memphis ) 1 243.00 UNLIMITED
+  D1095 ( Pittsburgh Winnipeg ) 1 86.00 UNLIMITED
+  D1096 ( Pittsburgh Calgary ) 1 80.00 UNLIMITED
+  D1097 ( Pittsburgh Seattle ) 1 264.00 UNLIMITED
+  D1098 ( Pittsburgh Portland ) 1 147.00 UNLIMITED
+  D1099 ( Pittsburgh Sacrameto ) 1 139.00 UNLIMITED
+  D1100 ( Pittsburgh Phoenix ) 1 290.00 UNLIMITED
+  D1101 ( Pittsburgh SanDiego ) 1 216.00 UNLIMITED
+  D1102 ( Cincinnati Vancouver ) 1 129.00 UNLIMITED
+  D1103 ( Cincinnati LosAngeles ) 1 1155.00 UNLIMITED
+  D1104 ( Cincinnati SanFrancisco ) 1 462.00 UNLIMITED
+  D1105 ( Cincinnati LasVegas ) 1 113.00 UNLIMITED
+  D1106 ( Cincinnati SaltLakeCity ) 1 83.00 UNLIMITED
+  D1107 ( Cincinnati ElPaso ) 1 62.00 UNLIMITED
+  D1108 ( Cincinnati Dallas ) 1 753.00 UNLIMITED
+  D1109 ( Cincinnati Houston ) 1 636.00 UNLIMITED
+  D1110 ( Cincinnati OklahomaCity ) 1 188.00 UNLIMITED
+  D1111 ( Cincinnati Minneapolis ) 1 578.00 UNLIMITED
+  D1112 ( Cincinnati KansasCity ) 1 377.00 UNLIMITED
+  D1113 ( Cincinnati Denver ) 1 268.00 UNLIMITED
+  D1114 ( Cincinnati Chicago ) 1 4008.00 UNLIMITED
+  D1115 ( Cincinnati Indianapolis ) 1 2355.00 UNLIMITED
+  D1116 ( Cincinnati Detroit ) 1 2549.00 UNLIMITED
+  D1117 ( Cincinnati StLouis ) 1 960.00 UNLIMITED
+  D1118 ( Cincinnati Nashville ) 1 636.00 UNLIMITED
+  D1119 ( Cincinnati Cleveland ) 1 1462.00 UNLIMITED
+  D1120 ( Cincinnati NewYork ) 1 4077.00 UNLIMITED
+  D1121 ( Cincinnati Montreal ) 1 534.00 UNLIMITED
+  D1122 ( Cincinnati Charlotte ) 1 463.00 UNLIMITED
+  D1123 ( Cincinnati NewOrleans ) 1 203.00 UNLIMITED
+  D1124 ( Cincinnati Boston ) 1 842.00 UNLIMITED
+  D1125 ( Cincinnati Atlanta ) 1 1350.00 UNLIMITED
+  D1126 ( Cincinnati Miami ) 1 624.00 UNLIMITED
+  D1127 ( Cincinnati WashingtonDC ) 1 2105.00 UNLIMITED
+  D1128 ( Cincinnati Philadelphia ) 1 1281.00 UNLIMITED
+  D1129 ( Cincinnati Toronto ) 1 1244.00 UNLIMITED
+  D1130 ( Cincinnati Pittsburgh ) 1 1056.00 UNLIMITED
+  D1131 ( Cincinnati Tampa ) 1 355.00 UNLIMITED
+  D1132 ( Cincinnati Memphis ) 1 326.00 UNLIMITED
+  D1133 ( Cincinnati Winnipeg ) 1 79.00 UNLIMITED
+  D1134 ( Cincinnati Calgary ) 1 72.00 UNLIMITED
+  D1135 ( Cincinnati Seattle ) 1 237.00 UNLIMITED
+  D1136 ( Cincinnati Portland ) 1 132.00 UNLIMITED
+  D1137 ( Cincinnati Sacrameto ) 1 127.00 UNLIMITED
+  D1138 ( Cincinnati Phoenix ) 1 274.00 UNLIMITED
+  D1139 ( Cincinnati SanDiego ) 1 200.00 UNLIMITED
+  D1140 ( Tampa Vancouver ) 1 131.00 UNLIMITED
+  D1141 ( Tampa LosAngeles ) 1 1287.00 UNLIMITED
+  D1142 ( Tampa SanFrancisco ) 1 504.00 UNLIMITED
+  D1143 ( Tampa LasVegas ) 1 122.00 UNLIMITED
+  D1144 ( Tampa SaltLakeCity ) 1 83.00 UNLIMITED
+  D1145 ( Tampa ElPaso ) 1 71.00 UNLIMITED
+  D1146 ( Tampa Dallas ) 1 823.00 UNLIMITED
+  D1147 ( Tampa Houston ) 1 859.00 UNLIMITED
+  D1148 ( Tampa OklahomaCity ) 1 160.00 UNLIMITED
+  D1149 ( Tampa Minneapolis ) 1 354.00 UNLIMITED
+  D1150 ( Tampa KansasCity ) 1 252.00 UNLIMITED
+  D1151 ( Tampa Denver ) 1 248.00 UNLIMITED
+  D1152 ( Tampa Chicago ) 1 1307.00 UNLIMITED
+  D1153 ( Tampa Indianapolis ) 1 290.00 UNLIMITED
+  D1154 ( Tampa Detroit ) 1 754.00 UNLIMITED
+  D1155 ( Tampa StLouis ) 1 433.00 UNLIMITED
+  D1156 ( Tampa Nashville ) 1 294.00 UNLIMITED
+  D1157 ( Tampa Cleveland ) 1 420.00 UNLIMITED
+  D1158 ( Tampa NewYork ) 1 2985.00 UNLIMITED
+  D1159 ( Tampa Montreal ) 1 381.00 UNLIMITED
+  D1160 ( Tampa Charlotte ) 1 368.00 UNLIMITED
+  D1161 ( Tampa NewOrleans ) 1 369.00 UNLIMITED
+  D1162 ( Tampa Boston ) 1 676.00 UNLIMITED
+  D1163 ( Tampa Atlanta ) 1 1522.00 UNLIMITED
+  D1164 ( Tampa Miami ) 1 3672.00 UNLIMITED
+  D1165 ( Tampa WashingtonDC ) 1 1295.00 UNLIMITED
+  D1166 ( Tampa Philadelphia ) 1 875.00 UNLIMITED
+  D1167 ( Tampa Toronto ) 1 601.00 UNLIMITED
+  D1168 ( Tampa Pittsburgh ) 1 380.00 UNLIMITED
+  D1169 ( Tampa Cincinnati ) 1 355.00 UNLIMITED
+  D1170 ( Tampa Memphis ) 1 249.00 UNLIMITED
+  D1171 ( Tampa Winnipeg ) 1 60.00 UNLIMITED
+  D1172 ( Tampa Calgary ) 1 68.00 UNLIMITED
+  D1173 ( Tampa Seattle ) 1 242.00 UNLIMITED
+  D1174 ( Tampa Portland ) 1 137.00 UNLIMITED
+  D1175 ( Tampa Sacrameto ) 1 137.00 UNLIMITED
+  D1176 ( Tampa Phoenix ) 1 303.00 UNLIMITED
+  D1177 ( Tampa SanDiego ) 1 225.00 UNLIMITED
+  D1178 ( Memphis Vancouver ) 1 80.00 UNLIMITED
+  D1179 ( Memphis LosAngeles ) 1 790.00 UNLIMITED
+  D1180 ( Memphis SanFrancisco ) 1 306.00 UNLIMITED
+  D1181 ( Memphis LasVegas ) 1 78.00 UNLIMITED
+  D1182 ( Memphis SaltLakeCity ) 1 56.00 UNLIMITED
+  D1183 ( Memphis ElPaso ) 1 49.00 UNLIMITED
+  D1184 ( Memphis Dallas ) 1 855.00 UNLIMITED
+  D1185 ( Memphis Houston ) 1 695.00 UNLIMITED
+  D1186 ( Memphis OklahomaCity ) 1 218.00 UNLIMITED
+  D1187 ( Memphis Minneapolis ) 1 302.00 UNLIMITED
+  D1188 ( Memphis KansasCity ) 1 319.00 UNLIMITED
+  D1189 ( Memphis Denver ) 1 195.00 UNLIMITED
+  D1190 ( Memphis Chicago ) 1 1279.00 UNLIMITED
+  D1191 ( Memphis Indianapolis ) 1 312.00 UNLIMITED
+  D1192 ( Memphis Detroit ) 1 569.00 UNLIMITED
+  D1193 ( Memphis StLouis ) 1 737.00 UNLIMITED
+  D1194 ( Memphis Nashville ) 1 472.00 UNLIMITED
+  D1195 ( Memphis Cleveland ) 1 298.00 UNLIMITED
+  D1196 ( Memphis NewYork ) 1 1534.00 UNLIMITED
+  D1197 ( Memphis Montreal ) 1 214.00 UNLIMITED
+  D1198 ( Memphis Charlotte ) 1 181.00 UNLIMITED
+  D1199 ( Memphis NewOrleans ) 1 238.00 UNLIMITED
+  D1200 ( Memphis Boston ) 1 346.00 UNLIMITED
+  D1201 ( Memphis Atlanta ) 1 929.00 UNLIMITED
+  D1202 ( Memphis Miami ) 1 410.00 UNLIMITED
+  D1203 ( Memphis WashingtonDC ) 1 682.00 UNLIMITED
+  D1204 ( Memphis Philadelphia ) 1 455.00 UNLIMITED
+  D1205 ( Memphis Toronto ) 1 385.00 UNLIMITED
+  D1206 ( Memphis Pittsburgh ) 1 243.00 UNLIMITED
+  D1207 ( Memphis Cincinnati ) 1 326.00 UNLIMITED
+  D1208 ( Memphis Tampa ) 1 249.00 UNLIMITED
+  D1209 ( Memphis Winnipeg ) 1 43.00 UNLIMITED
+  D1210 ( Memphis Calgary ) 1 43.00 UNLIMITED
+  D1211 ( Memphis Seattle ) 1 148.00 UNLIMITED
+  D1212 ( Memphis Portland ) 1 84.00 UNLIMITED
+  D1213 ( Memphis Sacrameto ) 1 84.00 UNLIMITED
+  D1214 ( Memphis Phoenix ) 1 198.00 UNLIMITED
+  D1215 ( Memphis SanDiego ) 1 138.00 UNLIMITED
+  D1216 ( Winnipeg Vancouver ) 1 65.00 UNLIMITED
+  D1217 ( Winnipeg LosAngeles ) 1 447.00 UNLIMITED
+  D1218 ( Winnipeg SanFrancisco ) 1 191.00 UNLIMITED
+  D1219 ( Winnipeg LasVegas ) 1 45.00 UNLIMITED
+  D1220 ( Winnipeg SaltLakeCity ) 1 39.00 UNLIMITED
+  D1221 ( Winnipeg ElPaso ) 1 20.00 UNLIMITED
+  D1222 ( Winnipeg Dallas ) 1 179.00 UNLIMITED
+  D1223 ( Winnipeg Houston ) 1 142.00 UNLIMITED
+  D1224 ( Winnipeg OklahomaCity ) 1 44.00 UNLIMITED
+  D1225 ( Winnipeg Minneapolis ) 1 308.00 UNLIMITED
+  D1226 ( Winnipeg KansasCity ) 1 93.00 UNLIMITED
+  D1227 ( Winnipeg Denver ) 1 116.00 UNLIMITED
+  D1228 ( Winnipeg Chicago ) 1 491.00 UNLIMITED
+  D1229 ( Winnipeg Indianapolis ) 1 74.00 UNLIMITED
+  D1230 ( Winnipeg Detroit ) 1 235.00 UNLIMITED
+  D1231 ( Winnipeg StLouis ) 1 121.00 UNLIMITED
+  D1232 ( Winnipeg Nashville ) 1 47.00 UNLIMITED
+  D1233 ( Winnipeg Cleveland ) 1 112.00 UNLIMITED
+  D1234 ( Winnipeg NewYork ) 1 649.00 UNLIMITED
+  D1235 ( Winnipeg Montreal ) 1 115.00 UNLIMITED
+  D1236 ( Winnipeg Charlotte ) 1 42.00 UNLIMITED
+  D1237 ( Winnipeg NewOrleans ) 1 36.00 UNLIMITED
+  D1238 ( Winnipeg Boston ) 1 164.00 UNLIMITED
+  D1239 ( Winnipeg Atlanta ) 1 141.00 UNLIMITED
+  D1240 ( Winnipeg Miami ) 1 117.00 UNLIMITED
+  D1241 ( Winnipeg WashingtonDC ) 1 241.00 UNLIMITED
+  D1242 ( Winnipeg Philadelphia ) 1 181.00 UNLIMITED
+  D1243 ( Winnipeg Toronto ) 1 186.00 UNLIMITED
+  D1244 ( Winnipeg Pittsburgh ) 1 86.00 UNLIMITED
+  D1245 ( Winnipeg Cincinnati ) 1 79.00 UNLIMITED
+  D1246 ( Winnipeg Tampa ) 1 60.00 UNLIMITED
+  D1247 ( Winnipeg Memphis ) 1 43.00 UNLIMITED
+  D1248 ( Winnipeg Calgary ) 1 46.00 UNLIMITED
+  D1249 ( Winnipeg Seattle ) 1 119.00 UNLIMITED
+  D1250 ( Winnipeg Portland ) 1 64.00 UNLIMITED
+  D1251 ( Winnipeg Sacrameto ) 1 53.00 UNLIMITED
+  D1252 ( Winnipeg Phoenix ) 1 101.00 UNLIMITED
+  D1253 ( Winnipeg SanDiego ) 1 75.00 UNLIMITED
+  D1254 ( Calgary Vancouver ) 1 241.00 UNLIMITED
+  D1255 ( Calgary LosAngeles ) 1 774.00 UNLIMITED
+  D1256 ( Calgary SanFrancisco ) 1 377.00 UNLIMITED
+  D1257 ( Calgary LasVegas ) 1 78.00 UNLIMITED
+  D1258 ( Calgary SaltLakeCity ) 1 71.00 UNLIMITED
+  D1259 ( Calgary ElPaso ) 1 28.00 UNLIMITED
+  D1260 ( Calgary Dallas ) 1 204.00 UNLIMITED
+  D1261 ( Calgary Houston ) 1 168.00 UNLIMITED
+  D1262 ( Calgary OklahomaCity ) 1 45.00 UNLIMITED
+  D1263 ( Calgary Minneapolis ) 1 166.00 UNLIMITED
+  D1264 ( Calgary KansasCity ) 1 83.00 UNLIMITED
+  D1265 ( Calgary Denver ) 1 147.00 UNLIMITED
+  D1266 ( Calgary Chicago ) 1 384.00 UNLIMITED
+  D1267 ( Calgary Indianapolis ) 1 65.00 UNLIMITED
+  D1268 ( Calgary Detroit ) 1 197.00 UNLIMITED
+  D1269 ( Calgary StLouis ) 1 108.00 UNLIMITED
+  D1270 ( Calgary Nashville ) 1 46.00 UNLIMITED
+  D1271 ( Calgary Cleveland ) 1 99.00 UNLIMITED
+  D1272 ( Calgary NewYork ) 1 646.00 UNLIMITED
+  D1273 ( Calgary Montreal ) 1 109.00 UNLIMITED
+  D1274 ( Calgary Charlotte ) 1 43.00 UNLIMITED
+  D1275 ( Calgary NewOrleans ) 1 41.00 UNLIMITED
+  D1276 ( Calgary Boston ) 1 165.00 UNLIMITED
+  D1277 ( Calgary Atlanta ) 1 147.00 UNLIMITED
+  D1278 ( Calgary Miami ) 1 136.00 UNLIMITED
+  D1279 ( Calgary WashingtonDC ) 1 238.00 UNLIMITED
+  D1280 ( Calgary Philadelphia ) 1 179.00 UNLIMITED
+  D1281 ( Calgary Toronto ) 1 162.00 UNLIMITED
+  D1282 ( Calgary Pittsburgh ) 1 80.00 UNLIMITED
+  D1283 ( Calgary Cincinnati ) 1 72.00 UNLIMITED
+  D1284 ( Calgary Tampa ) 1 68.00 UNLIMITED
+  D1285 ( Calgary Memphis ) 1 43.00 UNLIMITED
+  D1286 ( Calgary Winnipeg ) 1 46.00 UNLIMITED
+  D1287 ( Calgary Seattle ) 1 407.00 UNLIMITED
+  D1288 ( Calgary Portland ) 1 187.00 UNLIMITED
+  D1289 ( Calgary Sacrameto ) 1 109.00 UNLIMITED
+  D1290 ( Calgary Phoenix ) 1 156.00 UNLIMITED
+  D1291 ( Calgary SanDiego ) 1 126.00 UNLIMITED
+  D1292 ( Seattle Vancouver ) 1 3428.00 UNLIMITED
+  D1293 ( Seattle LosAngeles ) 1 3556.00 UNLIMITED
+  D1294 ( Seattle SanFrancisco ) 1 2046.00 UNLIMITED
+  D1295 ( Seattle LasVegas ) 1 346.00 UNLIMITED
+  D1296 ( Seattle SaltLakeCity ) 1 280.00 UNLIMITED
+  D1297 ( Seattle ElPaso ) 1 107.00 UNLIMITED
+  D1298 ( Seattle Dallas ) 1 721.00 UNLIMITED
+  D1299 ( Seattle Houston ) 1 600.00 UNLIMITED
+  D1300 ( Seattle OklahomaCity ) 1 155.00 UNLIMITED
+  D1301 ( Seattle Minneapolis ) 1 492.00 UNLIMITED
+  D1302 ( Seattle KansasCity ) 1 272.00 UNLIMITED
+  D1303 ( Seattle Denver ) 1 497.00 UNLIMITED
+  D1304 ( Seattle Chicago ) 1 1222.00 UNLIMITED
+  D1305 ( Seattle Indianapolis ) 1 214.00 UNLIMITED
+  D1306 ( Seattle Detroit ) 1 636.00 UNLIMITED
+  D1307 ( Seattle StLouis ) 1 355.00 UNLIMITED
+  D1308 ( Seattle Nashville ) 1 156.00 UNLIMITED
+  D1309 ( Seattle Cleveland ) 1 324.00 UNLIMITED
+  D1310 ( Seattle NewYork ) 1 2157.00 UNLIMITED
+  D1311 ( Seattle Montreal ) 1 357.00 UNLIMITED
+  D1312 ( Seattle Charlotte ) 1 147.00 UNLIMITED
+  D1313 ( Seattle NewOrleans ) 1 145.00 UNLIMITED
+  D1314 ( Seattle Boston ) 1 550.00 UNLIMITED
+  D1315 ( Seattle Atlanta ) 1 504.00 UNLIMITED
+  D1316 ( Seattle Miami ) 1 483.00 UNLIMITED
+  D1317 ( Seattle WashingtonDC ) 1 796.00 UNLIMITED
+  D1318 ( Seattle Philadelphia ) 1 598.00 UNLIMITED
+  D1319 ( Seattle Toronto ) 1 524.00 UNLIMITED
+  D1320 ( Seattle Pittsburgh ) 1 264.00 UNLIMITED
+  D1321 ( Seattle Cincinnati ) 1 237.00 UNLIMITED
+  D1322 ( Seattle Tampa ) 1 242.00 UNLIMITED
+  D1323 ( Seattle Memphis ) 1 148.00 UNLIMITED
+  D1324 ( Seattle Winnipeg ) 1 119.00 UNLIMITED
+  D1325 ( Seattle Calgary ) 1 407.00 UNLIMITED
+  D1326 ( Seattle Portland ) 1 3297.00 UNLIMITED
+  D1327 ( Seattle Sacrameto ) 1 603.00 UNLIMITED
+  D1328 ( Seattle Phoenix ) 1 642.00 UNLIMITED
+  D1329 ( Seattle SanDiego ) 1 560.00 UNLIMITED
+  D1330 ( Portland Vancouver ) 1 863.00 UNLIMITED
+  D1331 ( Portland LosAngeles ) 1 2265.00 UNLIMITED
+  D1332 ( Portland SanFrancisco ) 1 1417.00 UNLIMITED
+  D1333 ( Portland LasVegas ) 1 219.00 UNLIMITED
+  D1334 ( Portland SaltLakeCity ) 1 171.00 UNLIMITED
+  D1335 ( Portland ElPaso ) 1 63.00 UNLIMITED
+  D1336 ( Portland Dallas ) 1 414.00 UNLIMITED
+  D1337 ( Portland Houston ) 1 344.00 UNLIMITED
+  D1338 ( Portland OklahomaCity ) 1 88.00 UNLIMITED
+  D1339 ( Portland Minneapolis ) 1 272.00 UNLIMITED
+  D1340 ( Portland KansasCity ) 1 153.00 UNLIMITED
+  D1341 ( Portland Denver ) 1 288.00 UNLIMITED
+  D1342 ( Portland Chicago ) 1 681.00 UNLIMITED
+  D1343 ( Portland Indianapolis ) 1 120.00 UNLIMITED
+  D1344 ( Portland Detroit ) 1 354.00 UNLIMITED
+  D1345 ( Portland StLouis ) 1 200.00 UNLIMITED
+  D1346 ( Portland Nashville ) 1 88.00 UNLIMITED
+  D1347 ( Portland Cleveland ) 1 180.00 UNLIMITED
+  D1348 ( Portland NewYork ) 1 1202.00 UNLIMITED
+  D1349 ( Portland Montreal ) 1 197.00 UNLIMITED
+  D1350 ( Portland Charlotte ) 1 82.00 UNLIMITED
+  D1351 ( Portland NewOrleans ) 1 82.00 UNLIMITED
+  D1352 ( Portland Boston ) 1 306.00 UNLIMITED
+  D1353 ( Portland Atlanta ) 1 284.00 UNLIMITED
+  D1354 ( Portland Miami ) 1 274.00 UNLIMITED
+  D1355 ( Portland WashingtonDC ) 1 445.00 UNLIMITED
+  D1356 ( Portland Philadelphia ) 1 334.00 UNLIMITED
+  D1357 ( Portland Toronto ) 1 291.00 UNLIMITED
+  D1358 ( Portland Pittsburgh ) 1 147.00 UNLIMITED
+  D1359 ( Portland Cincinnati ) 1 132.00 UNLIMITED
+  D1360 ( Portland Tampa ) 1 137.00 UNLIMITED
+  D1361 ( Portland Memphis ) 1 84.00 UNLIMITED
+  D1362 ( Portland Winnipeg ) 1 64.00 UNLIMITED
+  D1363 ( Portland Calgary ) 1 187.00 UNLIMITED
+  D1364 ( Portland Seattle ) 1 3297.00 UNLIMITED
+  D1365 ( Portland Sacrameto ) 1 428.00 UNLIMITED
+  D1366 ( Portland Phoenix ) 1 392.00 UNLIMITED
+  D1367 ( Portland SanDiego ) 1 351.00 UNLIMITED
+  D1368 ( Sacrameto Vancouver ) 1 281.00 UNLIMITED
+  D1369 ( Sacrameto LosAngeles ) 1 4865.00 UNLIMITED
+  D1370 ( Sacrameto SanFrancisco ) 1 11724.00 UNLIMITED
+  D1371 ( Sacrameto LasVegas ) 1 407.00 UNLIMITED
+  D1372 ( Sacrameto SaltLakeCity ) 1 195.00 UNLIMITED
+  D1373 ( Sacrameto ElPaso ) 1 77.00 UNLIMITED
+  D1374 ( Sacrameto Dallas ) 1 438.00 UNLIMITED
+  D1375 ( Sacrameto Houston ) 1 365.00 UNLIMITED
+  D1376 ( Sacrameto OklahomaCity ) 1 90.00 UNLIMITED
+  D1377 ( Sacrameto Minneapolis ) 1 247.00 UNLIMITED
+  D1378 ( Sacrameto KansasCity ) 1 150.00 UNLIMITED
+  D1379 ( Sacrameto Denver ) 1 301.00 UNLIMITED
+  D1380 ( Sacrameto Chicago ) 1 642.00 UNLIMITED
+  D1381 ( Sacrameto Indianapolis ) 1 115.00 UNLIMITED
+  D1382 ( Sacrameto Detroit ) 1 331.00 UNLIMITED
+  D1383 ( Sacrameto StLouis ) 1 194.00 UNLIMITED
+  D1384 ( Sacrameto Nashville ) 1 86.00 UNLIMITED
+  D1385 ( Sacrameto Cleveland ) 1 170.00 UNLIMITED
+  D1386 ( Sacrameto NewYork ) 1 1132.00 UNLIMITED
+  D1387 ( Sacrameto Montreal ) 1 182.00 UNLIMITED
+  D1388 ( Sacrameto Charlotte ) 1 80.00 UNLIMITED
+  D1389 ( Sacrameto NewOrleans ) 1 84.00 UNLIMITED
+  D1390 ( Sacrameto Boston ) 1 286.00 UNLIMITED
+  D1391 ( Sacrameto Atlanta ) 1 281.00 UNLIMITED
+  D1392 ( Sacrameto Miami ) 1 273.00 UNLIMITED
+  D1393 ( Sacrameto WashingtonDC ) 1 423.00 UNLIMITED
+  D1394 ( Sacrameto Philadelphia ) 1 315.00 UNLIMITED
+  D1395 ( Sacrameto Toronto ) 1 270.00 UNLIMITED
+  D1396 ( Sacrameto Pittsburgh ) 1 139.00 UNLIMITED
+  D1397 ( Sacrameto Cincinnati ) 1 127.00 UNLIMITED
+  D1398 ( Sacrameto Tampa ) 1 137.00 UNLIMITED
+  D1399 ( Sacrameto Memphis ) 1 84.00 UNLIMITED
+  D1400 ( Sacrameto Winnipeg ) 1 53.00 UNLIMITED
+  D1401 ( Sacrameto Calgary ) 1 109.00 UNLIMITED
+  D1402 ( Sacrameto Seattle ) 1 603.00 UNLIMITED
+  D1403 ( Sacrameto Portland ) 1 428.00 UNLIMITED
+  D1404 ( Sacrameto Phoenix ) 1 572.00 UNLIMITED
+  D1405 ( Sacrameto SanDiego ) 1 643.00 UNLIMITED
+  D1406 ( Phoenix Vancouver ) 1 326.00 UNLIMITED
+  D1407 ( Phoenix LosAngeles ) 1 8690.00 UNLIMITED
+  D1408 ( Phoenix SanFrancisco ) 1 2085.00 UNLIMITED
+  D1409 ( Phoenix LasVegas ) 1 1144.00 UNLIMITED
+  D1410 ( Phoenix SaltLakeCity ) 1 367.00 UNLIMITED
+  D1411 ( Phoenix ElPaso ) 1 379.00 UNLIMITED
+  D1412 ( Phoenix Dallas ) 1 1206.00 UNLIMITED
+  D1413 ( Phoenix Houston ) 1 971.00 UNLIMITED
+  D1414 ( Phoenix OklahomaCity ) 1 233.00 UNLIMITED
+  D1415 ( Phoenix Minneapolis ) 1 514.00 UNLIMITED
+  D1416 ( Phoenix KansasCity ) 1 357.00 UNLIMITED
+  D1417 ( Phoenix Denver ) 1 802.00 UNLIMITED
+  D1418 ( Phoenix Chicago ) 1 1372.00 UNLIMITED
+  D1419 ( Phoenix Indianapolis ) 1 250.00 UNLIMITED
+  D1420 ( Phoenix Detroit ) 1 689.00 UNLIMITED
+  D1421 ( Phoenix StLouis ) 1 443.00 UNLIMITED
+  D1422 ( Phoenix Nashville ) 1 194.00 UNLIMITED
+  D1423 ( Phoenix Cleveland ) 1 353.00 UNLIMITED
+  D1424 ( Phoenix NewYork ) 1 2289.00 UNLIMITED
+  D1425 ( Phoenix Montreal ) 1 360.00 UNLIMITED
+  D1426 ( Phoenix Charlotte ) 1 173.00 UNLIMITED
+  D1427 ( Phoenix NewOrleans ) 1 204.00 UNLIMITED
+  D1428 ( Phoenix Boston ) 1 569.00 UNLIMITED
+  D1429 ( Phoenix Atlanta ) 1 626.00 UNLIMITED
+  D1430 ( Phoenix Miami ) 1 593.00 UNLIMITED
+  D1431 ( Phoenix WashingtonDC ) 1 875.00 UNLIMITED
+  D1432 ( Phoenix Philadelphia ) 1 643.00 UNLIMITED
+  D1433 ( Phoenix Toronto ) 1 548.00 UNLIMITED
+  D1434 ( Phoenix Pittsburgh ) 1 290.00 UNLIMITED
+  D1435 ( Phoenix Cincinnati ) 1 274.00 UNLIMITED
+  D1436 ( Phoenix Tampa ) 1 303.00 UNLIMITED
+  D1437 ( Phoenix Memphis ) 1 198.00 UNLIMITED
+  D1438 ( Phoenix Winnipeg ) 1 101.00 UNLIMITED
+  D1439 ( Phoenix Calgary ) 1 156.00 UNLIMITED
+  D1440 ( Phoenix Seattle ) 1 642.00 UNLIMITED
+  D1441 ( Phoenix Portland ) 1 392.00 UNLIMITED
+  D1442 ( Phoenix Sacrameto ) 1 572.00 UNLIMITED
+  D1443 ( Phoenix SanDiego ) 1 1846.00 UNLIMITED
+  D1444 ( SanDiego Vancouver ) 1 281.00 UNLIMITED
+  D1445 ( SanDiego LosAngeles ) 1 30034.00 UNLIMITED
+  D1446 ( SanDiego SanFrancisco ) 1 2509.00 UNLIMITED
+  D1447 ( SanDiego LasVegas ) 1 967.00 UNLIMITED
+  D1448 ( SanDiego SaltLakeCity ) 1 251.00 UNLIMITED
+  D1449 ( SanDiego ElPaso ) 1 173.00 UNLIMITED
+  D1450 ( SanDiego Dallas ) 1 776.00 UNLIMITED
+  D1451 ( SanDiego Houston ) 1 650.00 UNLIMITED
+  D1452 ( SanDiego OklahomaCity ) 1 153.00 UNLIMITED
+  D1453 ( SanDiego Minneapolis ) 1 369.00 UNLIMITED
+  D1454 ( SanDiego KansasCity ) 1 242.00 UNLIMITED
+  D1455 ( SanDiego Denver ) 1 482.00 UNLIMITED
+  D1456 ( SanDiego Chicago ) 1 992.00 UNLIMITED
+  D1457 ( SanDiego Indianapolis ) 1 181.00 UNLIMITED
+  D1458 ( SanDiego Detroit ) 1 509.00 UNLIMITED
+  D1459 ( SanDiego StLouis ) 1 311.00 UNLIMITED
+  D1460 ( SanDiego Nashville ) 1 139.00 UNLIMITED
+  D1461 ( SanDiego Cleveland ) 1 262.00 UNLIMITED
+  D1462 ( SanDiego NewYork ) 1 1741.00 UNLIMITED
+  D1463 ( SanDiego Montreal ) 1 275.00 UNLIMITED
+  D1464 ( SanDiego Charlotte ) 1 128.00 UNLIMITED
+  D1465 ( SanDiego NewOrleans ) 1 144.00 UNLIMITED
+  D1466 ( SanDiego Boston ) 1 436.00 UNLIMITED
+  D1467 ( SanDiego Atlanta ) 1 455.00 UNLIMITED
+  D1468 ( SanDiego Miami ) 1 445.00 UNLIMITED
+  D1469 ( SanDiego WashingtonDC ) 1 658.00 UNLIMITED
+  D1470 ( SanDiego Philadelphia ) 1 487.00 UNLIMITED
+  D1471 ( SanDiego Toronto ) 1 412.00 UNLIMITED
+  D1472 ( SanDiego Pittsburgh ) 1 216.00 UNLIMITED
+  D1473 ( SanDiego Cincinnati ) 1 200.00 UNLIMITED
+  D1474 ( SanDiego Tampa ) 1 225.00 UNLIMITED
+  D1475 ( SanDiego Memphis ) 1 138.00 UNLIMITED
+  D1476 ( SanDiego Winnipeg ) 1 75.00 UNLIMITED
+  D1477 ( SanDiego Calgary ) 1 126.00 UNLIMITED
+  D1478 ( SanDiego Seattle ) 1 560.00 UNLIMITED
+  D1479 ( SanDiego Portland ) 1 351.00 UNLIMITED
+  D1480 ( SanDiego Sacrameto ) 1 643.00 UNLIMITED
+  D1481 ( SanDiego Phoenix ) 1 1846.00 UNLIMITED
+)
+
+# ADMISSIBLE PATHS SECTION
+#
+# <demand_id> ( {<path_id> ( <link_id>+ )}+ )
+
+ADMISSIBLE_PATHS ( 
+)

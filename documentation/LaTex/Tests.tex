@@ -1,0 +1,237 @@
+\section{Test Generation, Running and Plotting}
+
+\subsection{The Basic concept}
+The test-system uses the classes \texttt{TestRun} and \texttt{TestSeries}, which can be found in package \textit{test}, as the basis for handling the data.
+A \texttt{TestRun} represents one test with the parameters, results and the complete \texttt{Scenario}.
+The \texttt{TestSeries} consists of at least one \texttt{TestRun}, a name and the "TestGenerator" which created the tests.
+
+The test-system consists of two parts.
+The first part includes classes which are generating tests with parameters or working with them.
+This category contains the \texttt{TestRun}, \texttt{TestSeries}, \texttt{XMLImporter}, \texttt{XMLExporter}, \texttt{PlainFileExporter}, 
+\texttt{Plotter} and the "TestGenerators". 
+
+A "TestGenerator" which is an implementation of \texttt{AbstractTestGenerator}, creates the \texttt{TestSeries} with all necessary \texttt{TestRun}s. 
+The implementation sets the class of the "TestRunner" which will run the Tests, name of the test-series, class of the generator and the number 
+runs for one distinct parameter set.
+For use in parameters the types \texttt{Double} and \texttt{String} are allowed.
+The followig arrays for are already predefined in \texttt{AbstractTestGenerator}:
+\begin{lstlisting}
+public static final Double[] numSNodesArray = {100d};
+public static final Double[] numVNetsArray = {5d};
+protected static final Double[] numVNodesPerVNetArray = {10d};
+public static final Double[] alphaArray = {0.5};
+public static final Double[] betaArray = {0.5};
+\end{lstlisting}
+If it's necessary, it's possible to redefine them.
+
+
+The second part contains classes which execute the tests.
+A "TestRunner" runs the different \texttt{TestRun}(s) contained in the given \texttt{TestSeries}.
+The implementation of a "TestRunner" sets the "SeedGenerator", "NetworkGenerator" and "ResourceGenerator(s)" and "DemandGenerator(s)".
+All these generators may need to contain different parameters, if a \texttt{TestRun} is lacking a necessary parameter an error is thrown.
+The "SeedGenerator" is optional, but some other generators rely on it, which leads to an error.
+The "TestRunner" may run tests in a given number of parallel running threads, this may lead to wrong results, because some
+algorithms are not thread-safe and using static data structures.
+
+
+\textbf{UML Missing here}
+
+
+
+
+\subsection{Running Tests}
+To run a test, it's necessary to create a \texttt{TestSeries}. 
+This can be done by using a "TestGenerator" or by importing an existing \texttt{TestSeries} using the \texttt{XMLImporter}.
+
+When using a "TestGenerator" it's necessary to create an implementation of the \texttt{Abstract\-Test\-Generator}.
+In the constructor there is a need to call the super-constructor and initialize the list of parameters \textsl{mParams}.
+Each entry contains a name and an array of values, which can have \texttt{Double} or \texttt{String} as data type.
+The name may contain a "marker", in this case "S1" (see exmplate below). 
+If a name contains a marker these parameter will be synchronized which means they will be rotated together in one step.
+
+\begin{lstlisting}
+public class ExampleTestGenerator extends AbstractTestGenerator {
+	protected static final Double[] numVNodesPerVNetArray = { 5d, 10d };
+	public static final Double[] numVNetsArray = { 20d, 4d };
+	public static final Double[] kShortestPath = { 3d };
+	public static final Double[] cpu_min = { 10d, 100d };
+	public static final Double[] cpu_max = { 100d, 200d };
+	
+	public ExampleTestGenerator(String seriesName) {
+		super(ExampleTestRunner.class, seriesName, "tests.scenarios.example.ExampleTestGenerator", 30);
+		
+		mParams = new ArrayList<SimpleEntry<String, Object[]>>();
+		//S1 is a marker, which lets these parameters treated in one round
+		mParams.add(new SimpleEntry<String, Object[]>("Waxman_alpha", alphaArray));
+		mParams.add(new SimpleEntry<String, Object[]>("Waxman_beta", betaArray));
+		mParams.add(new SimpleEntry<String, Object[]>("SNetSize", numSNodesArray));
+		mParams.add(new SimpleEntry<String, Object[]>("NumVNodesPerNet", numVNodesPerVNetArray));
+		mParams.add(new SimpleEntry<String, Object[]>("NumVNets", numVNetsArray));
+		//S1 is a marker, which lets these parameters treated in one round: (min,max) := (10,100), (100,200)
+		mParams.add(new SimpleEntry<String, Object[]>("S1:Min_CPU", cpu_min)); //For CPU generators
+		mParams.add(new SimpleEntry<String, Object[]>("S1:Max_CPU", cpu_max)); //For CPU generators
+	}
+}
+\end{lstlisting}
+Now it is possible to create an object of the \texttt{ExampleTestGenerator} and generate the \texttt{TestSeries} calling the method
+\textsl{generateTests()}.
+In the example 240 \texttt{TestRun} objects are created, for any possible combination of parameters, 8 in this case with 30 distinct runs for each.
+
+The next step is to run the tests, it is necessary to implement a "TestRunner" using the \texttt{AbstractTestRunner}.
+\begin{lstlisting}
+public class ExampleTestRunner extends AbstractTestRunner {
+	public ExampleTestRunner(XMLExporter exporter) {
+		super(new StandardSeedGenerator(), new FixedWaxmanNetworkGenerator(), true, exporter);
+		
+		//Set generator for resources
+		mResGens.add(new FixedCpuResourceGenerator()); //needs parameters: Min_CPU and Max_CPU
+		mResGens.add(new IdResourceGenerator());
+		
+		//Set generator for demands
+		mDemGens.add(new FixedCpuDemandGenerator()); //needs parameters: Min_CPU and Max_CPU
+		
+		//Set Metrics
+		mMetrics.add(new AcceptedVnrRatio());
+		mMetrics.add(new RejectedNetworksNumber());
+	}
+
+	@Override
+	protected IAlgorithm prepareRunnerStage2(TestRun tr) {
+		NetworkStack ns = tr.getScenario().getNetworkStack();
+		IAlgorithm algo = new SubgraphIsomorphismStackAlgorithm(ns,
+				new AdvancedSubgraphIsomorphismAlgorithm(false));
+		return algo;
+	}
+}
+\end{lstlisting}
+
+The super constructor will be called with the following parameters:
+\begin{enumerate}
+	\item "SeedGenerator" based on \texttt{AbstractSeedGenerator}, can be null.
+	\item "NetworkGenerator"  based on \texttt{AbstractNetworkGenerator}
+	\item \texttt{boolean} which says whether the links should be bidirectional or not
+	\item \texttt{XMLExporter} which will export the results
+\end{enumerate}
+Then the generators for "Resources", "Demands" and the metrics need to be set.
+At last it's necessary to implement the method \textsl{prepareRunnerStage2()} which creates and prepares the algorithm which is used for the tests.
+
+The last step is to run the tests, done by a simple main-class
+\begin{lstlisting}
+public class ExampleMain {
+
+	public static void main(String[] args) {
+		//Create the TestGenerator and generate the TestSeries
+		ExampleTestGenerator gen = new ExampleTestGenerator("Example TestSeries");
+		TestSeries series = gen.generateTests();
+		
+		//Create the XMLExporter which is used, which doesn't export the Networks
+		XMLExporter exporter = new XMLExporter("Result.xml", series.getTestSeriesName(), 
+		series.getTestGenerator(), false);
+		
+		//Create the TestRunner and run the tests in 5 parallel threads
+		GeneratorTestRunner run = new GeneratorTestRunner(exporter);
+		run.runAllTest(series.getAllTestRuns(), 5);
+	}
+}
+\end{lstlisting}
+
+
+
+
+\subsection{Plotting}
+The class \texttt{Plotter} in package \textit{plot} provides a simple method to filter the data and create plots in 2D and 3D.
+It's possible to filter the data using \textsl{applyFilter*} methods.
+Each filter method need to have the following parameters:
+\begin{enumerate}
+	\item Name of the parameter or metric as String
+	\item (Start) Value of the parameter with type \texttt{Double} or \texttt{String} (String only for \textsl{applyFilterEqual} and \textsl{applyFilterNotEqual}
+	\item End Value of the parameter with type \texttt{Double} (Only nneded in range filters)
+\end{enumerate}
+If the statement is true, the test will removed from the list.
+
+The output-methods always need to have a directory name, in which the results will be plotted and the files are named after the metric which is plotted.
+A 2D plot \textsl{output2d} need to have one parameter and a 3D plot \textsl{output3d} need to have two parameters.
+The ordering is based on the given parameter(s).
+\\
+\textbf{Be aware:} At the moment it isn't possible to use \texttt{String} based parameters.
+
+\begin{lstlisting}
+public class ExamplePlotMain {
+	public static void main(String[] args) {
+		TestSeries series2 = XMLImporter.importResults("Result.xml");
+		
+		Plotter p = new Plotter(series2);
+		p.applyFilterEquals("AcceptedVnrRatio", 0.0);
+		
+		p.output2D("ExamplePlot2d", "NumVNodesPerNet", "AcceptedVnrRatio");
+		p.output3D("ExamplePlot3d", "NumVNodesPerNet", "Min_CPU", "AcceptedVnrRatio");
+	}
+}
+\end{lstlisting}
+
+
+
+\subsection{Writing a Generator}
+To run tests there are different types of generators:
+\begin{itemize}
+	\item "SeedGenerators" based on \texttt{AbstractSeedGenerator} which are creating seeds for random generators
+	\item "NetworkGenerators" based on \texttt{AbstarctNetworkGenerator} which are creating the network stack
+	\item "ResourceGenerators" based on \texttt{AbstarctResourceGenerator} which are creating a resource
+	\item "DemandGenerators" based on \texttt{AbstarctResourceGenerator} which are creating a demand
+\end{itemize}
+
+
+A generator has always implement the methods \textsl{generate} which contains the logic and \textsl{reset} 
+which resets the state if needed and is called before a every new \texttt{TestRun}.
+If the generator needs parameters, these are specified in the \texttt{GeneratorParameter} annotation.
+The parameter array will filled with these values in order of annotation.
+The following values are possible:
+\begin{itemize}
+	\item "Seed:Seed": Seed from "SeedGenerator" from type \texttt{Double}
+	\item "Networks:Networks": The \texttt{NetworkStack}
+	\item "TR:ParameterName": The value for the parameter with the name "ParameterName" from \texttt{TestRun} (TR)
+	\item "Result:package.ResoureOrDemandGenerator": The result of the \textsl{generate} method of the given and used demand or resource generator
+	\item "Method:package.ResoureOrDemandGenerator|getFoo": The result of the non-static \textsl{getFoo} method of the given and in this "TestRunner"' used demand or resource generator
+	\item "SMethod:some.package.Class|getBar": The result of the static \textsl{getBar} method of the given class "some.package.Class"
+ \end{itemize}
+
+If a parameter is not available or there is an error, an \texttt{Error} is thrown.
+\textbf{Be aware:}Due to parallel execution of threads the call of static methods may lead to wrong results!
+
+
+\begin{lstlisting}
+@GeneratorParameter(
+		parameters = { "Networks:Networks", "TR:Min_CPU", "TR:Max_CPU", "Seed:Seed"}
+		)
+public class FixedCpuResourceGenerator extends AbstractResourceGenerator<List<CpuResource>> {
+
+	@Override
+	public List<CpuResource> generate(ArrayList<Object> parameters) {
+		ArrayList<CpuResource> resList = new ArrayList<CpuResource>();
+		
+		NetworkStack ns = (NetworkStack)parameters.get(0);
+		Integer minCPU = ConversionHelper.paramObjectToInteger(parameters.get(1));
+		Integer maxCPU = ConversionHelper.paramObjectToInteger(parameters.get(2));
+		Long seed = ConversionHelper.paramObjectToLong(parameters.get(3));
+		
+		Random random = new Random();
+		random.setSeed(seed);
+		
+		SubstrateNetwork sn = ns.getSubstrate();
+		
+		for(SubstrateNode n : sn.getVertices()) {
+			CpuResource cpu = new CpuResource(n);
+			int value = (int) (minCPU + (maxCPU
+					- minCPU + 1)
+					* random.nextDouble());
+			cpu.setCycles((double) value);
+			n.add(cpu);
+			resList.add(cpu);
+		}
+		return resList;
+	}
+
+	@Override
+	public void reset() {}
+}
+\end{lstlisting}

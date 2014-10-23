@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MappingTest xsi:schemaLocation="http://sourceforge.net/projects/alevin/ ./Alevin.xsd" 
+  xmlns="http://sourceforge.net/projects/alevin/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  name="XML Test Document"
+>
+
+  <TestGenerator className="MLSTestGenerator" />
+  
+  
+  <ScenarioResult >
+     <ScenarioParameter name="SNetSize" value="100" />
+     <ScenarioParameter name="NumberOfVNets" value="5" />
+     <ScenarioParameter name="VNetSize" value="5" />
+     <ScenarioParameter name="ScenarioNumber" value="1" />
+   
+     
+     <ScenarioMetric name="AvAcceptRate" result="40.0" />
+     <ScenarioMetric name="AcceptedVNets" result="2.0" />
+     
+     <ScenarioNetworks>
+        <SubstrateNetwork>
+      <SubstrateNodes>
+        <SubstrateNode coordinateX="-4.803" coordinateY="-2.969" id="1">
+          <Resource type="IdResource">
+          	<ConstructParameter name="SubstrateNetwork" type="localSNet" value=""/>
+            <Parameter name="Id" type="String" value="1"/>
+          </Resource>
+          <Resource type="CpuResource">
+            <Parameter name="Cycles" type="Double" value="100"/>
+          </Resource>
+        </SubstrateNode>
+        <SubstrateNode coordinateX="2.548" coordinateY="-6.104" id="2">
+          <Resource type="IdResource">
+          	<ConstructParameter name="SubstrateNetwork" type="localSNet" value=""/>
+            <Parameter name="Id" type="String" value="2"/>
+          </Resource>
+          <Resource type="CpuResource">
+            <Parameter name="Cycles" type="Double" value="100"/>
+          </Resource>
+        </SubstrateNode>
+        <SubstrateNode coordinateX="2.062" coordinateY="1.734" id="3">
+          <Resource type="IdResource">
+          	<ConstructParameter name="SubstrateNetwork" type="localSNet" value=""/>
+            <Parameter name="Id" type="String" value="3"/>
+          </Resource>
+          <Resource type="CpuResource">
+            <Parameter name="Cycles" type="Double" value="100"/>
+          </Resource>
+        </SubstrateNode>
+        <SubstrateNode coordinateX="-4.046" coordinateY="3.085" id="4">
+          <Resource type="IdResource">
+          	<ConstructParameter name="SubstrateNetwork" type="localSNet" value=""/>
+            <Parameter name="Id" type="String" value="4"/>
+          </Resource>
+        </SubstrateNode>
+      </SubstrateNodes>
+      <SubstrateLinks>
+        <SubstrateLink destination="2" id="6" source="1">
+          <Resource type="BandwidthResource">
+            <Parameter name="Bandwidth" type="Double" value="50"/>
+          </Resource>
+        </SubstrateLink>
+        <SubstrateLink destination="1" id="7" source="3">
+          <Resource type="BandwidthResource">
+            <Parameter name="Bandwidth" type="Double" value="50"/>
+          </Resource>
+        </SubstrateLink>
+        <SubstrateLink destination="3" id="8" source="2">
+          <Resource type="BandwidthResource">
+            <Parameter name="Bandwidth" type="Double" value="70"/>
+          </Resource>
+        </SubstrateLink>
+        <SubstrateLink destination="4" id="9" source="1">
+          <Resource type="BandwidthResource">
+            <Parameter name="Bandwidth" type="Double" value="40"/>
+          </Resource>
+        </SubstrateLink>
+        <SubstrateLink destination="3" id="10" source="4">
+          <Resource type="BandwidthResource">
+            <Parameter name="Bandwidth" type="Double" value="70"/>
+          </Resource>
+        </SubstrateLink>
+      </SubstrateLinks>
+    </SubstrateNetwork>
+    <VirtualNetworks>
+      <VirtualNetwork layer="1">
+        <VirtualNodes>
+          <VirtualNode coordinateX="-0.757" coordinateY="-3.622" id="11">
+            <Demand type="IdDemand">
+              <Parameter name="DemandedId" type="String" value="1"/>
+            </Demand>
+            <Demand type="CpuDemand">
+              <Parameter name="DemandedCycles" type="Double" value="50"/>
+            </Demand>
+          </VirtualNode>
+          <VirtualNode coordinateX="4.216" coordinateY="-0.595" id="12">
+            <Demand type="IdDemand">
+              <Parameter name="DemandedId" type="String" value="2"/>
+            </Demand>
+            <Demand type="CpuDemand">
+              <Parameter name="DemandedCycles" type="Double" value="100"/>
+            </Demand>
+          </VirtualNode>
+          <VirtualNode coordinateX="-4.541" coordinateY="1.081" id="13">
+            <Demand type="IdDemand">
+              <Parameter name="DemandedId" type="String" value="3"/>
+            </Demand>
+            <Demand type="CpuDemand">
+              <Parameter name="DemandedCycles" type="Double" value="35"/>
+            </Demand>
+          </VirtualNode>
+        </VirtualNodes>
+        <VirtualLinks>
+          <VirtualLink destination="13" id="14" source="11">
+            <Demand type="BandwidthDemand">
+              <Parameter name="DemandedBandwidth" type="Double" value="25"/>
+            </Demand>
+          </VirtualLink>
+          <VirtualLink destination="13" id="15" source="12">
+            <Demand type="BandwidthDemand">
+              <Parameter name="DemandedBandwidth" type="Double" value="30"/>
+            </Demand>
+          </VirtualLink>
+        </VirtualLinks>
+      </VirtualNetwork>
+      </VirtualNetworks>
+     </ScenarioNetworks>
+  </ScenarioResult>
+  
+    <ScenarioResult>
+     <ScenarioParameter name="SNetSize" value="100" />
+     <ScenarioParameter name="NumberOfVNets" value="5" />
+     <ScenarioParameter name="VNetSize" value="5" />
+     <ScenarioParameter name="ScenarioNumber" value="2" />
+     
+     <ScenarioMetric name="AvAcceptRate" result="80.0" />
+     <ScenarioMetric name="AcceptedVNets" result="4.0" />
+     </ScenarioResult>
+</MappingTest>

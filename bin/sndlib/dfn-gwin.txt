@@ -1,0 +1,198 @@
+?SNDlib native format; type: network; version: 1.0
+# network dfn-gwin
+
+# NODE SECTION
+#
+# <node_id> [(<longitude>, <latitude>)]
+
+NODES (
+  Leipzig ( 12.3797 51.3384 )
+  Hamburg ( 9.98792 53.5624 )
+  Hannover ( 9.72435 52.3798 )
+  Stuttgart ( 9.09565 48.7424 )
+  Muenchen ( 11.6718 48.2651 )
+  Koeln ( 7.19069 50.7725 )
+  Erlangen ( 11.0262 49.5737 )
+  Berlin ( 13.2944 52.4558 )
+  Essen ( 7.00796 51.4674 )
+  Frankfurt ( 8.72819 50.1172 )
+  IP ( 7.21 53.60 )
+)
+
+# LINK SECTION
+#
+# <link_id> ( <source> <target> ) <pre_installed_capacity> <pre_installed_capacity_cost> <routing_cost> <setup_cost> ( {<module_capacity> <module_cost>}* )
+
+LINKS (
+  Berlin_Leipzig ( Leipzig Berlin ) 0.00 0.00 0.00 0.00 ( 155.00 960.00 622.00 2880.00 )
+  Koeln_Leipzig ( Leipzig Koeln ) 0.00 0.00 0.00 0.00 ( 155.00 1872.00 622.00 5616.00 )
+  Leipzig_Muenchen ( Leipzig Muenchen ) 0.00 0.00 0.00 0.00 ( 155.00 1784.00 622.00 5352.00 )
+  Essen_Hamburg ( Hamburg Essen ) 0.00 0.00 0.00 0.00 ( 155.00 1632.00 622.00 4896.00 )
+  Berlin_Hamburg ( Hamburg Berlin ) 0.00 0.00 0.00 0.00 ( 155.00 1416.00 622.00 4248.00 )
+  Erlangen_Hamburg ( Hamburg Erlangen ) 0.00 0.00 0.00 0.00 ( 155.00 2200.00 622.00 6600.00 )
+  Hamburg_Stuttgart ( Hamburg Stuttgart ) 0.00 0.00 0.00 0.00 ( 155.00 2560.00 622.00 7680.00 )
+  Hamburg_Muenchen ( Hamburg Muenchen ) 0.00 0.00 0.00 0.00 ( 155.00 2804.00 622.00 8412.00 )
+  Frankfurt_Hannover ( Hannover Frankfurt ) 0.00 0.00 0.00 0.00 ( 155.00 1444.00 622.00 4332.00 )
+  Essen_Hannover ( Hannover Essen ) 0.00 0.00 0.00 0.00 ( 155.00 1252.00 622.00 3756.00 )
+  Hannover_Koeln ( Hannover Koeln ) 0.00 0.00 0.00 0.00 ( 155.00 1404.00 622.00 4212.00 )
+  Essen_Stuttgart ( Stuttgart Essen ) 0.00 0.00 0.00 0.00 ( 155.00 1752.00 622.00 5256.00 )
+  Erlangen_Stuttgart ( Stuttgart Erlangen ) 0.00 0.00 0.00 0.00 ( 155.00 1076.00 622.00 3228.00 )
+  Koeln_Stuttgart ( Stuttgart Koeln ) 0.00 0.00 0.00 0.00 ( 155.00 1456.00 622.00 4368.00 )
+  Essen_Muenchen ( Muenchen Essen ) 0.00 0.00 0.00 0.00 ( 155.00 2356.00 622.00 7068.00 )
+  Berlin_Muenchen ( Muenchen Berlin ) 0.00 0.00 0.00 0.00 ( 155.00 2320.00 622.00 6960.00 )
+  Erlangen_Muenchen ( Muenchen Erlangen ) 0.00 0.00 0.00 0.00 ( 155.00 1012.00 622.00 3036.00 )
+  Erlangen_Koeln ( Koeln Erlangen ) 0.00 0.00 0.00 0.00 ( 155.00 1616.00 622.00 4848.00 )
+  Erlangen_Frankfurt ( Erlangen Frankfurt ) 0.00 0.00 0.00 0.00 ( 155.00 1104.00 622.00 3312.00 )
+  Berlin_Essen ( Berlin Essen ) 0.00 0.00 0.00 0.00 ( 155.00 2180.00 622.00 6540.00 )
+  Frankfurt_IP ( IP Frankfurt ) 622.00 1200.00 0.00 0.00 ( )
+  Hannover_IP ( IP Hannover ) 622.00 1200.00 0.00 0.00 ( )
+  Essen_Leipzig ( Leipzig Essen ) 0.00 0.00 0.00 0.00 ( 155.00 1892.00 622.00 5676.00 )
+  Erlangen_Leipzig ( Leipzig Erlangen ) 0.00 0.00 0.00 0.00 ( 155.00 1276.00 622.00 3828.00 )
+  Leipzig_Stuttgart ( Leipzig Stuttgart ) 0.00 0.00 0.00 0.00 ( 155.00 1888.00 622.00 5664.00 )
+  Hannover_Leipzig ( Leipzig Hannover ) 0.00 0.00 0.00 0.00 ( 155.00 1264.00 622.00 3792.00 )
+  Hamburg_Leipzig ( Leipzig Hamburg ) 0.00 0.00 0.00 0.00 ( 155.00 1584.00 622.00 4752.00 )
+  Frankfurt_Leipzig ( Leipzig Frankfurt ) 0.00 0.00 0.00 0.00 ( 155.00 1564.00 622.00 4692.00 )
+  Frankfurt_Hamburg ( Hamburg Frankfurt ) 0.00 0.00 0.00 0.00 ( 155.00 1972.00 622.00 5916.00 )
+  Hamburg_Koeln ( Hamburg Koeln ) 0.00 0.00 0.00 0.00 ( 155.00 1860.00 622.00 5580.00 )
+  Hamburg_Hannover ( Hamburg Hannover ) 0.00 0.00 0.00 0.00 ( 155.00 932.00 622.00 2796.00 )
+  Berlin_Hannover ( Hannover Berlin ) 0.00 0.00 0.00 0.00 ( 155.00 1372.00 622.00 4116.00 )
+  Erlangen_Hannover ( Hannover Erlangen ) 0.00 0.00 0.00 0.00 ( 155.00 1700.00 622.00 5100.00 )
+  Hannover_Muenchen ( Hannover Muenchen ) 0.00 0.00 0.00 0.00 ( 155.00 2312.00 622.00 6936.00 )
+  Hannover_Stuttgart ( Hannover Stuttgart ) 0.00 0.00 0.00 0.00 ( 155.00 2028.00 622.00 6084.00 )
+  Frankfurt_Stuttgart ( Stuttgart Frankfurt ) 0.00 0.00 0.00 0.00 ( 155.00 1024.00 622.00 3072.00 )
+  Berlin_Stuttgart ( Stuttgart Berlin ) 0.00 0.00 0.00 0.00 ( 155.00 2432.00 622.00 7296.00 )
+  Muenchen_Stuttgart ( Stuttgart Muenchen ) 0.00 0.00 0.00 0.00 ( 155.00 1192.00 622.00 3576.00 )
+  Frankfurt_Muenchen ( Muenchen Frankfurt ) 0.00 0.00 0.00 0.00 ( 155.00 1588.00 622.00 4764.00 )
+  Koeln_Muenchen ( Muenchen Koeln ) 0.00 0.00 0.00 0.00 ( 155.00 2108.00 622.00 6324.00 )
+  Frankfurt_Koeln ( Koeln Frankfurt ) 0.00 0.00 0.00 0.00 ( 155.00 924.00 622.00 2772.00 )
+  Essen_Koeln ( Koeln Essen ) 0.00 0.00 0.00 0.00 ( 155.00 716.00 622.00 2148.00 )
+  Berlin_Koeln ( Koeln Berlin ) 0.00 0.00 0.00 0.00 ( 155.00 2244.00 622.00 6732.00 )
+  Erlangen_Essen ( Erlangen Essen ) 0.00 0.00 0.00 0.00 ( 155.00 1816.00 622.00 5448.00 )
+  Berlin_Erlangen ( Erlangen Berlin ) 0.00 0.00 0.00 0.00 ( 155.00 1832.00 622.00 5496.00 )
+  Berlin_Frankfurt ( Berlin Frankfurt ) 0.00 0.00 0.00 0.00 ( 155.00 2044.00 622.00 6132.00 )
+  Essen_Frankfurt ( Essen Frankfurt ) 0.00 0.00 0.00 0.00 ( 155.00 1172.00 622.00 3516.00 )
+)
+
+# DEMAND SECTION
+#
+# <demand_id> ( <source> <target> ) <routing_unit> <demand_value> <max_path_length>
+
+DEMANDS (
+  DFraEss ( Frankfurt Essen ) 1 109.00 2
+  DIPBer ( IP Berlin ) 1 85.00 3
+  DKoelStu ( Koeln Stuttgart ) 1 5.00 2
+  DEssStu ( Essen Stuttgart ) 1 5.00 2
+  DEssErl ( Essen Erlangen ) 1 5.00 2
+  DErlLei ( Erlangen Leipzig ) 1 5.00 2
+  DErlKoel ( Erlangen Koeln ) 1 5.00 2
+  DErlEss ( Erlangen Essen ) 1 5.00 2
+  DStuKoel ( Stuttgart Koeln ) 1 4.00 2
+  DStuHam ( Stuttgart Hamburg ) 1 4.00 2
+  DStuErl ( Stuttgart Erlangen ) 1 4.00 2
+  DErlHan ( Erlangen Hannover ) 1 4.00 2
+  DIPLei ( IP Leipzig ) 1 82.00 3
+  DErlHam ( Erlangen Hamburg ) 1 4.00 2
+  DMuenFra ( Muenchen Frankfurt ) 1 82.00 2
+  DIPHam ( IP Hamburg ) 1 79.00 3
+  DEssFra ( Essen Frankfurt ) 1 79.00 2
+  DHamStu ( Hamburg Stuttgart ) 1 77.00 2
+  DHamFra ( Hamburg Frankfurt ) 1 73.00 2
+  DIPKoel ( IP Koeln ) 1 69.00 3
+  DFraHan ( Frankfurt Hannover ) 1 67.00 2
+  DLeiIP ( Leipzig IP ) 1 65.00 3
+  DKoelFra ( Koeln Frankfurt ) 1 100.00 2
+  DFraErl ( Frankfurt Erlangen ) 1 65.00 2
+  DKoelIP ( Koeln IP ) 1 63.00 3
+  DBerLei ( Berlin Leipzig ) 1 63.00 2
+  DBerIP ( Berlin IP ) 1 62.00 3
+  DHamIP ( Hamburg IP ) 1 61.00 3
+  DFraMuen ( Frankfurt Muenchen ) 1 59.00 2
+  DFraStu ( Frankfurt Stuttgart ) 1 58.00 2
+  DIPHan ( IP Hannover ) 1 56.00 3
+  DEssIP ( Essen IP ) 1 56.00 3
+  DHanFra ( Hannover Frankfurt ) 1 55.00 2
+  DLeiFra ( Leipzig Frankfurt ) 1 99.00 2
+  DMuenIP ( Muenchen IP ) 1 54.00 3
+  DBerKoel ( Berlin Koeln ) 1 50.00 2
+  DKoelLei ( Koeln Leipzig ) 1 49.00 2
+  DIPErl ( IP Erlangen ) 1 48.00 3
+  DEssLei ( Essen Leipzig ) 1 48.00 2
+  DEssKoel ( Essen Koeln ) 1 48.00 2
+  DLeiHan ( Leipzig Hannover ) 1 45.00 2
+  DIPMuen ( IP Muenchen ) 1 44.00 3
+  DMuenStu ( Muenchen Stuttgart ) 1 40.00 2
+  DIPFra ( IP Frankfurt ) 1 38.00 3
+  DIPEss ( IP Essen ) 1 98.00 3
+  DEssMuen ( Essen Muenchen ) 1 38.00 2
+  DKoelEss ( Koeln Essen ) 1 36.00 2
+  DStuFra ( Stuttgart Frankfurt ) 1 35.00 2
+  DIPStu ( IP Stuttgart ) 1 33.00 3
+  DHanIP ( Hannover IP ) 1 33.00 3
+  DMuenErl ( Muenchen Erlangen ) 1 32.00 2
+  DLeiBer ( Leipzig Berlin ) 1 32.00 2
+  DKoelHan ( Koeln Hannover ) 1 30.00 2
+  DStuIP ( Stuttgart IP ) 1 29.00 3
+  DErlFra ( Erlangen Frankfurt ) 1 29.00 2
+  DFraLei ( Frankfurt Leipzig ) 1 98.00 2
+  DLeiEss ( Leipzig Essen ) 1 28.00 2
+  DBerMuen ( Berlin Muenchen ) 1 26.00 2
+  DBerHan ( Berlin Hannover ) 1 26.00 2
+  DMuenBer ( Muenchen Berlin ) 1 24.00 2
+  DFraIP ( Frankfurt IP ) 1 23.00 3
+  DErlIP ( Erlangen IP ) 1 23.00 3
+  DMuenEss ( Muenchen Essen ) 1 22.00 2
+  DEssHan ( Essen Hannover ) 1 22.00 2
+  DHamErl ( Hamburg Erlangen ) 1 21.00 2
+  DLeiMuen ( Leipzig Muenchen ) 1 20.00 2
+  DFraBer ( Frankfurt Berlin ) 1 93.00 2
+  DLeiHam ( Leipzig Hamburg ) 1 20.00 2
+  DHanEss ( Hannover Essen ) 1 19.00 2
+  DErlStu ( Erlangen Stuttgart ) 1 19.00 2
+  DLeiKoel ( Leipzig Koeln ) 1 18.00 2
+  DKoelHam ( Koeln Hamburg ) 1 18.00 2
+  DMuenHan ( Muenchen Hannover ) 1 16.00 2
+  DLeiErl ( Leipzig Erlangen ) 1 16.00 2
+  DMuenLei ( Muenchen Leipzig ) 1 15.00 2
+  DLeiStu ( Leipzig Stuttgart ) 1 14.00 2
+  DHamEss ( Hamburg Essen ) 1 14.00 2
+  DBerFra ( Berlin Frankfurt ) 1 93.00 2
+  DEssHam ( Essen Hamburg ) 1 14.00 2
+  DHanLei ( Hannover Leipzig ) 1 13.00 2
+  DHanErl ( Hannover Erlangen ) 1 13.00 2
+  DHanBer ( Hannover Berlin ) 1 13.00 2
+  DMuenHam ( Muenchen Hamburg ) 1 12.00 2
+  DKoelMuen ( Koeln Muenchen ) 1 12.00 2
+  DKoelBer ( Koeln Berlin ) 1 12.00 2
+  DHamBer ( Hamburg Berlin ) 1 12.00 2
+  DErlMuen ( Erlangen Muenchen ) 1 12.00 2
+  DBerHam ( Berlin Hamburg ) 1 12.00 2
+  DFraKoel ( Frankfurt Koeln ) 1 92.00 2
+  DMuenKoel ( Muenchen Koeln ) 1 11.00 2
+  DHamKoel ( Hamburg Koeln ) 1 11.00 2
+  DBerEss ( Berlin Essen ) 1 11.00 2
+  DHanMuen ( Hannover Muenchen ) 1 10.00 2
+  DHanKoel ( Hannover Koeln ) 1 10.00 2
+  DHanHam ( Hannover Hamburg ) 1 10.00 2
+  DHamMuen ( Hamburg Muenchen ) 1 10.00 2
+  DHamLei ( Hamburg Leipzig ) 1 10.00 2
+  DHamHan ( Hamburg Hannover ) 1 10.00 2
+  DEssBer ( Essen Berlin ) 1 10.00 2
+  DFraHam ( Frankfurt Hamburg ) 1 92.00 2
+  DStuBer ( Stuttgart Berlin ) 1 8.00 2
+  DErlBer ( Erlangen Berlin ) 1 8.00 2
+  DBerErl ( Berlin Erlangen ) 1 8.00 2
+  DKoelErl ( Koeln Erlangen ) 1 7.00 2
+  DHanStu ( Hannover Stuttgart ) 1 7.00 2
+  DBerStu ( Berlin Stuttgart ) 1 7.00 2
+  DStuMuen ( Stuttgart Muenchen ) 1 6.00 2
+  DStuLei ( Stuttgart Leipzig ) 1 6.00 2
+  DStuHan ( Stuttgart Hannover ) 1 6.00 2
+  DStuEss ( Stuttgart Essen ) 1 5.00 2
+)
+
+# ADMISSIBLE PATHS SECTION
+#
+# <demand_id> ( {<path_id> ( <link_id>+ )}+ )
+
+ADMISSIBLE_PATHS ( 
+)

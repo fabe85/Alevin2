@@ -1,0 +1,720 @@
+?SNDlib native format; type: network; version: 1.0
+# network polska
+
+# NODE SECTION
+#
+# <node_id> [(<longitude>, <latitude>)]
+
+NODES (
+  Gdansk ( 18.60 54.20 )
+  Bydgoszcz ( 17.90 53.10 )
+  Kolobrzeg ( 16.10 54.20 )
+  Katowice ( 18.80 50.30 )
+  Krakow ( 19.80 50.00 )
+  Bialystok ( 23.10 53.10 )
+  Lodz ( 19.40 51.70 )
+  Poznan ( 16.80 52.40 )
+  Rzeszow ( 21.90 50.00 )
+  Szczecin ( 14.50 53.40 )
+  Warsaw ( 21.00 52.20 )
+  Wroclaw ( 16.90 51.10 )
+)
+
+# LINK SECTION
+#
+# <link_id> ( <source> <target> ) <pre_installed_capacity> <pre_installed_capacity_cost> <routing_cost> <setup_cost> ( {<module_capacity> <module_cost>}* )
+
+LINKS (
+  Link_0_10 ( Gdansk Warsaw ) 0.00 0.00 0.00 156.00 ( 155.00 156.00 622.00 468.00 )
+  Link_0_2 ( Gdansk Kolobrzeg ) 0.00 0.00 0.00 272.00 ( 155.00 272.00 622.00 816.00 )
+  Link_1_2 ( Bydgoszcz Kolobrzeg ) 0.00 0.00 0.00 156.00 ( 155.00 156.00 622.00 468.00 )
+  Link_1_7 ( Bydgoszcz Poznan ) 0.00 0.00 0.00 186.00 ( 155.00 186.00 622.00 558.00 )
+  Link_1_10 ( Bydgoszcz Warsaw ) 0.00 0.00 0.00 272.00 ( 155.00 272.00 622.00 816.00 )
+  Link_2_9 ( Kolobrzeg Szczecin ) 0.00 0.00 0.00 237.00 ( 155.00 237.00 622.00 711.00 )
+  Link_3_4 ( Katowice Krakow ) 0.00 0.00 0.00 208.00 ( 155.00 208.00 622.00 624.00 )
+  Link_3_6 ( Katowice Lodz ) 0.00 0.00 0.00 181.00 ( 155.00 181.00 622.00 543.00 )
+  Link_3_11 ( Katowice Wroclaw ) 0.00 0.00 0.00 208.00 ( 155.00 208.00 622.00 624.00 )
+  Link_4_8 ( Krakow Rzeszow ) 0.00 0.00 0.00 250.00 ( 155.00 250.00 622.00 750.00 )
+  Link_4_10 ( Krakow Warsaw ) 0.00 0.00 0.00 324.00 ( 155.00 324.00 622.00 972.00 )
+  Link_5_8 ( Bialystok Rzeszow ) 0.00 0.00 0.00 324.00 ( 155.00 324.00 622.00 972.00 )
+  Link_5_10 ( Bialystok Warsaw ) 0.00 0.00 0.00 250.00 ( 155.00 250.00 622.00 750.00 )
+  Link_6_10 ( Lodz Warsaw ) 0.00 0.00 0.00 165.00 ( 155.00 165.00 622.00 495.00 )
+  Link_6_11 ( Lodz Wroclaw ) 0.00 0.00 0.00 305.00 ( 155.00 305.00 622.00 915.00 )
+  Link_7_9 ( Poznan Szczecin ) 0.00 0.00 0.00 142.00 ( 155.00 142.00 622.00 426.00 )
+  Link_7_11 ( Poznan Wroclaw ) 0.00 0.00 0.00 195.00 ( 155.00 195.00 622.00 585.00 )
+  Link_0_5 ( Gdansk Bialystok ) 0.00 0.00 0.00 294.00 ( 155.00 294.00 622.00 882.00 )
+)
+
+# DEMAND SECTION
+#
+# <demand_id> ( <source> <target> ) <routing_unit> <demand_value> <max_path_length>
+
+DEMANDS (
+  Demand_0_1 ( Gdansk Bydgoszcz ) 1 195.00 UNLIMITED
+  Demand_0_2 ( Gdansk Kolobrzeg ) 1 158.00 UNLIMITED
+  Demand_0_3 ( Gdansk Katowice ) 1 174.00 UNLIMITED
+  Demand_0_4 ( Gdansk Krakow ) 1 101.00 UNLIMITED
+  Demand_0_5 ( Gdansk Bialystok ) 1 198.00 UNLIMITED
+  Demand_0_6 ( Gdansk Lodz ) 1 158.00 UNLIMITED
+  Demand_0_7 ( Gdansk Poznan ) 1 182.00 UNLIMITED
+  Demand_0_8 ( Gdansk Rzeszow ) 1 154.00 UNLIMITED
+  Demand_0_9 ( Gdansk Szczecin ) 1 175.00 UNLIMITED
+  Demand_0_10 ( Gdansk Warsaw ) 1 122.00 UNLIMITED
+  Demand_0_11 ( Gdansk Wroclaw ) 1 114.00 UNLIMITED
+  Demand_1_2 ( Bydgoszcz Kolobrzeg ) 1 179.00 UNLIMITED
+  Demand_1_3 ( Bydgoszcz Katowice ) 1 117.00 UNLIMITED
+  Demand_1_4 ( Bydgoszcz Krakow ) 1 105.00 UNLIMITED
+  Demand_1_5 ( Bydgoszcz Bialystok ) 1 159.00 UNLIMITED
+  Demand_1_6 ( Bydgoszcz Lodz ) 1 198.00 UNLIMITED
+  Demand_1_7 ( Bydgoszcz Poznan ) 1 189.00 UNLIMITED
+  Demand_1_8 ( Bydgoszcz Rzeszow ) 1 166.00 UNLIMITED
+  Demand_1_9 ( Bydgoszcz Szczecin ) 1 142.00 UNLIMITED
+  Demand_1_10 ( Bydgoszcz Warsaw ) 1 137.00 UNLIMITED
+  Demand_1_11 ( Bydgoszcz Wroclaw ) 1 163.00 UNLIMITED
+  Demand_2_3 ( Kolobrzeg Katowice ) 1 131.00 UNLIMITED
+  Demand_2_4 ( Kolobrzeg Krakow ) 1 159.00 UNLIMITED
+  Demand_2_5 ( Kolobrzeg Bialystok ) 1 164.00 UNLIMITED
+  Demand_2_6 ( Kolobrzeg Lodz ) 1 128.00 UNLIMITED
+  Demand_2_7 ( Kolobrzeg Poznan ) 1 195.00 UNLIMITED
+  Demand_2_8 ( Kolobrzeg Rzeszow ) 1 130.00 UNLIMITED
+  Demand_2_9 ( Kolobrzeg Szczecin ) 1 105.00 UNLIMITED
+  Demand_2_10 ( Kolobrzeg Warsaw ) 1 173.00 UNLIMITED
+  Demand_2_11 ( Kolobrzeg Wroclaw ) 1 157.00 UNLIMITED
+  Demand_3_4 ( Katowice Krakow ) 1 194.00 UNLIMITED
+  Demand_3_5 ( Katowice Bialystok ) 1 125.00 UNLIMITED
+  Demand_3_6 ( Katowice Lodz ) 1 110.00 UNLIMITED
+  Demand_3_7 ( Katowice Poznan ) 1 132.00 UNLIMITED
+  Demand_3_8 ( Katowice Rzeszow ) 1 159.00 UNLIMITED
+  Demand_3_9 ( Katowice Szczecin ) 1 109.00 UNLIMITED
+  Demand_3_10 ( Katowice Warsaw ) 1 126.00 UNLIMITED
+  Demand_3_11 ( Katowice Wroclaw ) 1 100.00 UNLIMITED
+  Demand_4_5 ( Krakow Bialystok ) 1 124.00 UNLIMITED
+  Demand_4_6 ( Krakow Lodz ) 1 106.00 UNLIMITED
+  Demand_4_7 ( Krakow Poznan ) 1 136.00 UNLIMITED
+  Demand_4_8 ( Krakow Rzeszow ) 1 144.00 UNLIMITED
+  Demand_4_9 ( Krakow Szczecin ) 1 168.00 UNLIMITED
+  Demand_4_10 ( Krakow Warsaw ) 1 119.00 UNLIMITED
+  Demand_4_11 ( Krakow Wroclaw ) 1 127.00 UNLIMITED
+  Demand_5_6 ( Bialystok Lodz ) 1 105.00 UNLIMITED
+  Demand_5_7 ( Bialystok Poznan ) 1 147.00 UNLIMITED
+  Demand_5_8 ( Bialystok Rzeszow ) 1 140.00 UNLIMITED
+  Demand_5_9 ( Bialystok Szczecin ) 1 198.00 UNLIMITED
+  Demand_5_10 ( Bialystok Warsaw ) 1 104.00 UNLIMITED
+  Demand_5_11 ( Bialystok Wroclaw ) 1 113.00 UNLIMITED
+  Demand_6_7 ( Lodz Poznan ) 1 169.00 UNLIMITED
+  Demand_6_8 ( Lodz Rzeszow ) 1 187.00 UNLIMITED
+  Demand_6_9 ( Lodz Szczecin ) 1 196.00 UNLIMITED
+  Demand_6_10 ( Lodz Warsaw ) 1 193.00 UNLIMITED
+  Demand_6_11 ( Lodz Wroclaw ) 1 151.00 UNLIMITED
+  Demand_7_8 ( Poznan Rzeszow ) 1 106.00 UNLIMITED
+  Demand_7_9 ( Poznan Szczecin ) 1 125.00 UNLIMITED
+  Demand_7_10 ( Poznan Warsaw ) 1 194.00 UNLIMITED
+  Demand_7_11 ( Poznan Wroclaw ) 1 194.00 UNLIMITED
+  Demand_8_9 ( Rzeszow Szczecin ) 1 123.00 UNLIMITED
+  Demand_8_10 ( Rzeszow Warsaw ) 1 181.00 UNLIMITED
+  Demand_8_11 ( Rzeszow Wroclaw ) 1 193.00 UNLIMITED
+  Demand_9_10 ( Szczecin Warsaw ) 1 181.00 UNLIMITED
+  Demand_9_11 ( Szczecin Wroclaw ) 1 195.00 UNLIMITED
+  Demand_10_11 ( Warsaw Wroclaw ) 1 141.00 UNLIMITED
+)
+
+# ADMISSIBLE PATHS SECTION
+#
+# <demand_id> ( {<path_id> ( <link_id>+ )}+ )
+
+ADMISSIBLE_PATHS ( 
+  Demand_0_1 (
+    P_0 ( Link_0_2 Link_1_2 )
+    P_1 ( Link_0_10 Link_1_10 )
+    P_2 ( Link_0_2 Link_2_9 Link_7_9 Link_1_7 )
+    P_3 ( Link_0_5 Link_5_10 Link_1_10 )
+    P_4 ( Link_0_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 Link_1_7 )
+    P_5 ( Link_0_2 Link_2_9 Link_7_9 Link_7_11 Link_3_11 Link_3_4 Link_4_10 Link_1_10 )
+    P_6 ( Link_0_5 Link_5_8 Link_4_8 Link_4_10 Link_1_10 )
+  )
+  Demand_0_2 (
+    P_0 ( Link_0_2 )
+    P_1 ( Link_0_10 Link_1_10 Link_1_2 )
+    P_2 ( Link_0_5 Link_5_10 Link_1_10 Link_1_2 )
+    P_3 ( Link_0_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 Link_1_7 Link_1_2 )
+    P_4 ( Link_0_10 Link_1_10 Link_1_7 Link_7_9 Link_2_9 )
+    P_5 ( Link_0_5 Link_5_8 Link_4_8 Link_4_10 Link_1_10 Link_1_2 )
+    P_6 ( Link_0_5 Link_5_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 Link_1_7 Link_1_2 )
+  )
+  Demand_0_3 (
+    P_0 ( Link_0_5 Link_5_8 Link_4_8 Link_3_4 )
+    P_1 ( Link_0_10 Link_4_10 Link_3_4 )
+    P_2 ( Link_0_5 Link_5_10 Link_4_10 Link_3_4 )
+    P_3 ( Link_0_5 Link_5_8 Link_4_8 Link_4_10 Link_6_10 Link_3_6 )
+    P_4 ( Link_0_2 Link_1_2 Link_1_10 Link_4_10 Link_3_4 )
+    P_5 ( Link_0_10 Link_6_10 Link_3_6 )
+    P_6 ( Link_0_5 Link_5_10 Link_6_10 Link_3_6 )
+  )
+  Demand_0_4 (
+    P_0 ( Link_0_5 Link_5_8 Link_4_8 )
+    P_1 ( Link_0_10 Link_4_10 )
+    P_2 ( Link_0_5 Link_5_10 Link_4_10 )
+    P_3 ( Link_0_2 Link_1_2 Link_1_10 Link_4_10 )
+    P_4 ( Link_0_10 Link_6_10 Link_3_6 Link_3_4 )
+    P_5 ( Link_0_5 Link_5_10 Link_6_10 Link_3_6 Link_3_4 )
+    P_6 ( Link_0_2 Link_2_9 Link_7_9 Link_1_7 Link_1_10 Link_4_10 )
+  )
+  Demand_0_5 (
+    P_0 ( Link_0_5 )
+    P_1 ( Link_0_10 Link_5_10 )
+    P_2 ( Link_0_2 Link_1_2 Link_1_10 Link_5_10 )
+    P_3 ( Link_0_10 Link_4_10 Link_4_8 Link_5_8 )
+    P_4 ( Link_0_2 Link_2_9 Link_7_9 Link_1_7 Link_1_10 Link_5_10 )
+    P_5 ( Link_0_2 Link_1_2 Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_8 Link_5_8 )
+    P_6 ( Link_0_2 Link_1_2 Link_1_10 Link_4_10 Link_4_8 Link_5_8 )
+  )
+  Demand_0_6 (
+    P_0 ( Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_6 )
+    P_1 ( Link_0_10 Link_6_10 )
+    P_2 ( Link_0_5 Link_5_10 Link_6_10 )
+    P_3 ( Link_0_5 Link_5_8 Link_4_8 Link_4_10 Link_6_10 )
+    P_4 ( Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 Link_6_11 )
+    P_5 ( Link_0_2 Link_1_2 Link_1_10 Link_6_10 )
+    P_6 ( Link_0_10 Link_4_10 Link_3_4 Link_3_6 )
+  )
+  Demand_0_7 (
+    P_0 ( Link_0_2 Link_1_2 Link_1_7 )
+    P_1 ( Link_0_10 Link_1_10 Link_1_7 )
+    P_2 ( Link_0_2 Link_2_9 Link_7_9 )
+    P_3 ( Link_0_2 Link_1_2 Link_1_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 )
+    P_4 ( Link_0_5 Link_5_10 Link_1_10 Link_1_7 )
+    P_5 ( Link_0_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 )
+    P_6 ( Link_0_10 Link_1_10 Link_1_2 Link_2_9 Link_7_9 )
+  )
+  Demand_0_8 (
+    P_0 ( Link_0_5 Link_5_8 )
+    P_1 ( Link_0_10 Link_4_10 Link_4_8 )
+    P_2 ( Link_0_5 Link_5_10 Link_4_10 Link_4_8 )
+    P_3 ( Link_0_2 Link_1_2 Link_1_10 Link_4_10 Link_4_8 )
+    P_4 ( Link_0_10 Link_5_10 Link_5_8 )
+    P_5 ( Link_0_5 Link_5_10 Link_6_10 Link_3_6 Link_3_4 Link_4_8 )
+    P_6 ( Link_0_2 Link_2_9 Link_7_9 Link_1_7 Link_1_10 Link_4_10 Link_4_8 )
+  )
+  Demand_0_9 (
+    P_0 ( Link_0_2 Link_2_9 )
+    P_1 ( Link_0_10 Link_1_10 Link_1_2 Link_2_9 )
+    P_2 ( Link_0_2 Link_1_2 Link_1_7 Link_7_9 )
+    P_3 ( Link_0_5 Link_5_10 Link_1_10 Link_1_2 Link_2_9 )
+    P_4 ( Link_0_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 Link_7_9 )
+    P_5 ( Link_0_10 Link_1_10 Link_1_7 Link_7_9 )
+    P_6 ( Link_0_2 Link_1_2 Link_1_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 Link_7_9 )
+  )
+  Demand_0_10 (
+    P_0 ( Link_0_10 )
+    P_1 ( Link_0_2 Link_1_2 Link_1_10 )
+    P_2 ( Link_0_5 Link_5_10 )
+    P_3 ( Link_0_2 Link_2_9 Link_7_9 Link_1_7 Link_1_10 )
+    P_4 ( Link_0_2 Link_1_2 Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_10 )
+    P_5 ( Link_0_5 Link_5_8 Link_4_8 Link_4_10 )
+    P_6 ( Link_0_2 Link_2_9 Link_7_9 Link_7_11 Link_3_11 Link_3_4 Link_4_10 )
+  )
+  Demand_0_11 (
+    P_0 ( Link_0_2 Link_1_2 Link_1_7 Link_7_11 )
+    P_1 ( Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 )
+    P_2 ( Link_0_2 Link_2_9 Link_7_9 Link_7_11 )
+    P_3 ( Link_0_2 Link_1_2 Link_1_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_4 ( Link_0_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_5 ( Link_0_5 Link_5_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_6 ( Link_0_5 Link_5_8 Link_4_8 Link_4_10 Link_6_10 Link_6_11 )
+  )
+  Demand_1_2 (
+    P_0 ( Link_1_2 )
+    P_1 ( Link_1_7 Link_7_9 Link_2_9 )
+    P_2 ( Link_1_10 Link_0_10 Link_0_2 )
+    P_3 ( Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 )
+    P_4 ( Link_1_10 Link_5_10 Link_0_5 Link_0_2 )
+    P_5 ( Link_1_10 Link_0_10 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 Link_7_11 Link_7_9 Link_2_9 )
+    P_6 ( Link_1_7 Link_7_11 Link_6_11 Link_3_6 Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 )
+  )
+  Demand_1_3 (
+    P_0 ( Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 )
+    P_1 ( Link_1_7 Link_7_9 Link_2_9 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 )
+    P_2 ( Link_1_2 Link_2_9 Link_7_9 Link_7_11 Link_3_11 )
+    P_3 ( Link_1_2 Link_0_2 Link_0_10 Link_4_10 Link_3_4 )
+    P_4 ( Link_1_2 Link_0_2 Link_0_5 Link_5_10 Link_4_10 Link_3_4 )
+    P_5 ( Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_4_10 Link_6_10 Link_3_6 )
+    P_6 ( Link_1_10 Link_4_10 Link_3_4 )
+  )
+  Demand_1_4 (
+    P_0 ( Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 )
+    P_1 ( Link_1_7 Link_7_9 Link_2_9 Link_0_2 Link_0_5 Link_5_8 Link_4_8 )
+    P_2 ( Link_1_2 Link_2_9 Link_7_9 Link_7_11 Link_3_11 Link_3_4 )
+    P_3 ( Link_1_2 Link_0_2 Link_0_10 Link_4_10 )
+    P_4 ( Link_1_2 Link_0_2 Link_0_5 Link_5_10 Link_4_10 )
+    P_5 ( Link_1_10 Link_4_10 )
+    P_6 ( Link_1_7 Link_7_11 Link_3_11 Link_3_4 )
+  )
+  Demand_1_5 (
+    P_0 ( Link_1_2 Link_0_2 Link_0_5 )
+    P_1 ( Link_1_7 Link_7_9 Link_2_9 Link_0_2 Link_0_5 )
+    P_2 ( Link_1_2 Link_2_9 Link_7_9 Link_7_11 Link_3_11 Link_3_4 Link_4_8 Link_5_8 )
+    P_3 ( Link_1_2 Link_0_2 Link_0_10 Link_5_10 )
+    P_4 ( Link_1_10 Link_5_10 )
+    P_5 ( Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_8 Link_5_8 )
+    P_6 ( Link_1_7 Link_7_9 Link_2_9 Link_0_2 Link_0_10 Link_5_10 )
+  )
+  Demand_1_6 (
+    P_0 ( Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_6 )
+    P_1 ( Link_1_7 Link_7_9 Link_2_9 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_6 )
+    P_2 ( Link_1_2 Link_2_9 Link_7_9 Link_7_11 Link_6_11 )
+    P_3 ( Link_1_2 Link_0_2 Link_0_10 Link_6_10 )
+    P_4 ( Link_1_2 Link_0_2 Link_0_5 Link_5_10 Link_6_10 )
+    P_5 ( Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_4_10 Link_6_10 )
+    P_6 ( Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 Link_6_11 )
+  )
+  Demand_1_7 (
+    P_0 ( Link_1_7 )
+    P_1 ( Link_1_2 Link_2_9 Link_7_9 )
+    P_2 ( Link_1_10 Link_0_10 Link_0_2 Link_2_9 Link_7_9 )
+    P_3 ( Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 Link_7_11 )
+    P_4 ( Link_1_10 Link_5_10 Link_0_5 Link_0_2 Link_2_9 Link_7_9 )
+    P_5 ( Link_1_10 Link_0_10 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 Link_7_11 )
+    P_6 ( Link_1_2 Link_0_2 Link_0_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 )
+  )
+  Demand_1_8 (
+    P_0 ( Link_1_2 Link_0_2 Link_0_5 Link_5_8 )
+    P_1 ( Link_1_7 Link_7_9 Link_2_9 Link_0_2 Link_0_5 Link_5_8 )
+    P_2 ( Link_1_2 Link_2_9 Link_7_9 Link_7_11 Link_3_11 Link_3_4 Link_4_8 )
+    P_3 ( Link_1_2 Link_0_2 Link_0_10 Link_4_10 Link_4_8 )
+    P_4 ( Link_1_2 Link_0_2 Link_0_5 Link_5_10 Link_4_10 Link_4_8 )
+    P_5 ( Link_1_10 Link_4_10 Link_4_8 )
+    P_6 ( Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_8 )
+  )
+  Demand_1_9 (
+    P_0 ( Link_1_2 Link_2_9 )
+    P_1 ( Link_1_7 Link_7_9 )
+    P_2 ( Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 Link_7_11 Link_7_9 )
+    P_3 ( Link_1_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_4 ( Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_2_9 )
+    P_5 ( Link_1_2 Link_0_2 Link_0_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 Link_7_9 )
+    P_6 ( Link_1_2 Link_0_2 Link_0_5 Link_5_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 Link_7_9 )
+  )
+  Demand_1_10 (
+    P_0 ( Link_1_10 )
+    P_1 ( Link_1_2 Link_0_2 Link_0_10 )
+    P_2 ( Link_1_7 Link_7_9 Link_2_9 Link_0_2 Link_0_10 )
+    P_3 ( Link_1_2 Link_2_9 Link_7_9 Link_7_11 Link_3_11 Link_3_4 Link_4_10 )
+    P_4 ( Link_1_2 Link_0_2 Link_0_5 Link_5_10 )
+    P_5 ( Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_10 )
+    P_6 ( Link_1_7 Link_7_9 Link_2_9 Link_0_2 Link_0_5 Link_5_10 )
+  )
+  Demand_1_11 (
+    P_0 ( Link_1_7 Link_7_11 )
+    P_1 ( Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 )
+    P_2 ( Link_1_7 Link_7_9 Link_2_9 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 )
+    P_3 ( Link_1_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_4 ( Link_1_2 Link_2_9 Link_7_9 Link_7_11 )
+    P_5 ( Link_1_2 Link_0_2 Link_0_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_6 ( Link_1_2 Link_0_2 Link_0_5 Link_5_10 Link_4_10 Link_3_4 Link_3_11 )
+  )
+  Demand_2_3 (
+    P_0 ( Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 )
+    P_1 ( Link_1_2 Link_1_10 Link_4_10 Link_3_4 )
+    P_2 ( Link_0_2 Link_0_10 Link_4_10 Link_3_4 )
+    P_3 ( Link_0_2 Link_0_5 Link_5_10 Link_4_10 Link_3_4 )
+    P_4 ( Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_4_10 Link_6_10 Link_3_6 )
+    P_5 ( Link_2_9 Link_7_9 Link_1_7 Link_1_10 Link_4_10 Link_3_4 )
+    P_6 ( Link_1_2 Link_1_7 Link_7_11 Link_3_11 )
+  )
+  Demand_2_4 (
+    P_0 ( Link_0_2 Link_0_5 Link_5_8 Link_4_8 )
+    P_1 ( Link_1_2 Link_1_10 Link_4_10 )
+    P_2 ( Link_0_2 Link_0_10 Link_4_10 )
+    P_3 ( Link_0_2 Link_0_5 Link_5_10 Link_4_10 )
+    P_4 ( Link_2_9 Link_7_9 Link_1_7 Link_1_10 Link_4_10 )
+    P_5 ( Link_1_2 Link_1_7 Link_7_11 Link_3_11 Link_3_4 )
+    P_6 ( Link_1_2 Link_1_10 Link_6_10 Link_3_6 Link_3_4 )
+  )
+  Demand_2_5 (
+    P_0 ( Link_0_2 Link_0_5 )
+    P_1 ( Link_1_2 Link_1_10 Link_5_10 )
+    P_2 ( Link_0_2 Link_0_10 Link_5_10 )
+    P_3 ( Link_2_9 Link_7_9 Link_1_7 Link_1_10 Link_5_10 )
+    P_4 ( Link_1_2 Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_8 Link_5_8 )
+    P_5 ( Link_1_2 Link_1_10 Link_0_10 Link_0_5 )
+    P_6 ( Link_0_2 Link_0_10 Link_4_10 Link_4_8 Link_5_8 )
+  )
+  Demand_2_6 (
+    P_0 ( Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_6 )
+    P_1 ( Link_1_2 Link_1_10 Link_6_10 )
+    P_2 ( Link_0_2 Link_0_10 Link_6_10 )
+    P_3 ( Link_0_2 Link_0_5 Link_5_10 Link_6_10 )
+    P_4 ( Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_4_10 Link_6_10 )
+    P_5 ( Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 Link_6_11 )
+    P_6 ( Link_2_9 Link_7_9 Link_1_7 Link_1_10 Link_6_10 )
+  )
+  Demand_2_7 (
+    P_0 ( Link_1_2 Link_1_7 )
+    P_1 ( Link_2_9 Link_7_9 )
+    P_2 ( Link_1_2 Link_1_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 )
+    P_3 ( Link_0_2 Link_0_10 Link_1_10 Link_1_7 )
+    P_4 ( Link_1_2 Link_1_10 Link_6_10 Link_6_11 Link_7_11 )
+    P_5 ( Link_1_2 Link_1_10 Link_4_10 Link_3_4 Link_3_6 Link_6_11 Link_7_11 )
+    P_6 ( Link_0_2 Link_0_5 Link_5_10 Link_1_10 Link_1_7 )
+  )
+  Demand_2_8 (
+    P_0 ( Link_0_2 Link_0_5 Link_5_8 )
+    P_1 ( Link_1_2 Link_1_10 Link_4_10 Link_4_8 )
+    P_2 ( Link_0_2 Link_0_10 Link_4_10 Link_4_8 )
+    P_3 ( Link_0_2 Link_0_5 Link_5_10 Link_4_10 Link_4_8 )
+    P_4 ( Link_2_9 Link_7_9 Link_1_7 Link_1_10 Link_4_10 Link_4_8 )
+    P_5 ( Link_1_2 Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_8 )
+    P_6 ( Link_1_2 Link_1_10 Link_5_10 Link_5_8 )
+  )
+  Demand_2_9 (
+    P_0 ( Link_2_9 )
+    P_1 ( Link_1_2 Link_1_7 Link_7_9 )
+    P_2 ( Link_0_2 Link_0_10 Link_1_10 Link_1_7 Link_7_9 )
+    P_3 ( Link_1_2 Link_1_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 Link_7_9 )
+    P_4 ( Link_0_2 Link_0_5 Link_5_10 Link_1_10 Link_1_7 Link_7_9 )
+    P_5 ( Link_0_2 Link_0_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 Link_7_9 )
+    P_6 ( Link_1_2 Link_1_10 Link_6_10 Link_6_11 Link_7_11 Link_7_9 )
+  )
+  Demand_2_10 (
+    P_0 ( Link_0_2 Link_0_10 )
+    P_1 ( Link_1_2 Link_1_10 )
+    P_2 ( Link_0_2 Link_0_5 Link_5_10 )
+    P_3 ( Link_2_9 Link_7_9 Link_1_7 Link_1_10 )
+    P_4 ( Link_1_2 Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_10 )
+    P_5 ( Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_4_10 )
+    P_6 ( Link_2_9 Link_7_9 Link_7_11 Link_3_11 Link_3_4 Link_4_10 )
+  )
+  Demand_2_11 (
+    P_0 ( Link_1_2 Link_1_7 Link_7_11 )
+    P_1 ( Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 )
+    P_2 ( Link_1_2 Link_1_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_3 ( Link_2_9 Link_7_9 Link_7_11 )
+    P_4 ( Link_0_2 Link_0_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_5 ( Link_0_2 Link_0_5 Link_5_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_6 ( Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_4_10 Link_6_10 Link_6_11 )
+  )
+  Demand_3_4 (
+    P_0 ( Link_3_4 )
+    P_1 ( Link_3_6 Link_6_10 Link_4_10 )
+    P_2 ( Link_3_11 Link_7_11 Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 )
+    P_3 ( Link_3_6 Link_6_11 Link_7_11 Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 )
+    P_4 ( Link_3_6 Link_6_10 Link_5_10 Link_5_8 Link_4_8 )
+    P_5 ( Link_3_11 Link_6_11 Link_6_10 Link_4_10 )
+    P_6 ( Link_3_11 Link_7_11 Link_7_9 Link_2_9 Link_0_2 Link_0_5 Link_5_8 Link_4_8 )
+  )
+  Demand_3_5 (
+    P_0 ( Link_3_4 Link_4_8 Link_5_8 )
+    P_1 ( Link_3_6 Link_6_10 Link_5_10 )
+    P_2 ( Link_3_4 Link_4_10 Link_5_10 )
+    P_3 ( Link_3_11 Link_7_11 Link_1_7 Link_1_2 Link_0_2 Link_0_5 )
+    P_4 ( Link_3_6 Link_6_11 Link_7_11 Link_1_7 Link_1_2 Link_0_2 Link_0_5 )
+    P_5 ( Link_3_6 Link_6_10 Link_0_10 Link_0_5 )
+    P_6 ( Link_3_4 Link_4_10 Link_0_10 Link_0_5 )
+  )
+  Demand_3_6 (
+    P_0 ( Link_3_6 )
+    P_1 ( Link_3_4 Link_4_10 Link_6_10 )
+    P_2 ( Link_3_11 Link_6_11 )
+    P_3 ( Link_3_4 Link_4_8 Link_5_8 Link_5_10 Link_6_10 )
+    P_4 ( Link_3_4 Link_4_10 Link_1_10 Link_1_7 Link_7_11 Link_6_11 )
+    P_5 ( Link_3_11 Link_7_11 Link_1_7 Link_1_10 Link_6_10 )
+    P_6 ( Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_10 Link_6_10 )
+  )
+  Demand_3_7 (
+    P_0 ( Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 )
+    P_1 ( Link_3_6 Link_6_10 Link_1_10 Link_1_7 )
+    P_2 ( Link_3_4 Link_4_10 Link_1_10 Link_1_7 )
+    P_3 ( Link_3_4 Link_4_8 Link_5_8 Link_5_10 Link_1_10 Link_1_7 )
+    P_4 ( Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_10 Link_1_10 Link_1_7 )
+    P_5 ( Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_2_9 Link_7_9 )
+    P_6 ( Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_10 Link_6_10 Link_6_11 Link_7_11 )
+  )
+  Demand_3_8 (
+    P_0 ( Link_3_4 Link_4_8 )
+    P_1 ( Link_3_6 Link_6_10 Link_4_10 Link_4_8 )
+    P_2 ( Link_3_4 Link_4_10 Link_5_10 Link_5_8 )
+    P_3 ( Link_3_11 Link_7_11 Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_8 )
+    P_4 ( Link_3_6 Link_6_11 Link_7_11 Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_8 )
+    P_5 ( Link_3_6 Link_6_10 Link_5_10 Link_5_8 )
+    P_6 ( Link_3_4 Link_4_10 Link_0_10 Link_0_5 Link_5_8 )
+  )
+  Demand_3_9 (
+    P_0 ( Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_2_9 )
+    P_1 ( Link_3_6 Link_6_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_2 ( Link_3_4 Link_4_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_3 ( Link_3_4 Link_4_8 Link_5_8 Link_5_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_4 ( Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_10 Link_1_10 Link_1_2 Link_2_9 )
+    P_5 ( Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_9 )
+    P_6 ( Link_3_11 Link_7_11 Link_7_9 )
+  )
+  Demand_3_10 (
+    P_0 ( Link_3_4 Link_4_10 )
+    P_1 ( Link_3_6 Link_6_10 )
+    P_2 ( Link_3_4 Link_4_8 Link_5_8 Link_5_10 )
+    P_3 ( Link_3_11 Link_6_11 Link_6_10 )
+    P_4 ( Link_3_6 Link_6_11 Link_7_11 Link_1_7 Link_1_10 )
+    P_5 ( Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_10 )
+    P_6 ( Link_3_11 Link_7_11 Link_1_7 Link_1_10 )
+  )
+  Demand_3_11 (
+    P_0 ( Link_3_11 )
+    P_1 ( Link_3_6 Link_6_11 )
+    P_2 ( Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_11 )
+    P_3 ( Link_3_6 Link_6_10 Link_1_10 Link_1_7 Link_7_11 )
+    P_4 ( Link_3_4 Link_4_10 Link_6_10 Link_6_11 )
+    P_5 ( Link_3_4 Link_4_8 Link_5_8 Link_5_10 Link_6_10 Link_6_11 )
+    P_6 ( Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_10 Link_6_10 Link_6_11 )
+  )
+  Demand_4_5 (
+    P_0 ( Link_4_8 Link_5_8 )
+    P_1 ( Link_4_10 Link_5_10 )
+    P_2 ( Link_3_4 Link_3_6 Link_6_10 Link_5_10 )
+    P_3 ( Link_4_10 Link_0_10 Link_0_5 )
+    P_4 ( Link_3_4 Link_3_11 Link_7_11 Link_1_7 Link_1_2 Link_0_2 Link_0_5 )
+    P_5 ( Link_3_4 Link_3_6 Link_6_11 Link_7_11 Link_1_7 Link_1_2 Link_0_2 Link_0_5 )
+    P_6 ( Link_3_4 Link_3_6 Link_6_10 Link_0_10 Link_0_5 )
+  )
+  Demand_4_6 (
+    P_0 ( Link_3_4 Link_3_6 )
+    P_1 ( Link_4_10 Link_6_10 )
+    P_2 ( Link_3_4 Link_3_11 Link_6_11 )
+    P_3 ( Link_4_8 Link_5_8 Link_5_10 Link_6_10 )
+    P_4 ( Link_4_10 Link_1_10 Link_1_7 Link_7_11 Link_6_11 )
+    P_5 ( Link_3_4 Link_3_11 Link_7_11 Link_1_7 Link_1_10 Link_6_10 )
+    P_6 ( Link_4_8 Link_5_8 Link_0_5 Link_0_10 Link_6_10 )
+  )
+  Demand_4_7 (
+    P_0 ( Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 )
+    P_1 ( Link_4_10 Link_1_10 Link_1_7 )
+    P_2 ( Link_4_8 Link_5_8 Link_5_10 Link_1_10 Link_1_7 )
+    P_3 ( Link_4_8 Link_5_8 Link_0_5 Link_0_10 Link_1_10 Link_1_7 )
+    P_4 ( Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_2_9 Link_7_9 )
+    P_5 ( Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_10 Link_6_10 Link_6_11 Link_7_11 )
+    P_6 ( Link_3_4 Link_3_6 Link_6_10 Link_1_10 Link_1_7 )
+  )
+  Demand_4_8 (
+    P_0 ( Link_4_8 )
+    P_1 ( Link_4_10 Link_5_10 Link_5_8 )
+    P_2 ( Link_3_4 Link_3_6 Link_6_10 Link_5_10 Link_5_8 )
+    P_3 ( Link_4_10 Link_0_10 Link_0_5 Link_5_8 )
+    P_4 ( Link_3_4 Link_3_11 Link_7_11 Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_8 )
+    P_5 ( Link_3_4 Link_3_6 Link_6_11 Link_7_11 Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_8 )
+    P_6 ( Link_3_4 Link_3_6 Link_6_10 Link_0_10 Link_0_5 Link_5_8 )
+  )
+  Demand_4_9 (
+    P_0 ( Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_2_9 )
+    P_1 ( Link_4_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_2 ( Link_4_8 Link_5_8 Link_5_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_3 ( Link_4_8 Link_5_8 Link_0_5 Link_0_10 Link_1_10 Link_1_2 Link_2_9 )
+    P_4 ( Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_9 )
+    P_5 ( Link_3_4 Link_3_6 Link_6_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_6 ( Link_4_10 Link_1_10 Link_1_2 Link_2_9 )
+  )
+  Demand_4_10 (
+    P_0 ( Link_4_10 )
+    P_1 ( Link_3_4 Link_3_6 Link_6_10 )
+    P_2 ( Link_4_8 Link_5_8 Link_5_10 )
+    P_3 ( Link_3_4 Link_3_11 Link_6_11 Link_6_10 )
+    P_4 ( Link_3_4 Link_3_6 Link_6_11 Link_7_11 Link_1_7 Link_1_10 )
+    P_5 ( Link_4_8 Link_5_8 Link_0_5 Link_0_10 )
+    P_6 ( Link_3_4 Link_3_11 Link_7_11 Link_1_7 Link_1_10 )
+  )
+  Demand_4_11 (
+    P_0 ( Link_3_4 Link_3_11 )
+    P_1 ( Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_11 )
+    P_2 ( Link_3_4 Link_3_6 Link_6_11 )
+    P_3 ( Link_4_10 Link_6_10 Link_6_11 )
+    P_4 ( Link_4_8 Link_5_8 Link_5_10 Link_6_10 Link_6_11 )
+    P_5 ( Link_4_8 Link_5_8 Link_0_5 Link_0_10 Link_6_10 Link_6_11 )
+    P_6 ( Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_2_9 Link_7_9 Link_7_11 )
+  )
+  Demand_5_6 (
+    P_0 ( Link_5_8 Link_4_8 Link_3_4 Link_3_6 )
+    P_1 ( Link_5_10 Link_6_10 )
+    P_2 ( Link_5_8 Link_4_8 Link_4_10 Link_6_10 )
+    P_3 ( Link_5_8 Link_4_8 Link_3_4 Link_3_11 Link_6_11 )
+    P_4 ( Link_0_5 Link_0_10 Link_6_10 )
+    P_5 ( Link_5_10 Link_4_10 Link_3_4 Link_3_6 )
+    P_6 ( Link_5_8 Link_4_8 Link_4_10 Link_1_10 Link_1_7 Link_7_11 Link_6_11 )
+  )
+  Demand_5_7 (
+    P_0 ( Link_0_5 Link_0_2 Link_1_2 Link_1_7 )
+    P_1 ( Link_5_10 Link_1_10 Link_1_7 )
+    P_2 ( Link_0_5 Link_0_10 Link_1_10 Link_1_7 )
+    P_3 ( Link_0_5 Link_0_2 Link_2_9 Link_7_9 )
+    P_4 ( Link_0_5 Link_0_2 Link_1_2 Link_1_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 )
+    P_5 ( Link_5_8 Link_4_8 Link_4_10 Link_1_10 Link_1_7 )
+    P_6 ( Link_5_10 Link_0_10 Link_0_2 Link_1_2 Link_1_7 )
+  )
+  Demand_5_8 (
+    P_0 ( Link_5_8 )
+    P_1 ( Link_5_10 Link_4_10 Link_4_8 )
+    P_2 ( Link_0_5 Link_0_10 Link_4_10 Link_4_8 )
+    P_3 ( Link_5_10 Link_6_10 Link_3_6 Link_3_4 Link_4_8 )
+    P_4 ( Link_0_5 Link_0_2 Link_1_2 Link_1_10 Link_4_10 Link_4_8 )
+    P_5 ( Link_0_5 Link_0_10 Link_6_10 Link_3_6 Link_3_4 Link_4_8 )
+    P_6 ( Link_5_10 Link_1_10 Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_8 )
+  )
+  Demand_5_9 (
+    P_0 ( Link_0_5 Link_0_2 Link_2_9 )
+    P_1 ( Link_5_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_2 ( Link_0_5 Link_0_10 Link_1_10 Link_1_2 Link_2_9 )
+    P_3 ( Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_9 )
+    P_4 ( Link_5_8 Link_4_8 Link_4_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_5 ( Link_5_10 Link_1_10 Link_1_2 Link_2_9 )
+    P_6 ( Link_5_10 Link_0_10 Link_0_2 Link_1_2 Link_1_7 Link_7_9 )
+  )
+  Demand_5_10 (
+    P_0 ( Link_5_10 )
+    P_1 ( Link_0_5 Link_0_10 )
+    P_2 ( Link_5_8 Link_4_8 Link_4_10 )
+    P_3 ( Link_0_5 Link_0_2 Link_1_2 Link_1_10 )
+    P_4 ( Link_5_8 Link_4_8 Link_3_4 Link_3_6 Link_6_10 )
+    P_5 ( Link_0_5 Link_0_2 Link_2_9 Link_7_9 Link_1_7 Link_1_10 )
+    P_6 ( Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_10 )
+  )
+  Demand_5_11 (
+    P_0 ( Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_11 )
+    P_1 ( Link_5_8 Link_4_8 Link_3_4 Link_3_11 )
+    P_2 ( Link_0_5 Link_0_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_3 ( Link_0_5 Link_0_2 Link_2_9 Link_7_9 Link_7_11 )
+    P_4 ( Link_0_5 Link_0_2 Link_1_2 Link_1_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_5 ( Link_5_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_6 ( Link_5_8 Link_4_8 Link_4_10 Link_6_10 Link_6_11 )
+  )
+  Demand_6_7 (
+    P_0 ( Link_3_6 Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 )
+    P_1 ( Link_6_10 Link_1_10 Link_1_7 )
+    P_2 ( Link_3_6 Link_3_11 Link_7_11 )
+    P_3 ( Link_3_6 Link_3_4 Link_4_10 Link_1_10 Link_1_7 )
+    P_4 ( Link_3_6 Link_3_4 Link_4_8 Link_5_8 Link_5_10 Link_1_10 Link_1_7 )
+    P_5 ( Link_3_6 Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_10 Link_1_10 Link_1_7 )
+    P_6 ( Link_3_6 Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_2_9 Link_7_9 )
+  )
+  Demand_6_8 (
+    P_0 ( Link_3_6 Link_3_4 Link_4_8 )
+    P_1 ( Link_6_10 Link_4_10 Link_4_8 )
+    P_2 ( Link_3_6 Link_3_11 Link_7_11 Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_8 )
+    P_3 ( Link_3_6 Link_3_4 Link_4_10 Link_5_10 Link_5_8 )
+    P_4 ( Link_6_11 Link_3_11 Link_3_4 Link_4_8 )
+    P_5 ( Link_6_10 Link_5_10 Link_5_8 )
+    P_6 ( Link_6_10 Link_4_10 Link_3_4 Link_3_11 Link_7_11 Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_8 )
+  )
+  Demand_6_9 (
+    P_0 ( Link_3_6 Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_2_9 )
+    P_1 ( Link_6_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_2 ( Link_3_6 Link_3_11 Link_7_11 Link_7_9 )
+    P_3 ( Link_3_6 Link_3_4 Link_4_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_4 ( Link_3_6 Link_3_4 Link_4_8 Link_5_8 Link_5_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_5 ( Link_3_6 Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_10 Link_1_10 Link_1_2 Link_2_9 )
+    P_6 ( Link_3_6 Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_9 )
+  )
+  Demand_6_10 (
+    P_0 ( Link_6_10 )
+    P_1 ( Link_3_6 Link_3_4 Link_4_10 )
+    P_2 ( Link_6_11 Link_3_11 Link_3_4 Link_4_10 )
+    P_3 ( Link_3_6 Link_3_11 Link_7_11 Link_1_7 Link_1_10 )
+    P_4 ( Link_3_6 Link_3_4 Link_4_8 Link_5_8 Link_5_10 )
+    P_5 ( Link_6_11 Link_7_11 Link_1_7 Link_1_10 )
+    P_6 ( Link_6_11 Link_3_11 Link_3_4 Link_4_8 Link_5_8 Link_5_10 )
+  )
+  Demand_6_11 (
+    P_0 ( Link_6_11 )
+    P_1 ( Link_3_6 Link_3_11 )
+    P_2 ( Link_6_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_3 ( Link_3_6 Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_11 )
+    P_4 ( Link_6_10 Link_1_10 Link_1_7 Link_7_11 )
+    P_5 ( Link_6_10 Link_4_10 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_11 )
+    P_6 ( Link_3_6 Link_3_4 Link_4_10 Link_1_10 Link_1_7 Link_7_11 )
+  )
+  Demand_7_8 (
+    P_0 ( Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_8 )
+    P_1 ( Link_7_9 Link_2_9 Link_0_2 Link_0_5 Link_5_8 )
+    P_2 ( Link_1_7 Link_1_10 Link_4_10 Link_4_8 )
+    P_3 ( Link_1_7 Link_1_2 Link_0_2 Link_0_10 Link_4_10 Link_4_8 )
+    P_4 ( Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_10 Link_4_10 Link_4_8 )
+    P_5 ( Link_7_11 Link_3_11 Link_3_4 Link_4_8 )
+    P_6 ( Link_7_9 Link_2_9 Link_1_2 Link_1_10 Link_4_10 Link_4_8 )
+  )
+  Demand_7_9 (
+    P_0 ( Link_7_9 )
+    P_1 ( Link_1_7 Link_1_2 Link_2_9 )
+    P_2 ( Link_7_11 Link_3_11 Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_2_9 )
+    P_3 ( Link_1_7 Link_1_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_4 ( Link_7_11 Link_6_11 Link_3_6 Link_3_4 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_2_9 )
+    P_5 ( Link_7_11 Link_3_11 Link_3_6 Link_6_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_6 ( Link_7_11 Link_3_11 Link_3_4 Link_4_10 Link_0_10 Link_0_2 Link_2_9 )
+  )
+  Demand_7_10 (
+    P_0 ( Link_1_7 Link_1_10 )
+    P_1 ( Link_7_9 Link_2_9 Link_0_2 Link_0_10 )
+    P_2 ( Link_1_7 Link_1_2 Link_0_2 Link_0_10 )
+    P_3 ( Link_7_11 Link_3_11 Link_3_4 Link_4_10 )
+    P_4 ( Link_7_9 Link_2_9 Link_1_2 Link_1_10 )
+    P_5 ( Link_7_9 Link_2_9 Link_0_2 Link_0_5 Link_5_10 )
+    P_6 ( Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_10 )
+  )
+  Demand_7_11 (
+    P_0 ( Link_7_11 )
+    P_1 ( Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 )
+    P_2 ( Link_7_9 Link_2_9 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 )
+    P_3 ( Link_1_7 Link_1_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_4 ( Link_1_7 Link_1_2 Link_0_2 Link_0_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_5 ( Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_6 ( Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_4_10 Link_6_10 Link_6_11 )
+  )
+  Demand_8_9 (
+    P_0 ( Link_5_8 Link_0_5 Link_0_2 Link_2_9 )
+    P_1 ( Link_4_8 Link_4_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_2 ( Link_5_8 Link_5_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_3 ( Link_5_8 Link_0_5 Link_0_10 Link_1_10 Link_1_2 Link_2_9 )
+    P_4 ( Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_9 )
+    P_5 ( Link_4_8 Link_3_4 Link_3_6 Link_6_10 Link_0_10 Link_0_2 Link_2_9 )
+    P_6 ( Link_4_8 Link_4_10 Link_1_10 Link_1_2 Link_2_9 )
+  )
+  Demand_8_10 (
+    P_0 ( Link_4_8 Link_4_10 )
+    P_1 ( Link_5_8 Link_5_10 )
+    P_2 ( Link_4_8 Link_3_4 Link_3_6 Link_6_10 )
+    P_3 ( Link_5_8 Link_0_5 Link_0_10 )
+    P_4 ( Link_4_8 Link_3_4 Link_3_11 Link_6_11 Link_6_10 )
+    P_5 ( Link_4_8 Link_3_4 Link_3_6 Link_6_11 Link_7_11 Link_1_7 Link_1_10 )
+    P_6 ( Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_10 )
+  )
+  Demand_8_11 (
+    P_0 ( Link_4_8 Link_3_4 Link_3_11 )
+    P_1 ( Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_11 )
+    P_2 ( Link_4_8 Link_4_10 Link_6_10 Link_6_11 )
+    P_3 ( Link_4_8 Link_3_4 Link_3_6 Link_6_11 )
+    P_4 ( Link_5_8 Link_5_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_5 ( Link_5_8 Link_0_5 Link_0_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_6 ( Link_5_8 Link_0_5 Link_0_2 Link_2_9 Link_7_9 Link_7_11 )
+  )
+  Demand_9_10 (
+    P_0 ( Link_2_9 Link_0_2 Link_0_10 )
+    P_1 ( Link_7_9 Link_1_7 Link_1_10 )
+    P_2 ( Link_2_9 Link_1_2 Link_1_10 )
+    P_3 ( Link_2_9 Link_0_2 Link_0_5 Link_5_10 )
+    P_4 ( Link_7_9 Link_7_11 Link_3_11 Link_3_4 Link_4_10 )
+    P_5 ( Link_7_9 Link_1_7 Link_1_2 Link_0_2 Link_0_10 )
+    P_6 ( Link_2_9 Link_1_2 Link_1_7 Link_7_11 Link_3_11 Link_3_4 Link_4_10 )
+  )
+  Demand_9_11 (
+    P_0 ( Link_7_9 Link_7_11 )
+    P_1 ( Link_2_9 Link_1_2 Link_1_7 Link_7_11 )
+    P_2 ( Link_7_9 Link_1_7 Link_1_2 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 )
+    P_3 ( Link_2_9 Link_0_2 Link_0_5 Link_5_8 Link_4_8 Link_3_4 Link_3_11 )
+    P_4 ( Link_2_9 Link_1_2 Link_1_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_5 ( Link_7_9 Link_1_7 Link_1_10 Link_4_10 Link_3_4 Link_3_11 )
+    P_6 ( Link_7_9 Link_1_7 Link_1_2 Link_0_2 Link_0_10 Link_4_10 Link_3_4 Link_3_11 )
+  )
+  Demand_10_11 (
+    P_0 ( Link_4_10 Link_3_4 Link_3_11 )
+    P_1 ( Link_6_10 Link_6_11 )
+    P_2 ( Link_4_10 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_1_2 Link_1_7 Link_7_11 )
+    P_3 ( Link_4_10 Link_3_4 Link_3_6 Link_6_11 )
+    P_4 ( Link_1_10 Link_1_7 Link_7_11 )
+    P_5 ( Link_6_10 Link_3_6 Link_3_11 )
+    P_6 ( Link_4_10 Link_4_8 Link_5_8 Link_0_5 Link_0_2 Link_2_9 Link_7_9 Link_7_11 )
+  )
+)

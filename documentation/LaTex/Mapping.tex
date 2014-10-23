@@ -1,0 +1,70 @@
+\section{Mapping of Demands on Resources}
+
+\subsection{How Demands are Mapped to Resources and Vice Versa}
+Mappings between demands and resources are established by the mapping algorithms. 
+For each demand, the algorithms determine the resources fulfilling it.
+
+To create a mapping between a demand an a resource the following steps ar needed:
+\begin{enumerate}
+	\item The resource must accept the demand. In this step, it is determined if the resource and demand are compatible.
+	\item The resource must fulfill the demand. This assures that the resource is sufficient for the demand's requirements.
+	\item Finally, the demand occupies the resource. In this step, the free capacity of the resource is reduced and a mapping between the two constraints is created.
+\end{enumerate}
+To remove an existing mapping, the demand must free the occupied resource.
+
+
+\subsection{How to Deal with Demand-Resource Mappings}
+\begin{itemize}
+	\item Access
+	\begin{itemize}
+		\item Get occupied resource from a demand: 
+		\begin{lstlisting}
+AbstractDemand d;
+for (vnreal.mapping.Mapping m : d.getMappings()) {
+  AbstractResource r = m.getResource();
+ 
+  // ...
+}
+		\end{lstlisting}
+		\item Get occupying demands of a resource: 
+			\begin{lstlisting}
+AbstractResource r;
+for (vnreal.mapping.Mapping m : r.getMappings()) {
+  AbstractDemand d = m.getDemand();
+ 
+  // ...
+}
+		\end{lstlisting}
+		\item Removal
+		\begin{lstlisting}
+AbstractDemand d;
+AbstractResource r;
+ 
+d.getMapping(r).unregister(); // unlinks both elements		
+		\end{lstlisting}
+	\end{itemize}
+\end{itemize}
+
+
+\subsection{Example for occupying and freeing resources}
+To occupy a resource for a virtual network, the \textsl{occupy()} method of the corresponding Demand gets called. 
+The \textsl{occupy()} method retrieves the occupy visitor from the Resource, which then visits the Resource.
+
+First it checks if the Resource is able to fulfill the Demand by calling the \textsl{fulfills()} method of the Resource. 
+The \textsl{fulfills()} method retrieves the fulfills visitor from the Demand, which then visits the Resource and 
+returns if it is able to fulfill the demand. 
+This result gets forwarded to the occupy visitor, which then creates a new Mapping to occupy the demanded resource. 
+The Mapping registers itself at the Demand and the Resource.
+
+At last the occupy visitor returns if the resource occupation was successful. 
+This results gets forwarded to the caller of the \textsl{occupy()} method.
+
+
+\textbf{Missing Pucture... occupy pdf}
+
+To free a resource, which is no longer needed, the \textsl{free()} method of the corresponding Demand gets called. 
+The \textsl{free()} method retrieves the free visitor from the Resource, which then visits the Resource.
+
+The free visitor takes the corresponding mapping and advises it to unregister itself from the Demand and the Resource. If this was successful, the Resource is freed and the result gets forwarded to the Demand and from there to the caller of the \textsl{free()} method.
+
+\textbf{Missing Pucture... free pdf}

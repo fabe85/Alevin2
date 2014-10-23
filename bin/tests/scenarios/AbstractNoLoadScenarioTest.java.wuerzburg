@@ -1,0 +1,416 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Copyright (C) 2010-2011, The VNREAL Project Team.
+ * 
+ * This work has been funded by the European FP7
+ * Network of Excellence "Euro-NF" (grant agreement no. 216366)
+ * through the Specific Joint Developments and Experiments Project
+ * "Virtual Network Resource Embedding Algorithms" (VNREAL). 
+ *
+ * The VNREAL Project Team consists of members from:
+ * - University of Wuerzburg, Germany
+ * - Universitat Politecnica de Catalunya, Spain
+ * - University of Passau, Germany
+ * See the file AUTHORS for details and contact information.
+ * 
+ * This file is part of ALEVIN (ALgorithms for Embedding VIrtual Networks).
+ *
+ * ALEVIN is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License Version 3 or later
+ * (the "GPL"), or the GNU Lesser General Public License Version 3 or later
+ * (the "LGPL") as published by the Free Software Foundation.
+ *
+ * ALEVIN is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * or the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License and
+ * GNU Lesser General Public License along with ALEVIN; see the file
+ * COPYING. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * ***** END LICENSE BLOCK ***** */
+package tests.scenarios.jisa;
+
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+
+import mulavito.graph.generators.WaxmanGraphGenerator;
+import mulavito.utils.distributions.UniformStream;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+import vnreal.ToolKit;
+import vnreal.demands.BandwidthDemand;
+import vnreal.demands.CpuDemand;
+import vnreal.network.Network;
+import vnreal.network.NetworkStack;
+import vnreal.network.substrate.SubstrateLink;
+import vnreal.network.substrate.SubstrateNetwork;
+import vnreal.network.substrate.SubstrateNode;
+import vnreal.network.virtual.VirtualLink;
+import vnreal.network.virtual.VirtualNetwork;
+import vnreal.network.virtual.VirtualNode;
+import vnreal.resources.BandwidthResource;
+import vnreal.resources.CpuResource;
+import vnreal.resources.MultiCoreEnergyResource;
+import vnreal.resources.StaticEnergyResource;
+
+/**
+ * @author Michael Duelli
+ * @author Daniel Schlosser
+ * @author Vlad Singeorzan
+ * @author Michael Till Beck
+ */
+@RunWith(Parameterized.class)
+public abstract class AbstractNoLoadScenarioTest {
+	/** A flag which controls automated parallelization based on file checking */
+	protected boolean allowParallelRuns = false;
+
+	private final static int numScenarios = 10;
+
+	/** # of runs with different random seeds if algorithm is non-deterministic */
+	protected int numRunsPerScenario = 10;
+
+	private static final int[] numSNodesArray = { 100 };
+
+	private static final int[] numVNetsArray = { 5 };
+
+	protected static final int[] numVNodesPerVNetArray = { 10 };
+
+	private static final double[] maxCPUresArray = { 100.0 };
+	private static final double[] maxBWresArray = { 100.0 };
+
+	private static final double[] alphaArray = { 0.5 };
+	private static final double[] betaArray = { 0.5 };
+	
+	private static final int minConsumption = 100;
+	private static final int maxConsumption = 500;
+	private static final int maxCPUResource = 100;
+	private static final int maxCPUDemand = 50;
+	private static final int maxBandwidthResource = 100;
+	private static final int maxBandwidthDemand = 50;
+
+	protected static class ScenarioData {
+		public final int numSNodes;
+		public final int numVNets;
+		public final int numVNodesPerVNet;
+		public final double maxCPUres;
+		public final double maxBWres;
+		public final double alpha;
+		public final double beta;
+
+		ScenarioData(int numSNodes, int numVNets,
+				int numVNodesPerVNet, double maxCPUres, double maxBWres,
+				double alpha, double beta) {
+			this.numSNodes = numSNodes;
+			this.numVNets = numVNets;
+			this.numVNodesPerVNet = numVNodesPerVNet;
+			this.maxCPUres = maxCPUres;
+			this.maxBWres = maxBWres;
+			this.alpha = alpha;
+			this.beta = beta;
+		}
+	}
+
+	@Parameters
+	public static Collection<ScenarioData[]> data() {
+		List<ScenarioData[]> data = new LinkedList<ScenarioData[]>();
+		ScenarioData sd = null;
+
+		// Generate scenarios
+		for (double beta : betaArray)
+			for (double alpha : alphaArray)
+				for (double maxBWres : maxBWresArray)
+					for (double maxCPUres : maxCPUresArray)
+						for (int numVNodesPerVNet : numVNodesPerVNetArray)
+							for (int numVNets : numVNetsArray)
+								for (int numSNodes : numSNodesArray)
+										sd = new ScenarioData(numSNodes,
+												numVNets, numVNodesPerVNet,
+												maxCPUres, maxBWres, alpha,
+												beta);
+										data.add(new ScenarioData[] { sd });
+
+		return data;
+	}
+
+	protected String scenario_suffix;
+
+	@Test
+	public void runScenario() {
+		// Generate scenario
+		// FIXME UniformStream.setSeed(0);
+		for (int i = 0; i < numScenarios; i++) {
+			// Create new empty network stack.
+			ToolKit.getScenario().setNetworkStack(
+					new NetworkStack(new SubstrateNetwork(),
+							new LinkedList<VirtualNetwork>()));
+
+			final String suffix = data.numSNodes + "_" + data.numVNets + "_"
+			+ data.numVNodesPerVNet + "_" + i + "_" + 0.0;
+
+//			String basePath = System.getProperty("user.home") + File.separator + getName();
+//			if (!new File(basePath).exists()) {
+//				new File(basePath).mkdir();
+//			}
+
+//			final String template_output = basePath
+//			+ File.separator + "Scenario-template_" + suffix + ".xml";
+
+			// Parallelization:
+			// Check if another instance of this JUnit already has created the
+			// template. If so, we can skip the template creation.
+//			if (!allowParallelRuns || !(new File(template_output)).exists()) {
+				// FIXME UniformStream.setSeed(i);
+//				generate(data.rho, data.numSNodes, data.numVNets,
+//						data.numVNodesPerVNet, data.maxCPUres, data.maxBWres,
+//						data.alpha, data.beta, suffix, basePath);
+				generate(data.numSNodes, data.numVNets,
+						data.numVNodesPerVNet,
+						data.alpha, data.beta);
+
+				generateAdditionalConstraints();
+
+//				try {
+//					// Name schema:
+//					// Scenario-template_[size of substrate network]_[number of
+//					// virtual networks]_[number of nodes per network]_[number
+//					// for generation]_[mean load].xml
+//					ScenarioExporter exporter = new ScenarioExporter(
+//							template_output);
+//					exporter.write();
+//				} catch (FileNotFoundException e) {
+//					e.printStackTrace();
+//				}
+//			} else
+//				System.out.println("Skip template gen. " + template_output);
+
+			// Override abstract method to run algorithm.
+			for (int j = 0; j < numRunsPerScenario; j++) {
+				scenario_suffix = suffix + "_" + j;
+				System.out.println("Run " + scenario_suffix);
+
+//				final String scenario_output = basePath
+//				+ File.separator + "Scenario-mapped_" + scenario_suffix
+//				+ ".xml";
+
+				// Parallelization:
+				// Check if another instance of this JUnit might have created
+				// this output file already. If so, just continue with the
+				// next test run.
+//				if (allowParallelRuns && new File(scenario_output).exists()) {
+//					System.out.println("Skip mapping of " + scenario_output);
+//					continue;
+//				}
+
+				// Reset previous mappings
+				ToolKit.getScenario().getNetworkStack().clearMappings();
+
+				long startTime = System.currentTimeMillis();
+				runAlgorithm(); // abstract method
+				long elapsedTime = System.currentTimeMillis() - startTime;
+
+				evaluate(scenario_suffix, elapsedTime);
+
+//				try {
+//					// Name schema
+//					// Scenario-mapped_[size of substrate network]_[number of
+//					// virtual networks]_[number of nodes per network]_[number
+//					// for generation]_[mean load].xml
+//					ScenarioExporter exporter = new ScenarioExporter(
+//							scenario_output);
+//					exporter.write();
+//				} catch (FileNotFoundException e) {
+//					e.printStackTrace();
+//				}
+			}
+		}
+	}
+
+	protected void evaluate(String scenario_suffix, long elapsedTime) {
+		// default, does nothing
+	}
+
+	protected void generateAdditionalConstraints() {
+		// default, does nothing
+	}
+
+	protected String getName() {
+		return getClass().getSimpleName();
+	}
+
+	// N.B. Made abstract to be able to parallelize algorithms.
+	protected abstract void runAlgorithm();
+
+	protected final ScenarioData data;
+
+	protected AbstractNoLoadScenarioTest(ScenarioData data) {
+		this.data = data;
+	}
+
+
+	/**
+	 * A method to generate a scenario with the specified parameters
+	 * 
+	 * @param rho
+	 *            The load of the substrate. 0 <= rho <= 1
+	 * @param numSNodes
+	 *            The number of substrate nodes.
+	 * @param numVNets
+	 *            The number of virtual networks.
+	 * @param numVNodesPerVNet
+	 *            The number of nodes per virtual network.
+	 * @param maxCPUres
+	 *            The maximum value for the CPU resources.
+	 * @param maxBWres
+	 *            The maximum value for the BW resources.
+	 * @param alpha
+	 *            Alpha parameter for the {@link WaxmanGraphGenerator}. alpha >
+	 *            0
+	 * @param beta
+	 *            Beta parameter for the {@link WaxmanGraphGenerator}. beta <= 1
+	 * @param suffix
+	 */
+	private void generate(int numSNodes, int numVNets,
+			int numVNodesPerVNet,
+			double alpha, double beta) {
+
+		WaxmanGraphGenerator<SubstrateNode, SubstrateLink> sGenerator = new WaxmanGraphGenerator<SubstrateNode, SubstrateLink>(
+				alpha, beta, false);
+		WaxmanGraphGenerator<VirtualNode, VirtualLink> vGenerator = new WaxmanGraphGenerator<VirtualNode, VirtualLink>(
+				alpha, beta, false);
+
+		SubstrateNetwork sNetwork = new SubstrateNetwork();
+		for (int i = 0; i < numSNodes; ++i) {
+			SubstrateNode sn = new SubstrateNode();
+			sNetwork.addVertex(sn);
+		}
+		sGenerator.generate(sNetwork);
+
+		List<VirtualNetwork> vNetworks = new LinkedList<VirtualNetwork>();
+		int layer = 1;
+		for (int i = 0; i < numVNets; ++i) {
+			VirtualNetwork vNetwork = new VirtualNetwork(layer);
+			for (int n = 0; n < numVNodesPerVNet; ++n) {
+				VirtualNode vn = new VirtualNode(layer);
+
+				vNetwork.addVertex(vn);
+			}
+			vGenerator.generate(vNetwork);
+			vNetworks.add(vNetwork);
+		}
+		
+		NetworkStack stack = new NetworkStack(sNetwork, vNetworks);
+		
+		
+		generateCPUResourcesAndDemands(stack, maxCPUResource, maxCPUDemand);
+		generateBandwidthResourceAndDemands(stack, maxBandwidthResource, maxBandwidthDemand);
+		
+		ToolKit.getScenario().setNetworkStack(stack);
+	}
+	
+	public abstract void generateCPUResourcesAndDemands(NetworkStack stack,
+			double maxResourceCPU, double maxDemandCPU);
+
+	public static void generateRandomCPUResourcesAndDemands(NetworkStack stack,
+			double maxResourceCPU, double maxDemandCPU) {
+		UniformStream stream = new UniformStream();
+
+		for (SubstrateNode n : stack.getSubstrate().getVertices()) {
+			CpuResource cpu = new CpuResource(n);
+			cpu.setCycles(Math.floor(stream.nextDouble() * maxResourceCPU));
+			n.add(cpu);
+		}
+
+		boolean substrate = true;
+		for (Network<?, ?, ?> aNetwork : stack) {
+			if (substrate) {
+				substrate = false;
+				continue;
+			}
+
+			VirtualNetwork vNetwork = (VirtualNetwork) aNetwork;
+			for (VirtualNode n : vNetwork.getVertices()) {
+				CpuDemand cpu = new CpuDemand(n);
+				cpu.setDemandedCycles(Math.floor(stream.nextDouble()
+						* maxDemandCPU));
+				n.add(cpu);
+			}
+		}
+	}
+	
+	public abstract void generateBandwidthResourceAndDemands(
+			NetworkStack stack, double maxResourceBandwidth,
+			double maxDemandBandwidth);
+
+	public static void generateRandomBandwidthResourceAndDemands(
+			NetworkStack stack, double maxResourceBandwidth,
+			double maxDemandBandwidth) {
+		UniformStream stream = new UniformStream();
+
+		for (SubstrateLink l : stack.getSubstrate().getEdges()) {
+			BandwidthResource bw = new BandwidthResource(l);
+			bw.setBandwidth(Math.floor(stream.nextDouble()
+					* maxResourceBandwidth));
+			l.add(bw);
+		}
+
+		boolean substrate = true;
+		for (Network<?, ?, ?> aNetwork : stack) {
+			if (substrate) {
+				substrate = false;
+				continue;
+			}
+
+			VirtualNetwork vNetwork = (VirtualNetwork) aNetwork;
+			for (VirtualLink l : vNetwork.getEdges()) {
+				BandwidthDemand bw = new BandwidthDemand(l);
+				bw.setDemandedBandwidth(Math.floor(stream.nextDouble()
+						* maxDemandBandwidth));
+				l.add(bw);
+			}
+		}
+	}
+	
+	public static void generateStaticEnergyConsumptionResources(NetworkStack stack,
+			int consumption) {
+		for (SubstrateNode n : stack.getSubstrate().getVertices()) {
+			StaticEnergyResource r = new StaticEnergyResource(
+					n, consumption);
+
+			n.add(r);
+		}
+	}
+
+	public static void generateRandomStaticEnergyConsumptionResources() {
+		NetworkStack stack = ToolKit.getScenario().getNetworkStack();
+		UniformStream stream = new UniformStream();
+
+		for (SubstrateNode n : stack.getSubstrate().getVertices()) {
+			int rnd = (int) (stream.nextDouble() * (maxConsumption - minConsumption))
+			+ minConsumption;
+			StaticEnergyResource r = new StaticEnergyResource(
+					n, rnd);
+
+			n.add(r);
+		}
+	}
+
+	public static void generateMultiCoreEnergyConsumptionResources(
+			NetworkStack stack, int idleConsumption,
+			int additionalConsumptionPerCore, int numberOfCores) {
+
+		for (SubstrateNode n : stack.getSubstrate().getVertices()) {
+			MultiCoreEnergyResource r = new MultiCoreEnergyResource(n,
+					idleConsumption,
+					additionalConsumptionPerCore, numberOfCores);
+
+			n.add(r);
+		}
+	}
+
+}

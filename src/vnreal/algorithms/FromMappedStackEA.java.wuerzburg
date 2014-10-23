@@ -1,0 +1,1667 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Copyright (C) 2010-2011, The VNREAL Project Team.
+ * 
+ * This work has been funded by the European FP7
+ * Network of Excellence "Euro-NF" (grant agreement no. 216366)
+ * through the Specific Joint Developments and Experiments Project
+ * "Virtual Network Resource Embedding Algorithms" (VNREAL). 
+ *
+ * The VNREAL Project Team consists of members from:
+ * - University of Wuerzburg, Germany
+ * - Universitat Politecnica de Catalunya, Spain
+ * - University of Passau, Germany
+ * See the file AUTHORS for details and contact information.
+ * 
+ * This file is part of ALEVIN (ALgorithms for Embedding VIrtual Networks).
+ *
+ * ALEVIN is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License Version 3 or later
+ * (the "GPL"), or the GNU Lesser General Public License Version 3 or later
+ * (the "LGPL") as published by the Free Software Foundation.
+ *
+ * ALEVIN is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * or the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License and
+ * GNU Lesser General Public License along with ALEVIN; see the file
+ * COPYING. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * ***** END LICENSE BLOCK ***** */
+package vnreal.algorithms;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import vnreal.algorithms.utils.Consts;
+import vnreal.algorithms.utils.EnergyTransformedLinkWeight;
+import vnreal.algorithms.utils.EppsteinAlgorithm;
+import vnreal.algorithms.utils.LpSolver;
+import vnreal.algorithms.utils.MiscelFunctions;
+import vnreal.algorithms.utils.NodeLinkAssignation;
+import vnreal.algorithms.utils.TransformedLinkWeightForNodes;
+import vnreal.algorithms.utils.YenAlgorithm;
+import vnreal.algorithms.utils.dataSolverFile;
+import vnreal.demands.AbstractDemand;
+import vnreal.demands.BandwidthDemand;
+import vnreal.demands.CpuDemand;
+import vnreal.hiddenhopmapping.BandwidthCpuHiddenHopMapping;
+import vnreal.mapping.Mapping;
+import vnreal.network.Network;
+import vnreal.network.NetworkStack;
+import vnreal.network.substrate.SubstrateLink;
+import vnreal.network.substrate.SubstrateNetwork;
+import vnreal.network.substrate.SubstrateNode;
+import vnreal.network.virtual.VirtualLink;
+import vnreal.network.virtual.VirtualNetwork;
+import vnreal.network.virtual.VirtualNode;
+import vnreal.resources.AbstractResource;
+import vnreal.resources.BandwidthResource;
+import vnreal.resources.CpuResource;
+
+public class FromMappedStackEA {
+	private NetworkStack stack;
+
+	public FromMappedStackEA(NetworkStack mappedStack) {
+		stack = mappedStack;
+	}
+
+	private List<SubstrateLink> findLinksNumberDemand(int number) {
+		List<SubstrateLink> subsLinksOneDem = new LinkedList<SubstrateLink>();
+		for (SubstrateLink tempSlink : stack.getSubstrate().getEdges()) {
+			for (AbstractResource res : tempSlink) {
+				if (res instanceof BandwidthResource) {
+					if (res.getMappings().size() == number)
+						subsLinksOneDem.add(tempSlink);
+
+				}
+				break;
+			}
+		}
+		return subsLinksOneDem;
+	}
+
+	private List<SubstrateLink> findLinksInactivesDemand(SubstrateNode tempSnode) {
+		List<SubstrateLink> subsLinksOneDem = new LinkedList<SubstrateLink>();
+		boolean isForwardingNode;
+		for (AbstractResource res : tempSnode) {
+			if (res instanceof CpuResource) {
+				if (res.getMappings().isEmpty()) {
+					for (SubstrateLink tempSlink : stack.getSubstrate()
+							.getIncidentEdges(tempSnode))
+						subsLinksOneDem.add(tempSlink);
+
+				} else {
+					isForwardingNode = false;
+					for (Mapping mapp : res.getMappings()) {
+						if (mapp.getDemand().getOwner() instanceof VirtualNode) {
+							isForwardingNode = true;
+							break;
+						}
+					}
+					if (!isForwardingNode) {
+						for (SubstrateLink tempSlink : stack.getSubstrate()
+								.getIncidentEdges(tempSnode))
+							subsLinksOneDem.add(tempSlink);
+					}
+				}
+				break;
+			}
+		}
+
+		return subsLinksOneDem;
+	}
+
+	public void remapVnetsKsp() {
+		List<SubstrateLink> subsLinksOneDem = findLinksNumberDemand(1);
+
+		VirtualLink tmpVlink = null;
+		SubstrateNode srcSnode = null, dstSnode = null;
+		VirtualNode srcVnode, dstVnode;
+		VirtualNetwork vNet;
+		List<AbstractDemand> demList = null;
+		List<AbstractResource> resList = null;
+		List<Mapping> mappingsCopy = new ArrayList<Mapping>();
+		for (SubstrateLink tempLink : subsLinksOneDem) {
+			for (AbstractResource res : tempLink)
+				if (res instanceof BandwidthResource) {
+					mappingsCopy = new ArrayList<Mapping>();
+					mappingsCopy.addAll(res.getMappings());
+					if (mappingsCopy.size() == 1)
+						for (Mapping map : mappingsCopy) {
+							tmpVlink = (VirtualLink) map.getDemand().getOwner();
+							vNet = getVirtualNet(tmpVlink.getLayer());
+							srcVnode = vNet.getSource(tmpVlink);
+							dstVnode = vNet.getDest(tmpVlink);
+
+							for (AbstractDemand dem : srcVnode)
+								if (dem instanceof CpuDemand)
+									for (Mapping mapp : dem.getMappings())
+										srcSnode = (SubstrateNode) mapp
+												.getResource().getOwner();
+
+							for (AbstractDemand dem : dstVnode)
+								if (dem instanceof CpuDemand)
+									for (Mapping mapp : dem.getMappings())
+										dstSnode = (SubstrateNode) mapp
+												.getResource().getOwner();
+
+							demList = new LinkedList<AbstractDemand>();
+							resList = new LinkedList<AbstractResource>();
+							for (AbstractDemand dem : tmpVlink) {
+								List<Mapping> mappCopy = new ArrayList<Mapping>();
+								mappCopy.addAll(dem.getMappings());
+								for (Mapping mapp : mappCopy) {
+									demList.add(mapp.getDemand());
+									resList.add(mapp.getResource());
+									mapp.getDemand().free(mapp.getResource());
+								}
+
+							}
+
+						}
+					break;
+				}
+			if (mappingsCopy.size() == 1) {
+				boolean result = false;
+				// Search for path in filtered substrate using KShortestPaths
+				EnergyTransformedLinkWeight linkWeight = new EnergyTransformedLinkWeight();
+				EppsteinAlgorithm kshortestPaths = new EppsteinAlgorithm(
+						stack.getSubstrate(), linkWeight);
+
+				List<List<SubstrateLink>> paths = kshortestPaths
+						.getShortestPaths(srcSnode, dstSnode, 300);
+				for (List<SubstrateLink> path : paths)
+					if (NodeLinkAssignation.verifyPath(tmpVlink, path,
+							srcSnode, stack.getSubstrate())) {
+						if (!NodeLinkAssignation.vlm(tmpVlink, path,
+								stack.getSubstrate(), srcSnode))
+							throw new AssertionError("But we checked before!");
+
+						result = true;
+					}
+
+				if (result == false) {
+					for (int i = 1; i < demList.size(); i++) {
+						AbstractResource res = resList.get(i);
+						AbstractDemand dem = demList.get(i);
+						if (res.accepts(dem) && res.fulfills(dem)
+								&& dem.occupy(res)) {
+
+						} else {
+							throw new AssertionError("That was already checked");
+						}
+					}
+				}
+			}
+
+		}
+	}
+
+	public List<SubstrateLink> remapGeneralVnetsKspNodes() {
+
+		VirtualLink tmpVlink = null;
+		VirtualNode srcVnode, dstVnode;
+		VirtualNetwork vNet;
+		boolean toRemap = false;
+		List<AbstractDemand> toEraseDem = null;
+		List<Mapping> mappingsCopy = new ArrayList<Mapping>();
+		Map<AbstractDemand, VirtualLink> bwDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+		Map<AbstractDemand, VirtualLink> hhDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+		List<AbstractDemand> demList = new LinkedList<AbstractDemand>();
+		List<AbstractResource> resList = new LinkedList<AbstractResource>();
+		List<SubstrateLink> tempStressedSubsLinks = null;
+		List<SubstrateLink> highWeighSubsLinks = new LinkedList<SubstrateLink>();
+		List<AbstractDemand> toSkipDemList = new LinkedList<AbstractDemand>();
+
+		for (SubstrateNode sNode : stack.getSubstrate().getVertices()) {
+			tempStressedSubsLinks = findLinksInactivesDemand(sNode);
+			List<VirtualLink> toRemapVlink = new LinkedList<VirtualLink>();
+			List<SubstrateNode> srcSnodeList = new LinkedList<SubstrateNode>();
+			List<SubstrateNode> dstSnodeList = new LinkedList<SubstrateNode>();
+			demList = new LinkedList<AbstractDemand>();
+			resList = new LinkedList<AbstractResource>();
+			bwDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+			hhDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+			toSkipDemList = new LinkedList<AbstractDemand>();
+			if (!tempStressedSubsLinks.isEmpty()) {
+				for (SubstrateLink tempLink : tempStressedSubsLinks) {
+					for (AbstractResource res : tempLink) {
+						if (res instanceof BandwidthResource) {
+							mappingsCopy = new ArrayList<Mapping>();
+							mappingsCopy.addAll(res.getMappings());
+							for (Mapping map : mappingsCopy) {
+								toRemapVlink.add((VirtualLink) map.getDemand()
+										.getOwner());
+								tmpVlink = (VirtualLink) map.getDemand()
+										.getOwner();
+								vNet = getVirtualNet(tmpVlink.getLayer());
+								srcVnode = vNet.getSource(tmpVlink);
+								dstVnode = vNet.getDest(tmpVlink);
+								for (AbstractDemand dem : srcVnode)
+									if (dem instanceof CpuDemand)
+										for (Mapping mapp : dem.getMappings())
+											srcSnodeList
+													.add((SubstrateNode) mapp
+															.getResource()
+															.getOwner());
+
+								for (AbstractDemand dem : dstVnode)
+									if (dem instanceof CpuDemand)
+										for (Mapping mapp : dem.getMappings())
+											dstSnodeList
+													.add((SubstrateNode) mapp
+															.getResource()
+															.getOwner());
+
+								int counter = 0;
+								boolean hasMappings = false;
+								toEraseDem = new LinkedList<AbstractDemand>();
+								for (AbstractDemand dem : tmpVlink) {
+									if (dem instanceof BandwidthDemand) {
+										counter++;
+										List<Mapping> mappCopy = new ArrayList<Mapping>();
+										mappCopy.addAll(dem.getMappings());
+										for (Mapping mapp : mappCopy) {
+											hasMappings = true;
+											bwDemToVlink.put(mapp.getDemand(),
+													tmpVlink);
+											demList.add(mapp.getDemand());
+											resList.add(mapp.getResource());
+											mapp.getDemand().free(
+													mapp.getResource());
+
+										}
+									}
+									if (counter > 1) {
+										toEraseDem.add(dem);
+									} else {
+										if (hasMappings) {
+											toSkipDemList.add(dem);
+										}
+									}
+
+								}
+
+								counter = 0;
+								hasMappings = false;
+								for (AbstractDemand dem : tmpVlink
+										.getHiddenHopDemands()) {
+									if (dem instanceof CpuDemand) {
+										counter++;
+										List<Mapping> mappCopy = new ArrayList<Mapping>();
+										mappCopy.addAll(dem.getMappings());
+										for (Mapping mapp : mappCopy) {
+											hasMappings = true;
+											hhDemToVlink.put(mapp.getDemand(),
+													tmpVlink);
+											demList.add(mapp.getDemand());
+											resList.add(mapp.getResource());
+
+											mapp.getDemand().free(
+													mapp.getResource());
+										}
+									}
+									if (counter > 1) {
+										toEraseDem.add(dem);
+									} else {
+										if (hasMappings) {
+											toSkipDemList.add(dem);
+										}
+									}
+
+								}
+
+								if (!toEraseDem.isEmpty())
+									for (AbstractDemand dem : toEraseDem) {
+										if (dem instanceof BandwidthDemand) {
+											tmpVlink.remove(dem);
+										} else {
+											int index = tmpVlink
+													.getHiddenHopDemands()
+													.indexOf(dem);
+											tmpVlink.getHiddenHopDemands()
+													.remove(index);
+										}
+
+									}
+
+							}
+						}
+
+					}
+				}
+				if (!toRemap)
+					highWeighSubsLinks.addAll(tempStressedSubsLinks);
+
+				toRemap = false;
+				for (int i = 0; i < toRemapVlink.size(); i++) {
+
+					if (!realizeKspMappingForNodes(toRemapVlink.get(i),
+							stack.getSubstrate(), srcSnodeList.get(i),
+							dstSnodeList.get(i), highWeighSubsLinks)) {
+						toRemap = true;
+						break;
+					}
+				}
+
+				if (toRemap) {
+					for (int j = 0; j < toRemapVlink.size(); j++) {
+						int counter = 0;
+						toEraseDem = new LinkedList<AbstractDemand>();
+						for (AbstractDemand dem : toRemapVlink.get(j)) {
+							if (dem instanceof BandwidthDemand) {
+								counter++;
+								List<Mapping> mappCopy = new ArrayList<Mapping>();
+								mappCopy.addAll(dem.getMappings());
+								for (Mapping mapp : mappCopy)
+									mapp.getDemand().free(mapp.getResource());
+
+								if (counter > 1)
+									toEraseDem.add(dem);
+
+							}
+						}
+						counter = 0;
+						for (AbstractDemand dem : toRemapVlink.get(j)
+								.getHiddenHopDemands()) {
+							if (dem instanceof CpuDemand) {
+								counter++;
+								List<Mapping> mappCopy = new ArrayList<Mapping>();
+								mappCopy.addAll(dem.getMappings());
+								for (Mapping mapp : mappCopy)
+									mapp.getDemand().free(mapp.getResource());
+								if (counter > 1)
+									toEraseDem.add(dem);
+
+							}
+						}
+						if (!toEraseDem.isEmpty())
+							for (AbstractDemand dem : toEraseDem) {
+								if (dem instanceof BandwidthDemand) {
+									toRemapVlink.get(j).remove(dem);
+								} else {
+									int index = toRemapVlink.get(j)
+											.getHiddenHopDemands().indexOf(dem);
+									toRemapVlink.get(j).getHiddenHopDemands()
+											.remove(index);
+								}
+
+							}
+					}
+					for (int i = 0; i < toRemapVlink.size(); i++) {
+						List<AbstractDemand> demandList = new LinkedList<AbstractDemand>();
+						for (Iterator<AbstractDemand> demIt = bwDemToVlink
+								.keySet().iterator(); demIt.hasNext();) {
+							AbstractDemand dem = demIt.next();
+
+							if (bwDemToVlink.get(dem).equals(
+									toRemapVlink.get(i))) {
+								demandList.add(dem);
+								if (!toSkipDemList.contains(dem))
+									toRemapVlink.get(i).add(dem);
+							}
+						}
+						for (Iterator<AbstractDemand> demIt = hhDemToVlink
+								.keySet().iterator(); demIt.hasNext();) {
+							AbstractDemand dem = demIt.next();
+
+							if (hhDemToVlink.get(dem).equals(
+									toRemapVlink.get(i))) {
+								demandList.add(dem);
+								if (!toSkipDemList.contains(dem))
+									toRemapVlink.get(i).addHiddenHopDemand(dem);
+							}
+						}
+						for (AbstractDemand dem : demandList) {
+							for (int j = 0; j < demList.size(); j++) {
+								if (demList.get(j).equals(dem)) {
+									AbstractResource reso = resList.get(j);
+									if (reso.accepts(dem) && reso.fulfills(dem)
+											&& dem.occupy(reso)) {
+
+									} else {
+										throw new AssertionError(
+												"That was already checked");
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return highWeighSubsLinks;
+	}
+
+	public void remapGeneralVnetsPsNodes() {
+
+		VirtualLink tmpVlink = null;
+		VirtualNode srcVnode, dstVnode;
+		VirtualNetwork vNet;
+		Map<AbstractDemand, VirtualLink> bwDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+		Map<AbstractDemand, VirtualLink> hhDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+		List<AbstractDemand> toEraseDem = null;
+		List<Mapping> mappingsCopy = new ArrayList<Mapping>();
+		List<SubstrateLink> highWeighSubsLinks = new LinkedList<SubstrateLink>();
+		List<AbstractDemand> demList = new LinkedList<AbstractDemand>();
+		List<AbstractResource> resList = new LinkedList<AbstractResource>();
+		List<SubstrateLink> tempStressedSubsLinks = null;
+		List<AbstractDemand> toSkipDemList = new LinkedList<AbstractDemand>();
+		
+		for (SubstrateNode sNode : stack.getSubstrate().getVertices()) {
+			tempStressedSubsLinks = findLinksInactivesDemand(sNode);
+			bwDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+			hhDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+			toSkipDemList = new LinkedList<AbstractDemand>();
+			if (!tempStressedSubsLinks.isEmpty()) {
+				List<VirtualLink> toRemapVlink = new LinkedList<VirtualLink>();
+				List<SubstrateNode> srcSnodeList = new LinkedList<SubstrateNode>();
+				List<SubstrateNode> dstSnodeList = new LinkedList<SubstrateNode>();
+				for (SubstrateLink tempLink : tempStressedSubsLinks) {
+					for (AbstractResource res : tempLink) {
+						if (res instanceof BandwidthResource) {
+							mappingsCopy = new ArrayList<Mapping>();
+							mappingsCopy.addAll(res.getMappings());
+							for (Mapping map : mappingsCopy) {
+								toRemapVlink.add((VirtualLink) map.getDemand()
+										.getOwner());
+								tmpVlink = (VirtualLink) map.getDemand()
+										.getOwner();
+								vNet = getVirtualNet(tmpVlink.getLayer());
+								srcVnode = vNet.getSource(tmpVlink);
+								dstVnode = vNet.getDest(tmpVlink);
+								for (AbstractDemand dem : srcVnode)
+									if (dem instanceof CpuDemand)
+										for (Mapping mapp : dem.getMappings())
+											srcSnodeList
+													.add((SubstrateNode) mapp
+															.getResource()
+															.getOwner());
+
+								for (AbstractDemand dem : dstVnode)
+									if (dem instanceof CpuDemand)
+										for (Mapping mapp : dem.getMappings())
+											dstSnodeList
+													.add((SubstrateNode) mapp
+															.getResource()
+															.getOwner());
+
+								int counter = 0;
+								boolean hasMappings = false;
+								toEraseDem = new LinkedList<AbstractDemand>();
+								for (AbstractDemand dem : tmpVlink) {
+									if (dem instanceof BandwidthDemand) {
+										counter++;
+										List<Mapping> mappCopy = new ArrayList<Mapping>();
+										mappCopy.addAll(dem.getMappings());
+										for (Mapping mapp : mappCopy) {
+											hasMappings = true;
+											bwDemToVlink.put(mapp.getDemand(),
+													tmpVlink);
+											demList.add(mapp.getDemand());
+											resList.add(mapp.getResource());
+											mapp.getDemand().free(
+													mapp.getResource());
+
+										}
+									}
+									if (counter > 1) {
+										toEraseDem.add(dem);
+									} else {
+										if (hasMappings) {
+											toSkipDemList.add(dem);
+										}
+									}
+
+								}
+
+								counter = 0;
+								hasMappings = false;
+								for (AbstractDemand dem : tmpVlink
+										.getHiddenHopDemands()) {
+									if (dem instanceof CpuDemand) {
+										counter++;
+										List<Mapping> mappCopy = new ArrayList<Mapping>();
+										mappCopy.addAll(dem.getMappings());
+										for (Mapping mapp : mappCopy) {
+											hasMappings = true;
+											hhDemToVlink.put(mapp.getDemand(),
+													tmpVlink);
+											demList.add(mapp.getDemand());
+											resList.add(mapp.getResource());
+
+											mapp.getDemand().free(
+													mapp.getResource());
+										}
+									}
+									if (counter > 1) {
+										toEraseDem.add(dem);
+									} else {
+										if (hasMappings) {
+											toSkipDemList.add(dem);
+										}
+									}
+
+								}
+
+								if (!toEraseDem.isEmpty())
+									for (AbstractDemand dem : toEraseDem) {
+										if (dem instanceof BandwidthDemand) {
+											tmpVlink.remove(dem);
+										} else {
+											int index = tmpVlink
+													.getHiddenHopDemands()
+													.indexOf(dem);
+											tmpVlink.getHiddenHopDemands()
+													.remove(index);
+										}
+
+									}
+
+							}
+
+						}
+
+					}
+				}
+				highWeighSubsLinks = new LinkedList<SubstrateLink>();
+				highWeighSubsLinks = MiscelFunctions
+						.findLinksInactivesDemand(stack);
+				for (int h = 0; h < srcSnodeList.size(); h++) {
+					List<SubstrateNode> tmpSrcSnodeList = new LinkedList<SubstrateNode>();
+					List<SubstrateNode> tmpDstSnodeList = new LinkedList<SubstrateNode>();
+					tmpSrcSnodeList.add(srcSnodeList.get(h));
+					tmpDstSnodeList.add(dstSnodeList.get(h));
+					List<VirtualLink> tempRemapVlink = new LinkedList<VirtualLink>();
+					tempRemapVlink.add(toRemapVlink.get(h));
+					Random intGenerator = new Random();// FIXME Temp
+					// solution for
+					// executing
+					// at the same time different algorithms using
+					// this link mapping that must accede to different
+					// data
+					// files
+					LpSolver problemSolver = new LpSolver();
+					SubstrateNode tSNode = null, tDNode = null, hiddenHop;
+					SubstrateLink tSLink;
+					BandwidthDemand newBwDem, originalBwDem = null;
+					CpuDemand tmpHhDemand = null;
+					Map<List<String>, Double> solverResult;
+					String dataFileName = Consts.LP_SOLVER_DATAFILE
+							+ Integer.toString(intGenerator.nextInt(2001))
+							+ ".dat";
+					dataSolverFile lpLinkMappingData = new dataSolverFile(
+							Consts.LP_SOLVER_FOLDER + dataFileName);
+					lpLinkMappingData
+							.tempSolverRemappingFileEA(stack.getSubstrate(),
+									tmpSrcSnodeList, tmpDstSnodeList,
+									tempRemapVlink, highWeighSubsLinks);
+					problemSolver.solveMIPEA(Consts.LP_SOLVER_FOLDER,
+							Consts.LP_LINKMAPPING_MIP_ENERGY_MODEL_TEST,
+							dataFileName);
+					double hhFactor = 0;
+					for (int i = 0; i < tmpSrcSnodeList.size(); i++) {
+						SubstrateNode srcSnode = tmpSrcSnodeList.get(i);
+						SubstrateNode dstSnode = tmpDstSnodeList.get(i);
+						tmpVlink = tempRemapVlink.get(i);
+						if (problemSolver.problemFeasible()) {
+							// In model HHVNE-Model.mod in
+							// /ILP-LP-Models is
+							// easy to see
+							// that lambda is the variable of the
+							// multi-commodity flow
+							// problem
+							// indicating if a substrate node is part of
+							// the
+							// solution to
+							// map a virtual node demand.
+							solverResult = MiscelFunctions
+									.processSolverResult(
+											problemSolver.getSolverResult(),
+											"lambda[]");
+
+							// Get current VirtualLink demand
+							for (AbstractDemand dem : tmpVlink) {
+								if (dem instanceof BandwidthDemand) {
+									originalBwDem = (BandwidthDemand) dem;
+									break;
+								}
+							}
+
+							// Iterate all links values given by the
+							// solver.
+							for (Iterator<List<String>> cad = solverResult
+									.keySet().iterator(); cad.hasNext();) {
+								List<String> tmpValues = cad.next();
+								Double vtmp = MiscelFunctions
+										.roundTwelveDecimals(solverResult
+												.get(tmpValues));
+
+								if (srcSnode.getId() == Integer
+										.parseInt(tmpValues.get(0))
+										&& dstSnode.getId() == Integer
+												.parseInt(tmpValues.get(1))
+										&& vtmp != 0) {
+									for (SubstrateNode n : stack.getSubstrate()
+											.getVertices()) {
+										if (Integer.parseInt(tmpValues.get(2)) == n
+												.getId()) {
+											tSNode = n;
+										} else {
+											if (Integer.parseInt(tmpValues
+													.get(3)) == n.getId()) {
+												tDNode = n;
+											}
+										}
+									}
+									// get the susbstrate link (part of
+									// the
+									// mapping path
+									// to dstSnode from srcSnode)
+									tSLink = stack.getSubstrate().findEdge(
+											tSNode, tDNode);
+									// Create the new bandwidth demand
+									// that
+									// corresponds
+									// to the percentage of BW in the
+									// solution of the
+									// solver. tSLink is part of the
+									// path
+									// mapping tmpl
+
+									newBwDem = new BandwidthDemand(tmpVlink);
+									newBwDem.setDemandedBandwidth(MiscelFunctions.roundThreeDecimals(vtmp
+											* originalBwDem
+													.getDemandedBandwidth()));
+
+									tmpVlink.add(newBwDem);
+
+									hiddenHop = null;
+									if (!tmpVlink.getHiddenHopDemands()
+											.isEmpty()) {
+										// Hidden hops are considered,
+										// new
+										// hidden hop
+										// demand should be created
+										tmpHhDemand = (CpuDemand) new BandwidthCpuHiddenHopMapping(
+												hhFactor).transform(newBwDem);
+										tmpVlink.addHiddenHopDemand(tmpHhDemand);
+										if (!stack.getSubstrate()
+												.getSource(tSLink)
+												.equals(srcSnode)) {
+											hiddenHop = stack.getSubstrate()
+													.getSource(tSLink);
+										} else {
+											hiddenHop = null;
+										}
+									}
+									if (!NodeLinkAssignation.vlmSingleLink(
+											tmpVlink, newBwDem, tSLink,
+											hiddenHop, tmpHhDemand))
+										throw new AssertionError(
+												"But we checked before!");
+								}
+							}
+						} else {
+							h = srcSnodeList.size() + 1;
+							for (int j = 0; j < toRemapVlink.size(); j++) {
+								int counter = 0;
+								toEraseDem = new LinkedList<AbstractDemand>();
+								for (AbstractDemand dem : toRemapVlink.get(j)) {
+									if (dem instanceof BandwidthDemand) {
+										counter++;
+										List<Mapping> mappCopy = new ArrayList<Mapping>();
+										mappCopy.addAll(dem.getMappings());
+										for (Mapping mapp : mappCopy)
+											mapp.getDemand().free(
+													mapp.getResource());
+
+										if (counter > 1)
+											toEraseDem.add(dem);
+
+									}
+								}
+								counter = 0;
+								for (AbstractDemand dem : toRemapVlink.get(j)
+										.getHiddenHopDemands()) {
+									if (dem instanceof CpuDemand) {
+										counter++;
+										List<Mapping> mappCopy = new ArrayList<Mapping>();
+										mappCopy.addAll(dem.getMappings());
+										for (Mapping mapp : mappCopy)
+											mapp.getDemand().free(
+													mapp.getResource());
+										if (counter > 1)
+											toEraseDem.add(dem);
+
+									}
+								}
+								if (!toEraseDem.isEmpty())
+									for (AbstractDemand dem : toEraseDem) {
+										if (dem instanceof BandwidthDemand) {
+											toRemapVlink.get(j).remove(dem);
+										} else {
+											int index = toRemapVlink.get(j)
+													.getHiddenHopDemands()
+													.indexOf(dem);
+											toRemapVlink.get(j)
+													.getHiddenHopDemands()
+													.remove(index);
+										}
+
+									}
+							}
+							for (int k = 0; k < toRemapVlink.size(); k++) {
+								List<AbstractDemand> demandList = new LinkedList<AbstractDemand>();
+								for (Iterator<AbstractDemand> demIt = bwDemToVlink
+										.keySet().iterator(); demIt.hasNext();) {
+									AbstractDemand dem = demIt.next();
+
+									if (bwDemToVlink.get(dem).equals(
+											toRemapVlink.get(k))) {
+										demandList.add(dem);
+										if (!toSkipDemList.contains(dem))
+											toRemapVlink.get(k).add(dem);
+									}
+								}
+								for (Iterator<AbstractDemand> demIt = hhDemToVlink
+										.keySet().iterator(); demIt.hasNext();) {
+									AbstractDemand dem = demIt.next();
+
+									if (hhDemToVlink.get(dem).equals(
+											toRemapVlink.get(k))) {
+										demandList.add(dem);
+										if (!toSkipDemList.contains(dem))
+											toRemapVlink.get(k)
+													.addHiddenHopDemand(dem);
+									}
+								}
+								for (AbstractDemand dem : demandList) {
+									for (int j = 0; j < demList.size(); j++) {
+										if (demList.get(j).equals(dem)) {
+											AbstractResource reso = resList
+													.get(j);
+											if (reso.accepts(dem)
+													&& reso.fulfills(dem)
+													&& dem.occupy(reso)) {
+
+											} else {
+												throw new AssertionError(
+														"That was already checked");
+											}
+										}
+									}
+								}
+							}
+
+						}
+					}
+				}
+				
+				demList = new LinkedList<AbstractDemand>();
+				resList = new LinkedList<AbstractResource>();
+			}
+		}
+
+	}
+
+	public void remapGeneralVnetsKsp(int remappingDepth,
+			List<SubstrateLink> highWeighSubsLinks) {
+		VirtualLink tmpVlink = null;
+		VirtualNode srcVnode, dstVnode;
+		VirtualNetwork vNet;
+		boolean toRemap = false;
+		List<AbstractDemand> toEraseDem = null;
+		List<Mapping> mappingsCopy = new ArrayList<Mapping>();
+		Map<AbstractDemand, VirtualLink> bwDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+		Map<AbstractDemand, VirtualLink> hhDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+		List<AbstractDemand> demList = new LinkedList<AbstractDemand>();
+		List<AbstractDemand> toSkipDemList = new LinkedList<AbstractDemand>();
+		List<AbstractResource> resList = new LinkedList<AbstractResource>();
+		List<SubstrateLink> tempStressedSubsLinks = null;
+
+		for (int l = 0; l < remappingDepth; l++) {
+			tempStressedSubsLinks = findLinksNumberDemand(l + 1);
+			if (!tempStressedSubsLinks.isEmpty()) {
+				for (SubstrateLink tempLink : tempStressedSubsLinks) {
+					List<VirtualLink> toRemapVlink = new LinkedList<VirtualLink>();
+					List<SubstrateNode> srcSnodeList = new LinkedList<SubstrateNode>();
+					List<SubstrateNode> dstSnodeList = new LinkedList<SubstrateNode>();
+					demList = new LinkedList<AbstractDemand>();
+					resList = new LinkedList<AbstractResource>();
+					bwDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+					hhDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+					toSkipDemList = new LinkedList<AbstractDemand>();
+					for (AbstractResource res : tempLink) {
+						if (res instanceof BandwidthResource) {
+							mappingsCopy = new ArrayList<Mapping>();
+							mappingsCopy.addAll(res.getMappings());
+							for (Mapping map : mappingsCopy) {
+								toRemapVlink.add((VirtualLink) map.getDemand()
+										.getOwner());
+								tmpVlink = (VirtualLink) map.getDemand()
+										.getOwner();
+								vNet = getVirtualNet(tmpVlink.getLayer());
+								srcVnode = vNet.getSource(tmpVlink);
+								dstVnode = vNet.getDest(tmpVlink);
+								for (AbstractDemand dem : srcVnode)
+									if (dem instanceof CpuDemand)
+										for (Mapping mapp : dem.getMappings())
+											srcSnodeList
+													.add((SubstrateNode) mapp
+															.getResource()
+															.getOwner());
+
+								for (AbstractDemand dem : dstVnode)
+									if (dem instanceof CpuDemand)
+										for (Mapping mapp : dem.getMappings())
+											dstSnodeList
+													.add((SubstrateNode) mapp
+															.getResource()
+															.getOwner());
+								int counter = 0;
+								boolean hasMappings = false;
+								toEraseDem = new LinkedList<AbstractDemand>();
+
+								for (AbstractDemand dem : tmpVlink) {
+									if (dem instanceof BandwidthDemand) {
+										counter++;
+										List<Mapping> mappCopy = new ArrayList<Mapping>();
+										mappCopy.addAll(dem.getMappings());
+										for (Mapping mapp : mappCopy) {
+											hasMappings = true;
+											bwDemToVlink.put(mapp.getDemand(),
+													tmpVlink);
+											demList.add(mapp.getDemand());
+											resList.add(mapp.getResource());
+											mapp.getDemand().free(
+													mapp.getResource());
+										}
+									}
+									if (counter > 1) {
+										toEraseDem.add(dem);
+									} else {
+										if (hasMappings) {
+											toSkipDemList.add(dem);
+										}
+									}
+								}
+								counter = 0;
+								hasMappings = false;
+								for (AbstractDemand dem : tmpVlink
+										.getHiddenHopDemands()) {
+									if (dem instanceof CpuDemand) {
+										counter++;
+										List<Mapping> mappCopy = new ArrayList<Mapping>();
+										mappCopy.addAll(dem.getMappings());
+										for (Mapping mapp : mappCopy) {
+											hasMappings = true;
+											hhDemToVlink.put(mapp.getDemand(),
+													tmpVlink);
+											demList.add(mapp.getDemand());
+											resList.add(mapp.getResource());
+
+											mapp.getDemand().free(
+													mapp.getResource());
+										}
+									}
+									if (counter > 1) {
+										toEraseDem.add(dem);
+									} else {
+										if (hasMappings) {
+											toSkipDemList.add(dem);
+										}
+									}
+								}
+
+								if (!toEraseDem.isEmpty())
+									for (AbstractDemand dem : toEraseDem) {
+										if (dem instanceof BandwidthDemand) {
+											tmpVlink.remove(dem);
+										} else {
+											int index = tmpVlink
+													.getHiddenHopDemands()
+													.indexOf(dem);
+											tmpVlink.getHiddenHopDemands()
+													.remove(index);
+										}
+
+									}
+
+							}
+						}
+
+					}
+					toRemap = false;
+					for (int i = 0; i < toRemapVlink.size(); i++) {
+
+						if (!realizeKspMappingForNodes(toRemapVlink.get(i),
+								stack.getSubstrate(), srcSnodeList.get(i),
+								dstSnodeList.get(i), highWeighSubsLinks)) {
+							toRemap = true;
+							break;
+						}
+					}
+
+					if (toRemap) {
+						for (int j = 0; j < toRemapVlink.size(); j++) {
+							int counter = 0;
+							toEraseDem = new LinkedList<AbstractDemand>();
+							for (AbstractDemand dem : toRemapVlink.get(j)) {
+								if (dem instanceof BandwidthDemand) {
+									counter++;
+									List<Mapping> mappCopy = new ArrayList<Mapping>();
+									mappCopy.addAll(dem.getMappings());
+									for (Mapping mapp : mappCopy)
+										mapp.getDemand().free(
+												mapp.getResource());
+
+									if (counter > 1)
+										toEraseDem.add(dem);
+
+								}
+							}
+							counter = 0;
+							for (AbstractDemand dem : toRemapVlink.get(j)
+									.getHiddenHopDemands()) {
+								if (dem instanceof CpuDemand) {
+									counter++;
+									List<Mapping> mappCopy = new ArrayList<Mapping>();
+									mappCopy.addAll(dem.getMappings());
+									for (Mapping mapp : mappCopy)
+										mapp.getDemand().free(
+												mapp.getResource());
+									if (counter > 1)
+										toEraseDem.add(dem);
+
+								}
+							}
+							if (!toEraseDem.isEmpty())
+								for (AbstractDemand dem : toEraseDem) {
+									if (dem instanceof BandwidthDemand) {
+										toRemapVlink.get(j).remove(dem);
+									} else {
+										int index = toRemapVlink.get(j)
+												.getHiddenHopDemands()
+												.indexOf(dem);
+										toRemapVlink.get(j)
+												.getHiddenHopDemands()
+												.remove(index);
+									}
+
+								}
+						}
+						for (int i = 0; i < toRemapVlink.size(); i++) {
+							List<AbstractDemand> demandList = new LinkedList<AbstractDemand>();
+							for (Iterator<AbstractDemand> demIt = bwDemToVlink
+									.keySet().iterator(); demIt.hasNext();) {
+								AbstractDemand dem = demIt.next();
+
+								if (bwDemToVlink.get(dem).equals(
+										toRemapVlink.get(i))) {
+									demandList.add(dem);
+									if (!toSkipDemList.contains(dem))
+										toRemapVlink.get(i).add(dem);
+								}
+							}
+							for (Iterator<AbstractDemand> demIt = hhDemToVlink
+									.keySet().iterator(); demIt.hasNext();) {
+								AbstractDemand dem = demIt.next();
+
+								if (hhDemToVlink.get(dem).equals(
+										toRemapVlink.get(i))) {
+									demandList.add(dem);
+									if (!toSkipDemList.contains(dem))
+										toRemapVlink.get(i).addHiddenHopDemand(
+												dem);
+								}
+							}
+							for (AbstractDemand dem : demandList) {
+								for (int j = 0; j < demList.size(); j++) {
+									if (demList.get(j).equals(dem)) {
+										AbstractResource reso = resList.get(j);
+										if (reso.accepts(dem)
+												&& reso.fulfills(dem)
+												&& dem.occupy(reso)) {
+
+										} else {
+											throw new AssertionError(
+													"That was already checked");
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public void remapGeneralVnetsPs(int remappingDepth) {
+
+		VirtualLink tmpVlink = null;
+		VirtualNode srcVnode, dstVnode;
+		VirtualNetwork vNet;
+		List<AbstractDemand> toEraseDem = null;
+		List<Mapping> mappingsCopy = new ArrayList<Mapping>();
+		List<AbstractDemand> demList = new LinkedList<AbstractDemand>();
+		List<AbstractResource> resList = new LinkedList<AbstractResource>();
+		Map<AbstractDemand, VirtualLink> bwDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+		Map<AbstractDemand, VirtualLink> hhDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+		List<AbstractDemand> toSkipDemList = new LinkedList<AbstractDemand>();
+		List<SubstrateLink> highWeighSubsLinks = new LinkedList<SubstrateLink>();
+
+		for (int k = 0; k < remappingDepth; k++) {
+			List<SubstrateLink> tempStressedSubsLinks = findLinksNumberDemand(k + 1);
+			if (!tempStressedSubsLinks.isEmpty()) {
+				for (SubstrateLink tempLink : tempStressedSubsLinks) {
+					List<VirtualLink> toRemapVlink = new LinkedList<VirtualLink>();
+					List<SubstrateNode> srcSnodeList = new LinkedList<SubstrateNode>();
+					List<SubstrateNode> dstSnodeList = new LinkedList<SubstrateNode>();
+					demList = new LinkedList<AbstractDemand>();
+					resList = new LinkedList<AbstractResource>();
+					bwDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+					hhDemToVlink = new LinkedHashMap<AbstractDemand, VirtualLink>();
+					toSkipDemList = new LinkedList<AbstractDemand>();
+					for (AbstractResource res : tempLink) {
+						if (res instanceof BandwidthResource) {
+							mappingsCopy = new ArrayList<Mapping>();
+							mappingsCopy.addAll(res.getMappings());
+							for (Mapping map : mappingsCopy) {
+								toRemapVlink.add((VirtualLink) map.getDemand()
+										.getOwner());
+								tmpVlink = (VirtualLink) map.getDemand()
+										.getOwner();
+								vNet = getVirtualNet(tmpVlink.getLayer());
+								srcVnode = vNet.getSource(tmpVlink);
+								dstVnode = vNet.getDest(tmpVlink);
+								for (AbstractDemand dem : srcVnode)
+									if (dem instanceof CpuDemand)
+										for (Mapping mapp : dem.getMappings())
+											srcSnodeList
+													.add((SubstrateNode) mapp
+															.getResource()
+															.getOwner());
+
+								for (AbstractDemand dem : dstVnode)
+									if (dem instanceof CpuDemand)
+										for (Mapping mapp : dem.getMappings())
+											dstSnodeList
+													.add((SubstrateNode) mapp
+															.getResource()
+															.getOwner());
+								int counter = 0;
+								boolean hasMappings = false;
+								toEraseDem = new LinkedList<AbstractDemand>();
+
+								for (AbstractDemand dem : tmpVlink) {
+									if (dem instanceof BandwidthDemand) {
+										counter++;
+										List<Mapping> mappCopy = new ArrayList<Mapping>();
+										mappCopy.addAll(dem.getMappings());
+										for (Mapping mapp : mappCopy) {
+											hasMappings = true;
+											bwDemToVlink.put(mapp.getDemand(),
+													tmpVlink);
+											demList.add(mapp.getDemand());
+											resList.add(mapp.getResource());
+											mapp.getDemand().free(
+													mapp.getResource());
+										}
+									}
+									if (counter > 1) {
+										toEraseDem.add(dem);
+									} else {
+										if (hasMappings) {
+											toSkipDemList.add(dem);
+										}
+									}
+								}
+								counter = 0;
+								hasMappings = false;
+								for (AbstractDemand dem : tmpVlink
+										.getHiddenHopDemands()) {
+									if (dem instanceof CpuDemand) {
+										counter++;
+										List<Mapping> mappCopy = new ArrayList<Mapping>();
+										mappCopy.addAll(dem.getMappings());
+										for (Mapping mapp : mappCopy) {
+											hasMappings = true;
+											hhDemToVlink.put(mapp.getDemand(),
+													tmpVlink);
+											demList.add(mapp.getDemand());
+											resList.add(mapp.getResource());
+
+											mapp.getDemand().free(
+													mapp.getResource());
+										}
+									}
+									if (counter > 1) {
+										toEraseDem.add(dem);
+									} else {
+										if (hasMappings) {
+											toSkipDemList.add(dem);
+										}
+									}
+								}
+
+								if (!toEraseDem.isEmpty())
+									for (AbstractDemand dem : toEraseDem) {
+										if (dem instanceof BandwidthDemand) {
+											tmpVlink.remove(dem);
+										} else {
+											int index = tmpVlink
+													.getHiddenHopDemands()
+													.indexOf(dem);
+											tmpVlink.getHiddenHopDemands()
+													.remove(index);
+										}
+
+									}
+
+							}
+						}
+
+					}
+					highWeighSubsLinks = MiscelFunctions
+							.findLinksInactivesDemand(stack);
+					if(!highWeighSubsLinks.contains(tempLink))
+						highWeighSubsLinks.add(tempLink);
+					for (int h = 0; h < srcSnodeList.size(); h++) {
+						List<SubstrateNode> tmpSrcSnodeList = new LinkedList<SubstrateNode>();
+						List<SubstrateNode> tmpDstSnodeList = new LinkedList<SubstrateNode>();
+						tmpSrcSnodeList.add(srcSnodeList.get(h));
+						tmpDstSnodeList.add(dstSnodeList.get(h));
+						List<VirtualLink> tempRemapVlink = new LinkedList<VirtualLink>();
+						tempRemapVlink.add(toRemapVlink.get(h));
+						
+						Random intGenerator = new Random();// FIXME Temp
+						// solution for
+						// executing
+						// at the same time different algorithms using
+						// this link mapping that must accede to different
+						// data
+						// files
+						LpSolver problemSolver = new LpSolver();
+						SubstrateNode tSNode = null, tDNode = null, hiddenHop;
+						SubstrateLink tSLink;
+						BandwidthDemand newBwDem, originalBwDem = null;
+						CpuDemand tmpHhDemand = null;
+						Map<List<String>, Double> solverResult;
+						String dataFileName = Consts.LP_SOLVER_DATAFILE
+								+ Integer.toString(intGenerator.nextInt(2001))
+								+ ".dat";
+						dataSolverFile lpLinkMappingData = new dataSolverFile(
+								Consts.LP_SOLVER_FOLDER + dataFileName);
+						lpLinkMappingData.tempSolverRemappingFileEA(
+								stack.getSubstrate(), tmpSrcSnodeList,
+								tmpDstSnodeList, tempRemapVlink,
+								highWeighSubsLinks);
+						problemSolver.solveMIPEA(Consts.LP_SOLVER_FOLDER,
+								Consts.LP_LINKMAPPING_MIP_ENERGY_MODEL_TEST,
+								dataFileName);
+						double hhFactor = 0;
+						for (int i = 0; i < tmpSrcSnodeList.size(); i++) {
+							SubstrateNode srcSnode = tmpSrcSnodeList.get(i);
+							SubstrateNode dstSnode = tmpDstSnodeList.get(i);
+							tmpVlink = tempRemapVlink.get(i);
+							if (problemSolver.problemFeasible() && problemSolver.getOptSol() == 0) {
+								// In model HHVNE-Model.mod in
+								// /ILP-LP-Models is
+								// easy to see
+								// that lambda is the variable of the
+								// multi-commodity flow
+								// problem
+								// indicating if a substrate node is part of
+								// the
+								// solution to
+								// map a virtual node demand.
+								solverResult = MiscelFunctions
+										.processSolverResult(
+												problemSolver.getSolverResult(),
+												"lambda[]");
+
+								// Get current VirtualLink demand
+								for (AbstractDemand dem : tmpVlink) {
+									if (dem instanceof BandwidthDemand) {
+										originalBwDem = (BandwidthDemand) dem;
+										break;
+									}
+								}
+
+								// Iterate all links values given by the
+								// solver.
+								for (Iterator<List<String>> cad = solverResult
+										.keySet().iterator(); cad.hasNext();) {
+									List<String> tmpValues = cad.next();
+									Double vtmp = MiscelFunctions
+											.roundTwelveDecimals(solverResult
+													.get(tmpValues));
+
+									if (srcSnode.getId() == Integer
+											.parseInt(tmpValues.get(0))
+											&& dstSnode.getId() == Integer
+													.parseInt(tmpValues.get(1))
+											&& vtmp != 0) {
+										for (SubstrateNode n : stack
+												.getSubstrate().getVertices()) {
+											if (Integer.parseInt(tmpValues
+													.get(2)) == n.getId()) {
+												tSNode = n;
+											} else {
+												if (Integer.parseInt(tmpValues
+														.get(3)) == n.getId()) {
+													tDNode = n;
+												}
+											}
+										}
+										// get the susbstrate link (part of
+										// the
+										// mapping path
+										// to dstSnode from srcSnode)
+										tSLink = stack.getSubstrate().findEdge(
+												tSNode, tDNode);
+										// Create the new bandwidth demand
+										// that
+										// corresponds
+										// to the percentage of BW in the
+										// solution of the
+										// solver. tSLink is part of the
+										// path
+										// mapping tmpl
+
+										newBwDem = new BandwidthDemand(tmpVlink);
+										newBwDem.setDemandedBandwidth(MiscelFunctions.roundThreeDecimals(vtmp
+												* originalBwDem
+														.getDemandedBandwidth()));
+
+										tmpVlink.add(newBwDem);
+
+										hiddenHop = null;
+										if (!tmpVlink.getHiddenHopDemands()
+												.isEmpty()) {
+											// Hidden hops are considered,
+											// new
+											// hidden hop
+											// demand should be created
+											tmpHhDemand = (CpuDemand) new BandwidthCpuHiddenHopMapping(
+													hhFactor)
+													.transform(newBwDem);
+											tmpVlink.addHiddenHopDemand(tmpHhDemand);
+											if (!stack.getSubstrate()
+													.getSource(tSLink)
+													.equals(srcSnode)) {
+												hiddenHop = stack
+														.getSubstrate()
+														.getSource(tSLink);
+											} else {
+												hiddenHop = null;
+											}
+										}
+										if (!NodeLinkAssignation.vlmSingleLink(
+												tmpVlink, newBwDem, tSLink,
+												hiddenHop, tmpHhDemand))
+											throw new AssertionError(
+													"But we checked before!");
+									}
+								}
+							} else {
+								h = srcSnodeList.size() + 1;
+								highWeighSubsLinks.remove(highWeighSubsLinks.size()-1);
+								for (int j = 0; j < toRemapVlink.size(); j++) {
+									int counter = 0;
+									toEraseDem = new LinkedList<AbstractDemand>();
+									for (AbstractDemand dem : toRemapVlink
+											.get(j)) {
+										if (dem instanceof BandwidthDemand) {
+											counter++;
+											List<Mapping> mappCopy = new ArrayList<Mapping>();
+											mappCopy.addAll(dem.getMappings());
+											for (Mapping mapp : mappCopy)
+												mapp.getDemand().free(
+														mapp.getResource());
+
+											if (counter > 1)
+												toEraseDem.add(dem);
+
+										}
+									}
+									counter = 0;
+									for (AbstractDemand dem : toRemapVlink.get(
+											j).getHiddenHopDemands()) {
+										if (dem instanceof CpuDemand) {
+											counter++;
+											List<Mapping> mappCopy = new ArrayList<Mapping>();
+											mappCopy.addAll(dem.getMappings());
+											for (Mapping mapp : mappCopy)
+												mapp.getDemand().free(
+														mapp.getResource());
+											if (counter > 1)
+												toEraseDem.add(dem);
+
+										}
+									}
+									if (!toEraseDem.isEmpty())
+										for (AbstractDemand dem : toEraseDem) {
+											if (dem instanceof BandwidthDemand) {
+												toRemapVlink.get(j).remove(dem);
+											} else {
+												int index = toRemapVlink.get(j)
+														.getHiddenHopDemands()
+														.indexOf(dem);
+												toRemapVlink.get(j)
+														.getHiddenHopDemands()
+														.remove(index);
+											}
+
+										}
+								}
+								for (int m = 0; m < toRemapVlink.size(); m++) {
+									List<AbstractDemand> demandList = new LinkedList<AbstractDemand>();
+									for (Iterator<AbstractDemand> demIt = bwDemToVlink
+											.keySet().iterator(); demIt
+											.hasNext();) {
+										AbstractDemand dem = demIt.next();
+
+										if (bwDemToVlink.get(dem).equals(
+												toRemapVlink.get(m))) {
+											demandList.add(dem);
+											if (!toSkipDemList.contains(dem))
+												toRemapVlink.get(m).add(dem);
+										}
+									}
+									for (Iterator<AbstractDemand> demIt = hhDemToVlink
+											.keySet().iterator(); demIt
+											.hasNext();) {
+										AbstractDemand dem = demIt.next();
+
+										if (hhDemToVlink.get(dem).equals(
+												toRemapVlink.get(m))) {
+											demandList.add(dem);
+											if (!toSkipDemList.contains(dem))
+												toRemapVlink
+														.get(m)
+														.addHiddenHopDemand(dem);
+										}
+									}
+									for (AbstractDemand dem : demandList) {
+										for (int j = 0; j < demList.size(); j++) {
+											if (demList.get(j).equals(dem)) {
+												AbstractResource reso = resList
+														.get(j);
+												if (reso.accepts(dem)
+														&& reso.fulfills(dem)
+														&& dem.occupy(reso)) {
+
+												} else {
+													throw new AssertionError(
+															"That was already checked");
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					demList = new LinkedList<AbstractDemand>();
+					resList = new LinkedList<AbstractResource>();
+				}
+			}
+		}
+	}
+
+	/*
+	 * private boolean realizeKspMapping(VirtualLink vLink, SubstrateNetwork
+	 * sNet, SubstrateNode srcSnode, SubstrateNode dstSnode) { boolean result =
+	 * false; // Search for path in filtered substrate using KShortestPaths
+	 * EnergyTransformedLinkWeight linkWeight = new
+	 * EnergyTransformedLinkWeight(); YenAlgorithm kshortestPaths = new
+	 * YenAlgorithm(stack.getSubstrate(), linkWeight); List<List<SubstrateLink>>
+	 * paths = kshortestPaths.getShortestPaths( srcSnode, dstSnode, 50); for
+	 * (List<SubstrateLink> path : paths) if
+	 * (NodeLinkAssignation.verifyPath(vLink, path, srcSnode,
+	 * stack.getSubstrate())) { if (!NodeLinkAssignation.vlm(vLink, path,
+	 * stack.getSubstrate(), srcSnode)) throw new
+	 * AssertionError("But we checked before!");
+	 * 
+	 * result = true; break; } return result; }
+	 */
+
+	private boolean realizeKspMappingForNodes(VirtualLink vLink,
+			SubstrateNetwork sNet, SubstrateNode srcSnode,
+			SubstrateNode dstSnode, List<SubstrateLink> selectedLinks) {
+		boolean result = false;
+		// Search for path in filtered substrate using KShortestPaths
+		TransformedLinkWeightForNodes linkWeight = new TransformedLinkWeightForNodes(
+				selectedLinks);
+		YenAlgorithm kshortestPaths = new YenAlgorithm(stack.getSubstrate(),
+				linkWeight);
+		List<List<SubstrateLink>> paths = kshortestPaths.getShortestPaths(
+				srcSnode, dstSnode, 150);
+		for (List<SubstrateLink> path : paths)
+			if (NodeLinkAssignation.verifyPath(vLink, path, srcSnode,
+					stack.getSubstrate())) {
+				if (!NodeLinkAssignation.vlm(vLink, path, stack.getSubstrate(),
+						srcSnode))
+					throw new AssertionError("But we checked before!");
+
+				result = true;
+				break;
+			}
+		return result;
+	}
+
+	public void remapVnetsPs() {
+		List<SubstrateLink> subsLinksOneDem = findLinksNumberDemand(1);
+		VirtualLink tmpVlink = null;
+		SubstrateNode srcSnode = null, dstSnode = null;
+		VirtualNode srcVnode, dstVnode;
+		VirtualNetwork vNet;
+		List<AbstractDemand> demList = null;
+		List<AbstractResource> resList = null;
+		List<Mapping> mappingsCopy = new ArrayList<Mapping>();
+		for (SubstrateLink tempLink : subsLinksOneDem) {
+			for (AbstractResource res : tempLink)
+				if (res instanceof BandwidthResource) {
+					mappingsCopy = new ArrayList<Mapping>();
+					mappingsCopy.addAll(res.getMappings());
+					if (mappingsCopy.size() == 1)
+						for (Mapping map : mappingsCopy) {
+							tmpVlink = (VirtualLink) map.getDemand().getOwner();
+							vNet = getVirtualNet(tmpVlink.getLayer());
+							srcVnode = vNet.getSource(tmpVlink);
+							dstVnode = vNet.getDest(tmpVlink);
+
+							for (AbstractDemand dem : srcVnode)
+								if (dem instanceof CpuDemand)
+									for (Mapping mapp : dem.getMappings())
+										srcSnode = (SubstrateNode) mapp
+												.getResource().getOwner();
+
+							for (AbstractDemand dem : dstVnode)
+								if (dem instanceof CpuDemand)
+									for (Mapping mapp : dem.getMappings())
+										dstSnode = (SubstrateNode) mapp
+												.getResource().getOwner();
+
+							demList = new LinkedList<AbstractDemand>();
+							resList = new LinkedList<AbstractResource>();
+							for (AbstractDemand dem : tmpVlink) {
+								List<Mapping> mappCopy = new ArrayList<Mapping>();
+								mappCopy.addAll(dem.getMappings());
+								for (Mapping mapp : mappCopy) {
+									demList.add(mapp.getDemand());
+									resList.add(mapp.getResource());
+									mapp.getDemand().free(mapp.getResource());
+								}
+
+							}
+
+						}
+				}
+			if (mappingsCopy.size() == 1) {
+				Random intGenerator = new Random();// FIXME Temp solution for
+				// executing
+				// at the same time different algorithms using
+				// this link mapping that must accede to different data files
+				LpSolver problemSolver = new LpSolver();
+				SubstrateNode tSNode = null, tDNode = null, hiddenHop;
+				SubstrateLink tSLink;
+				BandwidthDemand newBwDem, originalBwDem = null;
+				CpuDemand tmpHhDemand = null;
+				Map<List<String>, Double> solverResult;
+				String dataFileName = Consts.LP_SOLVER_DATAFILE
+						+ Integer.toString(intGenerator.nextInt(2001)) + ".dat";
+				dataSolverFile lpLinkMappingData = new dataSolverFile(
+						Consts.LP_SOLVER_FOLDER + dataFileName);
+				lpLinkMappingData.createSingleDataSolverFileEnergyAware(
+						stack.getSubstrate(), srcSnode, dstSnode, tmpVlink, 1,
+						1);
+				problemSolver.solveMIPEA(Consts.LP_SOLVER_FOLDER,
+						Consts.LP_LINKMAPPING_MIP_ENERGY_MODEL_TEST,
+						dataFileName);
+				double hhFactor = 0;
+				if (problemSolver.problemFeasible()) {
+
+					// In model HHVNE-Model.mod in /ILP-LP-Models is easy to see
+					// that lambda is the variable of the multi-commodity flow
+					// problem
+					// indicating if a substrate node is part of the solution to
+					// map a virtual node demand.
+					solverResult = MiscelFunctions.processSolverResult(
+							problemSolver.getSolverResult(), "lambda[]");
+
+					// Get current VirtualLink demand
+					for (AbstractDemand dem : tmpVlink) {
+						if (dem instanceof BandwidthDemand) {
+							originalBwDem = (BandwidthDemand) dem;
+							break;
+						}
+					}
+
+					// Iterate all links values given by the solver.
+					for (Iterator<List<String>> cad = solverResult.keySet()
+							.iterator(); cad.hasNext();) {
+						List<String> tmpValues = cad.next();
+						Double vtmp = MiscelFunctions
+								.roundTwelveDecimals(solverResult
+										.get(tmpValues));
+
+						if (srcSnode.getId() == Integer.parseInt(tmpValues
+								.get(0))
+								&& dstSnode.getId() == Integer
+										.parseInt(tmpValues.get(1))
+								&& vtmp != 0) {
+							for (SubstrateNode n : stack.getSubstrate()
+									.getVertices()) {
+								if (Integer.parseInt(tmpValues.get(2)) == n
+										.getId()) {
+									tSNode = n;
+								} else {
+									if (Integer.parseInt(tmpValues.get(3)) == n
+											.getId()) {
+										tDNode = n;
+									}
+								}
+							}
+							// get the susbstrate link (part of the mapping path
+							// to dstSnode from srcSnode)
+							tSLink = stack.getSubstrate().findEdge(tSNode,
+									tDNode);
+							// Create the new bandwidth demand that corresponds
+							// to the percentage of BW in the solution of the
+							// solver. tSLink is part of the path mapping tmpl
+
+							newBwDem = new BandwidthDemand(tmpVlink);
+							newBwDem.setDemandedBandwidth(MiscelFunctions
+									.roundThreeDecimals(vtmp
+											* originalBwDem
+													.getDemandedBandwidth()));
+
+							tmpVlink.add(newBwDem);
+
+							hiddenHop = null;
+							if (!tmpVlink.getHiddenHopDemands().isEmpty()) {
+								// Hidden hops are considered, new hidden hop
+								// demand should be created
+								tmpHhDemand = (CpuDemand) new BandwidthCpuHiddenHopMapping(
+										hhFactor).transform(newBwDem);
+								tmpVlink.addHiddenHopDemand(tmpHhDemand);
+								if (!stack.getSubstrate().getSource(tSLink)
+										.equals(srcSnode)) {
+									hiddenHop = stack.getSubstrate().getSource(
+											tSLink);
+								} else {
+									hiddenHop = null;
+								}
+							}
+							if (!NodeLinkAssignation.vlmSingleLink(tmpVlink,
+									newBwDem, tSLink, hiddenHop, tmpHhDemand))
+								throw new AssertionError(
+										"But we checked before!");
+						}
+					}
+				} else {
+					boolean result = false;
+					// Search for path in filtered substrate using
+					// KShortestPaths
+					EnergyTransformedLinkWeight linkWeight = new EnergyTransformedLinkWeight();
+					EppsteinAlgorithm kshortestPaths = new EppsteinAlgorithm(
+							stack.getSubstrate(), linkWeight);
+
+					List<List<SubstrateLink>> paths = kshortestPaths
+							.getShortestPaths(srcSnode, dstSnode, 300);
+					for (List<SubstrateLink> path : paths)
+						if (NodeLinkAssignation.verifyPath(tmpVlink, path,
+								srcSnode, stack.getSubstrate())) {
+							if (!NodeLinkAssignation.vlm(tmpVlink, path,
+									stack.getSubstrate(), srcSnode))
+								throw new AssertionError(
+										"But we checked before!");
+
+							result = true;
+						}
+
+					if (result == false) {
+						for (int i = 1; i < demList.size(); i++) {
+							AbstractResource res = resList.get(i);
+							AbstractDemand dem = demList.get(i);
+							if (res.accepts(dem) && res.fulfills(dem)
+									&& dem.occupy(res)) {
+
+							} else {
+								throw new AssertionError(
+										"That was already checked");
+							}
+						}
+					}
+				}
+			}
+
+		}
+	}
+
+	protected NetworkStack getStack() {
+		return stack;
+	}
+
+	private VirtualNetwork getVirtualNet(int layer) {
+		for (Network<?, ?, ?> n : this.stack) {
+			if (n instanceof VirtualNetwork)
+				if (n.getLayer() == layer) {
+					return ((VirtualNetwork) n);
+				}
+		}
+		return null;
+	}
+
+}
